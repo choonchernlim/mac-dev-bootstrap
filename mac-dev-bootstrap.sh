@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
-readonly BASE_DIR=$(cd `dirname $0` && pwd)
+readonly BASE_DIR=$(cd "$(dirname "$0")" && pwd)
 
-function git_checkout(){
+function git_checkout() {
   local url=$1
   local dir=$2
 
   if [[ ! -d "$dir" ]]; then
     git clone --depth=1 "$url" "$dir"
   else
-    cd "$dir"
+    cd "$dir" || exit
     git pull
   fi
 }
 
-function curl_install(){
+function curl_install() {
   local url=$1
 
-  sh -c "$(curl -fsSL $url)"
+  sh -c "$(curl -fsSL "$url")"
 }
 
 function install_homebrew() {
@@ -49,7 +49,7 @@ function install_oh_my_zsh() {
   local zsh_custom="$zsh/custom"
 
   if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-      curl_install "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
+    curl_install   "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
   else
     (cd "$zsh" && git pull)
   fi
@@ -98,7 +98,7 @@ function install_nvm() {
   if [[ ! -d "$HOME/.nvm" ]]; then
     curl_install "https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh"
   else
-    (cd /Users/limc/.nvm && git pull)
+    (cd ~/.nvm && git pull)
   fi
 
   export NVM_DIR="$HOME/.nvm"
@@ -111,7 +111,7 @@ function install_nvm() {
   nvm ls
 
   # Remove old versions
-  rm -rf $(ls -td $HOME/.nvm/versions/node/* | awk "NR>1")
+  rm -rf "$(ls -td "$HOME/.nvm/versions/node/*" | awk "NR>1")"
 }
 
 function install_all() {
