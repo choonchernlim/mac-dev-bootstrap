@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
 
-readonly BASE_DIR=$(cd "$(dirname "$0")" && pwd)
+readonly BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 function git_checkout() {
-  local url=$1
-  local dir=$2
+  local url="$1"
+  local dir="$2"
 
-  if [[ ! -d "$dir" ]]; then
-    git clone --depth=1 "$url" "$dir"
+  if [[ ! -d "${dir}" ]]; then
+    git clone --depth=1 "${url}" "${dir}"
   else
-    cd "$dir" || exit
+    cd "${dir}" || exit
     git pull
   fi
 }
 
 function curl_install() {
-  local url=$1
+  local url="$1"
 
-  sh -c "$(curl -fsSL "$url")"
+  sh -c "$(curl -fsSL "${url}")"
 }
 
 function install_homebrew() {
@@ -45,47 +46,47 @@ function install_oh_my_zsh() {
   echo " Oh My Zsh"
   echo "====================================================================="
 
-  local zsh="$HOME/.oh-my-zsh"
-  local zsh_custom="$zsh/custom"
+  local zsh="${HOME}/.oh-my-zsh"
+  local zsh_custom="${zsh}/custom"
 
-  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
     curl_install   "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
   else
-    (cd "$zsh" && git pull)
+    (cd "${zsh}" && git pull)
   fi
 
   echo "====================================================================="
   echo " PowerLevel10k"
   echo "====================================================================="
-  git_checkout "https://github.com/romkatv/powerlevel10k.git" "$zsh_custom/themes/powerlevel10k"
+  git_checkout "https://github.com/romkatv/powerlevel10k.git" "${zsh_custom}/themes/powerlevel10k"
   cp "${BASE_DIR}/zshrc/.p10k.zsh" "${HOME}/.p10k.zsh"
 
   echo "====================================================================="
   echo " Spaceship"
   echo "====================================================================="
-  git_checkout "https://github.com/denysdovhan/spaceship-prompt.git" "$zsh_custom/themes/spaceship-prompt"
-  ln -s "$zsh_custom/themes/spaceship-prompt/spaceship.zsh-theme" "$zsh_custom/themes/spaceship.zsh-theme"
+  git_checkout "https://github.com/denysdovhan/spaceship-prompt.git" "${zsh_custom}/themes/spaceship-prompt"
+  ln -s "${zsh_custom}/themes/spaceship-prompt/spaceship.zsh-theme" "${zsh_custom}/themes/spaceship.zsh-theme"
 
   echo "====================================================================="
   echo " Syntax Highlighting"
   echo "====================================================================="
-  git_checkout "https://github.com/zsh-users/zsh-syntax-highlighting.git" "$zsh_custom/plugins/zsh-syntax-highlighting"
+  git_checkout "https://github.com/zsh-users/zsh-syntax-highlighting.git" "${zsh_custom}/plugins/zsh-syntax-highlighting"
 
   echo "====================================================================="
   echo " ZSH-AutoSuggestions"
   echo "====================================================================="
-  git_checkout "https://github.com/zsh-users/zsh-autosuggestions.git" "$zsh_custom/plugins/zsh-autosuggestions"
+  git_checkout "https://github.com/zsh-users/zsh-autosuggestions.git" "${zsh_custom}/plugins/zsh-autosuggestions"
 }
 
 function install_sdk() {
   echo "====================================================================="
   echo " SDKMAN"
   echo "====================================================================="
-  if [[ ! -d "$HOME/.sdkman" ]]; then
+  if [[ ! -d "${HOME}/.sdkman" ]]; then
     curl_install "https://get.sdkman.io"
   else
-    export SDKMAN_DIR="$HOME/.sdkman"
-    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+    export SDKMAN_DIR="${HOME}/.sdkman"
+    [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
     sdk selfupdate force
   fi
@@ -95,15 +96,13 @@ function install_nvm() {
   echo "====================================================================="
   echo " NVM"
   echo "====================================================================="
-  if [[ ! -d "$HOME/.nvm" ]]; then
+  if [[ ! -d "${HOME}/.nvm" ]]; then
     curl_install "https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh"
-  else
-    (cd ~/.nvm && git pull)
   fi
 
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  export NVM_DIR="${HOME}/.nvm"
+  [ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
+  [ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
 
   # Install only LTS
   nvm install --lts
@@ -111,7 +110,8 @@ function install_nvm() {
   nvm ls
 
   # Remove old versions
-  rm -rf "$(ls -td "$HOME/.nvm/versions/node/*" | awk "NR>1")"
+  # shellcheck disable=SC2012,SC2086
+  rm -rf "$(ls -td ${HOME}/.nvm/versions/node/* | awk "NR>1")"
 }
 
 function install_all() {
@@ -121,7 +121,7 @@ function install_all() {
   install_nvm
 
   echo "====================================================================="
-  echo "Add the following line in ~/.zshrc:-"
+  echo "Add the following line in ${HOME}/.zshrc:-"
   echo " "
   echo "export MAC_DEV_BOOTSTRAP=${BASE_DIR}/mac-dev-bootstrap.sh"
   echo "alias update=\"\$MAC_DEV_BOOTSTRAP\""
