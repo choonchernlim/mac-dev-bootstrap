@@ -11,7 +11,8 @@ function git_checkout() {
     git clone --depth=1 "${url}" "${dir}"
   else
     cd "${dir}" || exit
-    git pull
+    git reset --hard
+    git pull --ff-only
   fi
 }
 
@@ -52,7 +53,7 @@ function install_oh_my_zsh() {
   if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
     curl_install   "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
   else
-    (cd "${zsh}" && git pull)
+    (cd "${zsh}" && git reset --hard && git pull --ff-only)
   fi
 
   echo "====================================================================="
@@ -114,11 +115,25 @@ function install_nvm() {
   rm -rf "$(ls -td ${HOME}/.nvm/versions/node/* | awk "NR>1")"
 }
 
+function install_gcloud() {
+  echo "====================================================================="
+  echo " GCloud"
+  echo "====================================================================="
+  if [[ ! -x "$(command -v gcloud)" ]]; then
+    curl https://sdk.cloud.google.com > install_gcloud.sh
+    bash install_gcloud.sh --disable-prompts
+    rm install_gcloud.sh
+  else
+    gcloud components update --quiet
+  fi
+}
+
 function install_all() {
   install_homebrew
   install_oh_my_zsh
   install_sdk
   install_nvm
+  install_gcloud
 
   echo "====================================================================="
   echo "Add the following line in ${HOME}/.zshrc:-"
