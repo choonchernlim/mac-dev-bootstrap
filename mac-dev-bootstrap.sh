@@ -40,6 +40,11 @@ function install_homebrew() {
   echo "====================================================================="
   brew tap homebrew/cask-fonts
   brew cask install font-hack-nerd-font
+
+  echo "====================================================================="
+  echo " Rectangle"
+  echo "====================================================================="
+  brew cask install rectangle
 }
 
 function install_oh_my_zsh() {
