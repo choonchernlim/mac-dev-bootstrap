@@ -143,8 +143,9 @@ function install_all() {
   echo "====================================================================="
   echo "Add the following line in ${HOME}/.zshrc:-"
   echo " "
-  echo "export MAC_DEV_BOOTSTRAP=${BASE_DIR}/mac-dev-bootstrap.sh"
-  echo "alias update=\"\$MAC_DEV_BOOTSTRAP\""
+  echo "export MAC_DEV_BOOTSTRAP_HOME=\"${BASE_DIR}\""
+  echo "export MAC_DEV_BOOTSTRAP_SCRIPT=\"\${MAC_DEV_BOOTSTRAP_HOME}/mac-dev-bootstrap.sh\""
+  echo "alias update=\"cd \${MAC_DEV_BOOTSTRAP_HOME} && git pull; \${MAC_DEV_BOOTSTRAP_SCRIPT}\""
 }
 
 install_all
