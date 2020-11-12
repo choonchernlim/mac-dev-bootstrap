@@ -49,8 +49,7 @@ function install_homebrew() {
   echo "====================================================================="
   echo " Essential Packages..."
   echo "====================================================================="
-  brew install jq
-  brew install python
+  brew install jq python wget yarn tree composer imagemagick
 }
 
 function install_oh_my_zsh() {
