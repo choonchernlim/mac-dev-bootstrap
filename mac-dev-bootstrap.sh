@@ -143,12 +143,16 @@ function install_vimrc() {
   echo "====================================================================="
   echo " VIMRC"
   echo "====================================================================="
-  git_checkout "https://github.com/amix/vimrc.git" "${HOME}/.vim_runtime"
-  if [[ ! -d "${HOME}/.vim_runtime" ]]; then
-    sh "${HOME}/.vim_runtime/install_awesome_vimrc.sh"
+
+  local vimrc="${HOME}/.vim_runtime"
+
+  git_checkout "https://github.com/amix/vimrc.git" "${vimrc}"
+
+  if [[ ! -d "${vimrc}" ]]; then
+    sh "${vimrc}/install_awesome_vimrc.sh"
   else
-    pip install requests --upgrade
-    python update_plugins.py
+    /usr/local/bin/pip3 install requests --upgrade
+    /usr/local/bin/python3 "${vimrc}/update_plugins.py"
   fi
 }
 
