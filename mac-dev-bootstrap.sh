@@ -147,6 +147,7 @@ function install_vimrc() {
   if [[ ! -d "${HOME}/.vim_runtime" ]]; then
     sh "${HOME}/.vim_runtime/install_awesome_vimrc.sh"
   else
+    pip install requests --upgrade
     python update_plugins.py
   fi
 }
