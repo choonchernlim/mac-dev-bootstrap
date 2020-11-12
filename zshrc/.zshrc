@@ -3,6 +3,11 @@
 # mac-dev-bootstrap :: Don't change anything below!
 # =====================================================================
 
+export PATH="/usr/local/sbin:$PATH"
+
+alias python="/usr/local/bin/python3"
+alias pip="/usr/local/bin/pip3"
+
 export MAVEN_OPTS="-Xms2048m -Xmx2048m"
 export JAVA_OPTS="-Xms2048m -Xmx2048m"
 export JAVA_HOME="`/usr/libexec/java_home -v '11.*'`"

@@ -45,6 +45,12 @@ function install_homebrew() {
   echo " Rectangle"
   echo "====================================================================="
   brew cask install rectangle
+
+  echo "====================================================================="
+  echo " Essential Packages..."
+  echo "====================================================================="
+  brew install jq
+  brew install python
 }
 
 function install_oh_my_zsh() {
@@ -133,12 +139,25 @@ function install_gcloud() {
   fi
 }
 
+function install_vimrc() {
+  echo "====================================================================="
+  echo " VIMRC"
+  echo "====================================================================="
+  git_checkout "https://github.com/amix/vimrc.git" "${HOME}/.vim_runtime"
+  if [[ ! -d "${HOME}/.vim_runtime" ]]; then
+    sh "${HOME}/.vim_runtime/install_awesome_vimrc.sh"
+  else
+    python update_plugins.py
+  fi
+}
+
 function install_all() {
   install_homebrew
   install_oh_my_zsh
   install_sdk
   install_nvm
   install_gcloud
+  install_vimrc
 
   echo "====================================================================="
   echo "Add the following line in ${HOME}/.zshrc:-"
