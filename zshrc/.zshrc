@@ -10,7 +10,7 @@ alias pip="/usr/local/bin/pip3"
 
 export MAVEN_OPTS="-Xms2048m -Xmx2048m"
 export JAVA_OPTS="-Xms2048m -Xmx2048m"
-export JAVA_HOME="`/usr/libexec/java_home -v '11.*'`"
+export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 export GPG_TTY=$(tty)
 
 ZSH=$HOME/.oh-my-zsh
