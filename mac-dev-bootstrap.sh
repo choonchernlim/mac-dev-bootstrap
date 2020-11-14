@@ -29,6 +29,7 @@ function install_homebrew() {
   if  [[ ! -x "$(command -v brew)" ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   else
+    brew analytics off
     brew update
     brew upgrade
     brew cleanup
