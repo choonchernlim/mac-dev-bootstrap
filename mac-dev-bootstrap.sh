@@ -132,11 +132,12 @@ function install_gcloud() {
   echo "====================================================================="
   echo " GCloud"
   echo "====================================================================="
-  if [[ ! -x "$(command -v gcloud)" ]]; then
+  if [[ ! -d "${HOME}/google-cloud-sdk" ]]; then
     curl https://sdk.cloud.google.com > install_gcloud.sh
     bash install_gcloud.sh --disable-prompts
     rm install_gcloud.sh
   else
+    gcloud config set disable_usage_reporting false
     gcloud components update --quiet
   fi
 }
