@@ -95,11 +95,13 @@ function install_sdk() {
   echo "====================================================================="
   if [[ ! -d "${HOME}/.sdkman" ]]; then
     curl_install "https://get.sdkman.io"
+    sdk install java
   else
     export SDKMAN_DIR="${HOME}/.sdkman"
     [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
     sdk selfupdate force
+    sdk upgrade
   fi
 }
 
