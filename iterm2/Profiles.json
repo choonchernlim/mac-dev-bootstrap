@@ -11,7 +11,7 @@
     "Blue Component" : 0.63137254901960782,
     "Green Component" : 0.63137254901960782
   },
-  "Rows" : 30,
+  "Rows" : 50,
   "Ansi 11 Color" : {
     "Red Component" : 0.396078431372549,
     "Color Space" : "sRGB",
@@ -149,6 +149,7 @@
     "Blue Component" : 0,
     "Green Component" : 0.53725490196078429
   },
+  "Icon" : 1,
   "Link Color" : {
     "Red Component" : 0,
     "Color Space" : "sRGB",
@@ -495,6 +496,7 @@
     "Blue Component" : 0.83529411764705885,
     "Green Component" : 0.90980392156862744
   },
+  "Space" : 0,
   "Command" : "",
   "Terminal Type" : "xterm",
   "Horizontal Spacing" : 1,
