@@ -443,7 +443,7 @@
   "Disable Smcup Rmcup" : false,
   "Name" : "mac-dev-bootstrap",
   "Blinking Cursor" : false,
-  "Guid" : "751FCFC3-9D5B-4ECF-9DD0-7D6B621CB211",
+  "Guid" : "5B6EB087-B95B-49C0-9CC4-035B4764B370",
   "Ansi 1 Color" : {
     "Red Component" : 0.86274509803921573,
     "Color Space" : "sRGB",

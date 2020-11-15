@@ -159,6 +159,16 @@ function install_vimrc() {
   fi
 }
 
+function install_iterm2() {
+  echo "====================================================================="
+  echo " ITERM2"
+  echo "====================================================================="
+
+  brew cask install iterm2
+
+  cp "${BASE_DIR}/iterm2/Profiles.json" "${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
+}
+
 function install_all() {
   install_homebrew
   install_oh_my_zsh
@@ -166,6 +176,7 @@ function install_all() {
   install_nvm
   install_gcloud
   install_vimrc
+  install_iterm2
 
   echo "====================================================================="
   echo "Add the following line in ${HOME}/.zshrc:-"
