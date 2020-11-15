@@ -1,5 +1,10 @@
 # mac-dev-bootstrap
 
+## Usage
+
+- If iTerm was installed without using Homebrew, remove it from `/Applications/iTerms.app` first.
+- Run `mac-dev-bootstrap.sh` to begin the installation.
+
 ## One-Time Setup
 
 ## Iterm2
