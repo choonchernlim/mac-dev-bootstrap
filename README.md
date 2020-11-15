@@ -1,6 +1,6 @@
 # mac-dev-bootstrap
 
-A very opinionated script to install, configure and update the following development tools:
+A very opinionated script to install, configure and update the following development tools on a Mac:
 
 - [Homebrew](https://brew.sh/)
 - [Oh MyZsh](https://ohmyz.sh/)
