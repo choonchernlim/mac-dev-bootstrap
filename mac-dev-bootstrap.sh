@@ -3,7 +3,7 @@
 
 readonly BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-function git_checkout() {
+git_checkout() {
   local url="$1"
   local dir="$2"
 
@@ -16,13 +16,13 @@ function git_checkout() {
   fi
 }
 
-function curl_install() {
+curl_install() {
   local url="$1"
 
   sh -c "$(curl -fsSL "${url}")"
 }
 
-function install_homebrew() {
+install_homebrew() {
   echo "====================================================================="
   echo " HomeBrew"
   echo "====================================================================="
@@ -53,7 +53,7 @@ function install_homebrew() {
   brew install jq python wget yarn tree composer imagemagick maven
 }
 
-function install_oh_my_zsh() {
+install_oh_my_zsh() {
   echo "====================================================================="
   echo " Oh My Zsh"
   echo "====================================================================="
@@ -90,7 +90,7 @@ function install_oh_my_zsh() {
   git_checkout "https://github.com/zsh-users/zsh-autosuggestions.git" "${zsh_custom}/plugins/zsh-autosuggestions"
 }
 
-function install_sdk() {
+install_sdk() {
   echo "====================================================================="
   echo " SDKMAN"
   echo "====================================================================="
@@ -106,7 +106,7 @@ function install_sdk() {
   fi
 }
 
-function install_nvm() {
+install_nvm() {
   echo "====================================================================="
   echo " NVM"
   echo "====================================================================="
@@ -128,7 +128,7 @@ function install_nvm() {
   rm -rf "$(ls -td ${HOME}/.nvm/versions/node/* | awk "NR>1")"
 }
 
-function install_gcloud() {
+install_gcloud() {
   echo "====================================================================="
   echo " GCloud"
   echo "====================================================================="
@@ -142,7 +142,7 @@ function install_gcloud() {
   fi
 }
 
-function install_vimrc() {
+install_vimrc() {
   echo "====================================================================="
   echo " VIMRC"
   echo "====================================================================="
@@ -159,7 +159,7 @@ function install_vimrc() {
   fi
 }
 
-function install_iterm2() {
+install_iterm2() {
   echo "====================================================================="
   echo " ITERM2"
   echo "====================================================================="
@@ -169,7 +169,7 @@ function install_iterm2() {
   cp "${BASE_DIR}/iterm2/Profiles.json" "${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
 }
 
-function install_all() {
+install_all() {
   install_homebrew
   install_oh_my_zsh
   install_sdk
