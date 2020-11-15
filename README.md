@@ -1,13 +1,36 @@
 # mac-dev-bootstrap
 
+A very opinionated script to install, configure and update the following development tools:
+
+- [Homebrew](https://brew.sh/)
+- [Oh MyZsh](https://ohmyz.sh/)
+- [SDKMAN!](https://sdkman.io/)
+- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
+- [amix/vimrc](https://github.com/amix/vimrc)
+- [iTerm2](https://www.iterm2.com/)
+
 ## Usage
 
-- If iTerm was installed without using Homebrew, remove it from `/Applications/iTerms.app` first.
+**IMPORTANT:** Please read [mac-dev-bootstrap.sh](mac-dev-bootstrap.sh) and understand what's going on first before
+proceeding.
+
+- If iTerm was already installed without using Homebrew, remove it from `/Applications/iTerms.app` first.
 - Run `mac-dev-bootstrap.sh` to begin the installation.
+
+- Add the following on the top of `~/.zshrc`:
+
+```shell script
+export MAC_DEV_BOOTSTRAP_HOME="[PATH]/mac-dev-bootstrap" # Fix [PATH]!
+export MAC_DEV_BOOTSTRAP_SCRIPT="${MAC_DEV_BOOTSTRAP_HOME}/mac-dev-bootstrap.sh"
+alias update="cd ${MAC_DEV_BOOTSTRAP_HOME} && git pull --ff-only; ${MAC_DEV_BOOTSTRAP_SCRIPT}"
+```
+
+- To update the all the tools in the future, run `update` in the terminal.
 
 ## One-Time Setup
 
-## Iterm2
+## iTerm2
 
 - `General -> Preferences`.
     - Check "Load preferences from a custom folder or URL".
@@ -21,11 +44,5 @@
 
 ## .zshrc
 
-- Copy `[PATH]/mac-dev-bootstrap/zshrc/.zshrc` and paste at the bottom of`~/.zshrc`.
-- Add the following to the top of `~/.zshrc`:
-
-```shell script
-export MAC_DEV_BOOTSTRAP_HOME="[PATH]/mac-dev-bootstrap" # Fix [PATH]!
-export MAC_DEV_BOOTSTRAP_SCRIPT="${MAC_DEV_BOOTSTRAP_HOME}/mac-dev-bootstrap.sh"
-alias update="cd ${MAC_DEV_BOOTSTRAP_HOME} && git pull --ff-only; ${MAC_DEV_BOOTSTRAP_SCRIPT}"
-```
+- Copy `[PATH]/mac-dev-bootstrap/zshrc/.zshrc` and paste at the bottom of`~/.zshrc`. The pre-generated `.zshrc` file
+  can be safely replaced with this.
