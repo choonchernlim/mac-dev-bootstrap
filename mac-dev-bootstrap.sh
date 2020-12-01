@@ -40,12 +40,12 @@ install_homebrew() {
   echo " Nerd Font"
   echo "====================================================================="
   brew tap homebrew/cask-fonts
-  brew cask install font-hack-nerd-font
+  brew install --cask font-hack-nerd-font
 
   echo "====================================================================="
   echo " Rectangle"
   echo "====================================================================="
-  brew cask install rectangle
+  brew install --cask rectangle
 
   echo "====================================================================="
   echo " Essential Packages..."
@@ -110,13 +110,9 @@ install_nvm() {
   echo "====================================================================="
   echo " NVM"
   echo "====================================================================="
-  if [[ ! -d "${HOME}/.nvm" ]]; then
-    curl_install "https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh"
-  fi
+  brew install nvm
 
-  export NVM_DIR="${HOME}/.nvm"
-  [ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
-  [ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
+  . "/usr/local/opt/nvm/nvm.sh"
 
   # Install only LTS
   nvm install --lts
@@ -164,7 +160,7 @@ install_iterm2() {
   echo " ITERM2"
   echo "====================================================================="
 
-  brew cask install iterm2
+  brew install --cask iterm2
 
   cp "${BASE_DIR}/iterm2/Profiles.json" "${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
 }
