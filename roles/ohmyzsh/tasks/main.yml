@@ -1,0 +1,6 @@
+---
+- name: Create conf dir if not exist
+  file:
+    path: '{{ zshrc_conf_dir }}'
+    state: directory
+    mode: 0755

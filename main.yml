@@ -1,0 +1,52 @@
+---
+- name: mac-dev-bootstrap
+  hosts: all
+  vars:
+    user_home: '{{ lookup("env", "HOME") }}'
+    zshrc_conf_dir: '{{ user_home }}/.zshrc_conf'
+  roles:
+    - ohmyzsh
+    - sdkman
+
+#      user_home: "{{ user_home }}"
+#      sdkman_flush_caches_before:
+#        - temp
+#      sdkman_flush_caches_after:
+#        - archives
+#        - broadcast
+#        - candidates
+#        - temp
+#      sdkman_offline_mode: false
+#      sdkman_update_alternatives:
+#        - candidate: java
+#          name: java
+#          link: /usr/bin/java
+#        - candidate: java
+#          name: javac
+#          link: /usr/bin/javac
+
+#  tasks:
+#  - name: Updating Homebrew and upgrading all packages
+#    homebrew:
+#      update_homebrew: yes
+#      upgrade_all: yes
+#
+#  - name: Upgrading all casks
+#    homebrew_cask:
+#      upgrade_all: true
+
+#  - name: Tapping homebrew/cask-fonts
+#    homebrew_tap:
+#      name: homebrew/cask-fonts
+#
+#  - name: Installing Nerd Font
+#    homebrew_cask:
+#      name: font-hack-nerd-font
+
+#  - name: Installing Rectangle
+#    homebrew_cask:
+#      name: rectangle
+#
+#  - name: Installing essential packages with Homebrew
+#    homebrew:
+#      name: ['jq', 'python', 'wget', 'yarn', 'tree', 'composer', 'imagemagick', 'maven']

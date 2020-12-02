@@ -1,0 +1,61 @@
+---
+- name: Is it installed?
+  stat:
+    path: '{{ sdkman_init_script }}'
+  register: is_installed
+
+- name: Not installed
+  block:
+    - name: Download installer
+      get_url:
+        url: https://get.sdkman.io
+        dest: /tmp
+        mode: 0755
+
+    - name: Run installer
+      shell: /tmp/index.html
+
+    - name: Delete installer
+      file:
+        path: /tmp/index.html
+        state: absent
+  when: not is_installed.stat.exists
+
+- name: Run self update
+  shell: >-
+    . {{ sdkman_init_script }} && sdk selfupdate
+  retries: 5
+  delay: 3
+  register: sdk_selfupdate
+  until: sdk_selfupdate.rc == 0
+  changed_when: sdk_selfupdate.stdout != 'No update available at this time.'
+  when: is_installed.stat.exists
+
+- name: Install packages
+  shell: >-
+    . {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}
+  loop: '{{ sdkman_install_packages }}'
+  retries: 5
+  delay: 3
+  register: result
+  until: result.rc == 0
+
+# TODO move to root
+- name: Create ~/.zshrc_conf dir if not exist
+  file:
+    path: '{{ zshrc_conf_dir }}'
+    state: directory
+    mode: 0755
+
+- name: Add SDKMAN to shell script
+  copy:
+    dest: '{{ zshrc_conf_dir }}/sdkman.sh'
+    content: |
+      [[ -s {{ user_home }}/bin/sdkman-init.sh ]] && source {{ sdkman_init_script }}
+
+- name: 'Set "sdk use [CANDIDATE] [VERSION]" in shell script'
+  lineinfile:
+    dest: '{{ zshrc_conf_dir }}/sdkman.sh'
+    line: 'sdk use {{ item.candidate }} {{ item.version }}'
+  with_items:
+    - '{{ sdkman_install_packages }}'
