@@ -1,2 +1,4 @@
 ---
-# defaults file for on-my-zsh
+ohmyzsh_dir: '{{ ansible_user_dir }}/.oh-my-zsh'
+ohmyzsh_conf_dir: '{{ ansible_user_dir }}/.zshrc_conf'
+ohmyzsh_custom_dir: '{{ ohmyzsh_dir }}/custom'

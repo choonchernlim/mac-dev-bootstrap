@@ -1,12 +1,23 @@
 ---
 - name: mac-dev-bootstrap
   hosts: all
-  vars:
-    user_home: '{{ lookup("env", "HOME") }}'
-    zshrc_conf_dir: '{{ user_home }}/.zshrc_conf'
   roles:
     - ohmyzsh
     - sdkman
+
+#  tasks:
+#    - name: "Ansible | List all known variables and facts"
+#      debug:
+#        var: hostvars[inventory_hostname]
+#
+#    - name: asd
+#      debug:
+#        msg: '{{ ansible_user_dir }}'
+#
+#    - name: playbook_dir
+#      debug:
+#        msg: '{{ playbook_dir }}'
+
 
 #      user_home: "{{ user_home }}"
 #      sdkman_flush_caches_before:
