@@ -18,24 +18,6 @@
 #      debug:
 #        msg: '{{ playbook_dir }}'
 
-
-#      user_home: "{{ user_home }}"
-#      sdkman_flush_caches_before:
-#        - temp
-#      sdkman_flush_caches_after:
-#        - archives
-#        - broadcast
-#        - candidates
-#        - temp
-#      sdkman_offline_mode: false
-#      sdkman_update_alternatives:
-#        - candidate: java
-#          name: java
-#          link: /usr/bin/java
-#        - candidate: java
-#          name: javac
-#          link: /usr/bin/javac
-
 #  tasks:
 #  - name: Updating Homebrew and upgrading all packages
 #    homebrew:
