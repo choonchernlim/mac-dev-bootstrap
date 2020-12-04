@@ -1,0 +1,10 @@
+---
+- name: Install iTerm2
+  homebrew_cask:
+    name: iTerm2
+    state: present
+
+- name: Copy Profiles.json to ~/Library/Application Support/iTerm2/DynamicProfiles
+  copy:
+    src: Profiles.json
+    dest: '{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles'

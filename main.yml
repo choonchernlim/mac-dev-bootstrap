@@ -2,9 +2,10 @@
 - name: mac-dev-bootstrap
   hosts: all
   roles:
-    - homebrew
+#    - homebrew
 #    - ohmyzsh
 #    - sdkman
+    - iterm2
 
 #  tasks:
 #    - name: "Ansible | List all known variables and facts"
