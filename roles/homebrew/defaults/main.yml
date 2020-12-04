@@ -1,0 +1,13 @@
+---
+homebrew_packages:
+  - jq
+  - python
+  - wget
+  - yarn
+  - tree
+  - composer
+  - imagemagick
+  - maven
+homebrew_cask_packages:
+  - alfred
+  - rectangle

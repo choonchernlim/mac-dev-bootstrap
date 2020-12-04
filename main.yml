@@ -2,8 +2,9 @@
 - name: mac-dev-bootstrap
   hosts: all
   roles:
-    - ohmyzsh
-    - sdkman
+    - homebrew
+#    - ohmyzsh
+#    - sdkman
 
 #  tasks:
 #    - name: "Ansible | List all known variables and facts"
@@ -17,29 +18,3 @@
 #    - name: playbook_dir
 #      debug:
 #        msg: '{{ playbook_dir }}'
-
-#  tasks:
-#  - name: Updating Homebrew and upgrading all packages
-#    homebrew:
-#      update_homebrew: yes
-#      upgrade_all: yes
-#
-#  - name: Upgrading all casks
-#    homebrew_cask:
-#      upgrade_all: true
-
-#  - name: Tapping homebrew/cask-fonts
-#    homebrew_tap:
-#      name: homebrew/cask-fonts
-#
-#  - name: Installing Nerd Font
-#    homebrew_cask:
-#      name: font-hack-nerd-font
-
-#  - name: Installing Rectangle
-#    homebrew_cask:
-#      name: rectangle
-#
-#  - name: Installing essential packages with Homebrew
-#    homebrew:
-#      name: ['jq', 'python', 'wget', 'yarn', 'tree', 'composer', 'imagemagick', 'maven']
