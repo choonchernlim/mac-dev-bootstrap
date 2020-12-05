@@ -12,8 +12,8 @@
 # homebrew_cask doesn't work with tapped repo... so, run the command directly
 - name: Install Nerd Fonts
   shell: brew install --cask font-hack-nerd-font
-  register: result
-  changed_when: not 'is already installed' in result.stderr
+  register: homebrew_install_nerd_fonts_output
+  changed_when: not 'is already installed' in homebrew_install_nerd_fonts_output.stderr
 
 - name: Install cask packages
   homebrew_cask:

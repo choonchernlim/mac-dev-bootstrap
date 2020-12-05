@@ -7,16 +7,7 @@
     - sdkman
     - iterm2
     - nvm
-
 #  tasks:
 #    - name: "Ansible | List all known variables and facts"
 #      debug:
 #        var: hostvars[inventory_hostname]
-#
-#    - name: asd
-#      debug:
-#        msg: '{{ ansible_user_dir }}'
-#
-#    - name: playbook_dir
-#      debug:
-#        msg: '{{ playbook_dir }}'

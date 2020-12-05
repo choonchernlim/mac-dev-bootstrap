@@ -14,24 +14,30 @@
 # Version '' (with LTS filter) not found - try `nvm ls-remote --lts` to browse available versions.
 - name: Install LTS version of Node
   shell: |
-    . /usr/local/opt/nvm/nvm.sh
+    . $(brew --prefix)/opt/nvm/nvm.sh
     nvm install --lts
   environment:
     NVM_DIR: '{{ nvm_dir }}'
-  register: result
-  changed_when: not 'is already installed' in result.stderr
+  retries: 5
+  delay: 3
+  register: nvm_install_output
+  until: not "Version '' (with LTS filter) not found" in nvm_install_output.stderr
+  changed_when: not 'is already installed' in nvm_install_output.stderr
+
+
+
 
 - name: Find all installed versions
   find:
     paths: '{{ nvm_dir }}/versions/node'
     file_type: directory
-  register: installed_version_dirs
+  register: nvm_installed_version_dirs
 
 - name: Keep most recent version and delete all older versions
   file:
     path: "{{ item }}"
     state: absent
-  with_items: "{{ (installed_version_dirs.files | sort(attribute='mtime') | map(attribute='path'))[:-1] }}"
+  with_items: "{{ (nvm_installed_version_dirs.files | sort(attribute='mtime') | map(attribute='path'))[:-1] }}"
 
 - name: Add to shell config dir
   copy:

@@ -2,7 +2,7 @@
 - name: Is it installed?
   stat:
     path: '{{ sdkman_init_script }}'
-  register: is_installed
+  register: sdkman_installed
 
 - name: Not installed
   block:
@@ -19,17 +19,17 @@
       file:
         path: /tmp/index.html
         state: absent
-  when: not is_installed.stat.exists
+  when: not sdkman_installed.stat.exists
 
 - name: Run self update
   shell: >-
     . {{ sdkman_init_script }} && sdk selfupdate
   retries: 5
   delay: 3
-  register: sdk_selfupdate
-  until: sdk_selfupdate.rc == 0
-  changed_when: sdk_selfupdate.stdout != 'No update available at this time.'
-  when: is_installed.stat.exists
+  register: sdkman_selfupdate
+  until: sdkman_selfupdate.rc == 0
+  changed_when: sdkman_selfupdate.stdout != 'No update available at this time.'
+  when: sdkman_installed.stat.exists
 
 - name: Install packages
   shell: >-
@@ -37,8 +37,8 @@
   loop: '{{ sdkman_install_packages }}'
   retries: 5
   delay: 3
-  register: result
-  until: result.rc == 0
+  register: sdkman_install_packages_output
+  until: sdkman_install_packages_output.rc == 0
 
 - name: Add to shell config dir
   copy:
