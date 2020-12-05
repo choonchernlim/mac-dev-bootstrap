@@ -42,14 +42,8 @@
 
 - name: Add to shell config dir
   copy:
+    src: sdkman.sh
     dest: '{{ ohmyzsh_conf_dir }}/sdkman.sh'
-    content: |
-      export SDKMAN_DIR="{{ ansible_user_dir }}/.sdkman"
-      source {{ sdkman_init_script }}
-
-      export MAVEN_OPTS="-Xms2048m -Xmx2048m"
-      export JAVA_OPTS="-Xms2048m -Xmx2048m"
-      export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 
 - name: 'Set "sdk use [CANDIDATE] [VERSION]" in shell script'
   lineinfile:
