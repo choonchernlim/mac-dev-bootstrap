@@ -2,6 +2,7 @@
 homebrew_packages:
   - curl
   - jq
+  - ansible
   - python
   - wget
   - yarn
@@ -9,6 +10,8 @@ homebrew_packages:
   - composer
   - imagemagick
   - maven
+  - htop
+  - tldr
 homebrew_cask_packages:
   - alfred
   - rectangle

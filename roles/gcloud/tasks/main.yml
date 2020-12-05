@@ -1,13 +1,9 @@
 ---
-- name: Check if gcloud is installed
-  shell: brew info google-cloud-sdk
-  register: gcloud_check_is_installed_output
-  changed_when: no
-
 # homebrew_cask doesn't work... so, run the command directly
 - name: Install gcloud
   shell: brew install --cask google-cloud-sdk
-  when: gcloud_check_is_installed_output.stdout is search('Not installed')
+  register: homebrew_install_gcloud_output
+  changed_when: not 'is already installed' in homebrew_install_gcloud_output.stderr
 
 - name: Disable reporting usage
   shell: >-
