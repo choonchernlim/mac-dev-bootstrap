@@ -8,3 +8,8 @@
   copy:
     src: Profiles.json
     dest: '{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles'
+
+- name: Copy com.googlecode.iterm2.plist to ~/Library/Preferences
+  copy:
+    src: com.googlecode.iterm2.plist
+    dest: '{{ ansible_user_dir }}/Library/Preferences'
