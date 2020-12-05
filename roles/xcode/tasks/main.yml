@@ -1,0 +1,10 @@
+---
+- name: Check if command line tools are installed
+  command: xcode-select -print-path
+  register: xcode_is_installed_output
+  ignore_errors: true
+  changed_when: false
+
+- name: Install command line tools
+  shell: xcode-select --install
+  when: xcode_is_installed_output.stdout|length == 0
