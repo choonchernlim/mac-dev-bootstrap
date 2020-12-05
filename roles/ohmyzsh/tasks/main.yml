@@ -66,10 +66,7 @@
     block: |
       export PATH="/usr/local/sbin:$PATH"
 
-      export MAC_DEV_BOOTSTRAP_HOME="{{ playbook_dir }}"
-      export MAC_DEV_BOOTSTRAP_SCRIPT="${MAC_DEV_BOOTSTRAP_HOME}/mac-dev-bootstrap.sh"
-      alias update="cd ${MAC_DEV_BOOTSTRAP_HOME} && git pull --ff-only && ${MAC_DEV_BOOTSTRAP_SCRIPT}"
-
+      alias update="cd {{ playbook_dir }} && git pull --ff-only && {{ playbook_dir }}/mac-dev-bootstrap.sh"
       alias python="/usr/local/bin/python3"
       alias pip="/usr/local/bin/pip3"
 
