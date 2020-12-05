@@ -1,0 +1,27 @@
+---
+- name: Check if gcloud is installed
+  shell: brew info google-cloud-sdk
+  register: gcloud_check_is_installed_output
+  changed_when: no
+
+# homebrew_cask doesn't work... so, run the command directly
+- name: Install gcloud
+  shell: brew install --cask google-cloud-sdk
+  when: gcloud_check_is_installed_output.stdout is search('Not installed')
+
+- name: Disable reporting usage
+  shell: >-
+    $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud config set disable_usage_reporting false
+  register: gcloud_disable_reporting_output
+  changed_when: not 'Updated property [core/disable_usage_reporting]' in gcloud_disable_reporting_output.stderr
+
+- name: Update components
+  shell: >-
+    $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud components update --quiet
+  register: gcloud_update_components_output
+  changed_when: not 'All components are up to date' in gcloud_update_components_output.stderr
+
+- name: Add to shell config dir
+  copy:
+    src: gcloud.sh
+    dest: '{{ ohmyzsh_conf_dir }}/gcloud.sh'
