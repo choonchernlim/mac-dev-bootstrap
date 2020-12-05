@@ -1,0 +1,2 @@
+---
+vimrc_runtime_dir: '{{ ansible_user_dir }}/.vim_runtime'

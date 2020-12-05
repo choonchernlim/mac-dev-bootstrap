@@ -2,11 +2,13 @@
 - name: mac-dev-bootstrap
   hosts: all
   roles:
-    - homebrew
-    - ohmyzsh   # Expose `ohmyzsh_conf_dir` var for other roles below to use
-    - sdkman
-    - iterm2
-    - nvm
+#    - homebrew
+    - python
+    #    - ohmyzsh   # Expose `ohmyzsh_conf_dir` var for other roles below to use
+    #    - sdkman
+    #    - iterm2
+    #    - nvm
+    - vimrc
 #  tasks:
 #    - name: "Ansible | List all known variables and facts"
 #      debug:

@@ -1,0 +1,3 @@
+---
+python_packages:
+  - requests # Needed by VIMRC
