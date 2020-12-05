@@ -3,6 +3,7 @@ homebrew_packages:
   - curl
   - jq
   - ansible
+  - ansible-lint
   - python
   - wget
   - yarn
