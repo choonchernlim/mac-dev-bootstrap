@@ -1,6 +1,6 @@
 ---
 - name: Turn off analytics
-  shell: brew analytics off
+  command: brew analytics off
   register: homebrew_analytics_off_output
   changed_when: homebrew_analytics_off_output.rc != 0
 
@@ -16,7 +16,7 @@
 
 # homebrew_cask doesn't work with tapped repo... so, run the command directly
 - name: Install Nerd Fonts
-  shell: brew install --cask font-hack-nerd-font
+  command: brew install --cask font-hack-nerd-font
   register: homebrew_install_nerd_fonts_output
   changed_when: not 'is already installed' in homebrew_install_nerd_fonts_output.stderr
 

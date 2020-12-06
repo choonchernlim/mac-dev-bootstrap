@@ -6,5 +6,5 @@
   changed_when: false
 
 - name: Install command line tools
-  shell: xcode-select --install
+  command: xcode-select --install
   when: xcode_is_installed_output.stdout|length == 0

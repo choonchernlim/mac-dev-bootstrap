@@ -13,7 +13,7 @@
         mode: 0755
 
     - name: Run installer
-      shell: /tmp/index.html
+      command: /tmp/index.html
 
     - name: Delete installer
       file:

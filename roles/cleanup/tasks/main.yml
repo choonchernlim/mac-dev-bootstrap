@@ -1,9 +1,9 @@
 ---
 - name: Free up space by removing old packages installed by Homebrew
-  shell: brew cleanup
+  command: brew cleanup
 
 - name: Check health of Homebrew
-  shell: brew doctor
+  command: brew doctor
   register: cleanup_brew_doctor_output
   changed_when: not 'Your system is ready to brew' in cleanup_brew_doctor_output.stdout
 

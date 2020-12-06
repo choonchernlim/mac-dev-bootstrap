@@ -5,7 +5,7 @@
     dest: '{{ vimrc_runtime_dir }}'
 
 - name: Install VIMRC
-  shell: '{{ vimrc_runtime_dir }}/install_awesome_vimrc.sh'
+  command: '{{ vimrc_runtime_dir }}/install_awesome_vimrc.sh'
   args:
     creates: '{{ ansible_user_dir }}/.vimrc'
 

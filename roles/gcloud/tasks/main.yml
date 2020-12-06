@@ -1,7 +1,7 @@
 ---
 # homebrew_cask doesn't work... so, run the command directly
 - name: Install gcloud
-  shell: brew install --cask google-cloud-sdk
+  command: brew install --cask google-cloud-sdk
   register: homebrew_install_gcloud_output
   changed_when: not 'is already installed' in homebrew_install_gcloud_output.stderr
 
