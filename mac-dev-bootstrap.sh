@@ -6,7 +6,11 @@ set -e -o pipefail
 
 # Install Ansible and its dependencies
 [[ ! -x "$(command -v ansible)" ]] && brew install ansible
+[[ ! -x "$(command -v ansible-lint)" ]] && brew install ansible-lint
 [[ ! -x "$(command -v python)" ]] && brew install python
 
 # Run the playbook
 ansible-playbook main.yml
+
+# Lint the playbook
+ansible-lint main.yml

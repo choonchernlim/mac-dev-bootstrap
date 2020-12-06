@@ -29,6 +29,13 @@ proceeding.
 
 - To update the all the tools in the future, run `update` in the terminal.
 
+## Troubleshooting
+
+### Error: It seems there is already an App at '/Applications/[NAME].app'
+
+This is due to the fact the app was already installed before running the playbook. To fix this, simply delete the
+app and rerun the playbook. You will not lose your app's configuration.
+
 ## One-Time Setup
 
 ## iTerm2
