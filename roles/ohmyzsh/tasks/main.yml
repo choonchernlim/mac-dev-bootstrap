@@ -3,6 +3,7 @@
   git:
     repo: '{{ item.base_url }}/{{ item.name }}.git'
     dest: '{{ ohmyzsh_custom_dir }}/{{ item.type }}/{{ item.name }}'
+    force: yes
   with_items:
     - base_url: https://github.com/romkatv
       name: powerlevel10k
