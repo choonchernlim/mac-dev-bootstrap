@@ -7,8 +7,14 @@
   command: brew doctor
   register: cleanup_brew_doctor_output
   changed_when: not 'Your system is ready to brew' in cleanup_brew_doctor_output.stdout
+  failed_when:
+    - cleanup_brew_doctor_output.rc != 0
+    # Homebrew may display this message on older macOS, ignore it
+    - not 'A newer Command Line Tools release is available.' in cleanup_brew_doctor_output.stderr
 
 - name: Display things to fix in Homebrew
   debug:
     var: cleanup_brew_doctor_output.stderr_lines
-  when: not 'Your system is ready to brew' in cleanup_brew_doctor_output.stdout
+  when:
+    - not 'Your system is ready to brew' in cleanup_brew_doctor_output.stdout
+    - not 'A newer Command Line Tools release is available.' in cleanup_brew_doctor_output.stderr
