@@ -42,10 +42,10 @@
 
 - name: First-time installation - Backup and create an empty .zshrc file
   block:
-    - name: Backup original .zshrc file
+    - name: Backup original ~/.zshrc file to ~/.zshrc.[TIMESTAMP]
       copy:
         src: '{{ ansible_user_dir }}/.zshrc'
-        dest: '{{ ansible_user_dir }}/.zshrc.bak'
+        dest: '{{ ansible_user_dir }}/.zshrc.{{ lookup("pipe", "date +%Y%m%d%H%M%S") }}'
         mode: 0644
 
     - name: Remove original .zshrc file
