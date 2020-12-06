@@ -10,7 +10,7 @@ set -e -o pipefail
 [[ ! -x "$(command -v python)" ]] && brew install python
 
 # Run the playbook
-ansible-playbook main.yml
+ansible-playbook main.yml "$@"
 
 # Lint the playbook
 ansible-lint main.yml

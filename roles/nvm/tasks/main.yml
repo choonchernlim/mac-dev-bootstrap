@@ -24,9 +24,6 @@
   until: not "Version '' (with LTS filter) not found" in nvm_install_output.stderr
   changed_when: not 'is already installed' in nvm_install_output.stderr
 
-
-
-
 - name: Find all installed versions
   find:
     paths: '{{ nvm_dir }}/versions/node'

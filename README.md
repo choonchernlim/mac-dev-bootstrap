@@ -9,7 +9,6 @@ A very opinionated script to install, configure and update the following develop
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 - [amix/vimrc](https://github.com/amix/vimrc)
 - [iTerm2](https://www.iterm2.com/)
-- XCode Command Line Tools
 - [Alfred](https://www.alfredapp.com/)
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 - [Rectangle](https://rectangleapp.com/)
@@ -19,6 +18,9 @@ A very opinionated script to install, configure and update the following develop
 - [Textmate](https://macromates.com/)
 - [Google Chrome](https://www.google.com/chrome/)
 - [Sublime Text](https://www.sublimetext.com/)
+- [NordVPN](https://nordvpn.com/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- XCode Command Line Tools
 
 ## Usage
 
@@ -26,6 +28,10 @@ A very opinionated script to install, configure and update the following develop
 proceeding.
 
 - Run `mac-dev-bootstrap.sh` to begin the installation.
+
+- To install/configure just specific installation(s), run `mac-dev-bootstrap.sh --tags "[ROLE_TAG(S)]"`, ex:
+  - `mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
+  - `mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
 
 - To update the all the tools in the future, run `update` in the terminal.
 

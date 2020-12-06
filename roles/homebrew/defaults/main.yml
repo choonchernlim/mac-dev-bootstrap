@@ -4,7 +4,6 @@ homebrew_packages:
   - jq
   - ansible
   - ansible-lint
-  - python
   - wget
   - yarn
   - tree
@@ -23,3 +22,5 @@ homebrew_cask_packages:
   - textmate
   - google-chrome
   - sublime-text
+  - nordvpn
+  - docker

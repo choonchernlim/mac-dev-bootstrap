@@ -1,5 +1,10 @@
 ---
-- name: Install packages
+- name: Install Python
+  homebrew:
+    name: python
+    state: present
+
+- name: Install packages using PIP
   pip:
     name: '{{ item }}'
     state: present
