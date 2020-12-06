@@ -9,22 +9,14 @@ A very opinionated script to install, configure and update the following develop
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 - [amix/vimrc](https://github.com/amix/vimrc)
 - [iTerm2](https://www.iterm2.com/)
+- XCode Command Line Tools
 
 ## Usage
 
 **IMPORTANT:** Please read [mac-dev-bootstrap.sh](mac-dev-bootstrap.sh) and understand what's going on first before
 proceeding.
 
-- If iTerm was already installed without using Homebrew, remove it from `/Applications/iTerms.app` first.
 - Run `mac-dev-bootstrap.sh` to begin the installation.
-
-- Add the following on the top of `~/.zshrc`:
-
-```shell script
-export MAC_DEV_BOOTSTRAP_HOME="[PATH]/mac-dev-bootstrap" # Fix [PATH]!
-export MAC_DEV_BOOTSTRAP_SCRIPT="${MAC_DEV_BOOTSTRAP_HOME}/mac-dev-bootstrap.sh"
-alias update="cd ${MAC_DEV_BOOTSTRAP_HOME} && git pull --ff-only; ${MAC_DEV_BOOTSTRAP_SCRIPT}"
-```
 
 - To update the all the tools in the future, run `update` in the terminal.
 
@@ -32,17 +24,8 @@ alias update="cd ${MAC_DEV_BOOTSTRAP_HOME} && git pull --ff-only; ${MAC_DEV_BOOT
 
 ## iTerm2
 
-- `General -> Preferences`.
-    - Check "Load preferences from a custom folder or URL".
-    - Specify the path to `iterm2` dir in the Git repo: `[PATH]/mac-dev-bootstrap/iterm2`.
-    - Check "Save changes to folder when iTerm2 quits".
 - `Profiles`.
     - Click on `mac-dev-bootstrap`.
     - `Other Actions...`.
     - `Set as Default`.
     - Delete other existing profiles.
-
-## .zshrc
-
-- Copy `[PATH]/mac-dev-bootstrap/zshrc/.zshrc` and paste at the bottom of`~/.zshrc`. The pre-generated `.zshrc` file
-  can be safely replaced with this.
