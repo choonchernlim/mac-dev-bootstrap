@@ -15,12 +15,16 @@ homebrew_packages:
 homebrew_cask_packages:
   - 1password
   - alfred
+  - chronosync
   - docker
   - firefox
   - font-hack-nerd-font
+  - google-backup-and-sync
   - google-chrome
   - mamp
+  - postman
   - rectangle
+  - skitch
   - spotify
   - sublime-text
   - textmate
