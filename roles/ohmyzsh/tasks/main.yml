@@ -72,7 +72,7 @@
       alias pip="/usr/local/bin/pip3"
 
       for conf_file in {{ ohmyzsh_conf_dir }}/*; do
-        echo "Sourcing ${conf_file} ..."
+        echo "\nLoading ${conf_file} ...\n"
         source "${conf_file}"
       done
 
