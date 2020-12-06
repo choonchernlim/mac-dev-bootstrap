@@ -21,3 +21,4 @@
   copy:
     src: gcloud.sh
     dest: '{{ ohmyzsh_conf_dir }}/gcloud.sh'
+    mode: 0644

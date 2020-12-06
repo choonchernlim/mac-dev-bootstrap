@@ -44,6 +44,7 @@
   copy:
     src: sdkman.sh
     dest: '{{ ohmyzsh_conf_dir }}/sdkman.sh'
+    mode: 0644
 
 - name: 'Set "sdk use [CANDIDATE] [VERSION]" in shell script'
   lineinfile:

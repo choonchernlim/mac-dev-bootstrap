@@ -43,3 +43,4 @@
   copy:
     src: nvm.sh
     dest: '{{ ohmyzsh_conf_dir }}/nvm.sh'
+    mode: 0644
