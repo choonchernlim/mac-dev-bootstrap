@@ -21,6 +21,7 @@ A very opinionated script to install, configure and update the following develop
 - [Sublime Text](https://www.sublimetext.com/)
 - [Textmate](https://macromates.com/)
 - XCode Command Line Tools
+- ... and many commonly used DevOps commands
 
 Tested on:
 
