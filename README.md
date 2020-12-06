@@ -12,7 +12,6 @@ A very opinionated script to install, configure and update the following develop
 - [Homebrew](https://brew.sh/)
 - [iTerm2](https://www.iterm2.com/)
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
-- [NordVPN](https://nordvpn.com/)
 - [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
 - [Oh MyZsh](https://ohmyz.sh/)
 - [SDKMAN!](https://sdkman.io/)
