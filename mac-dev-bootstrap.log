@@ -21,7 +21,6 @@ ok: [localhost] => (item=1password)
 ok: [localhost] => (item=textmate)
 ok: [localhost] => (item=google-chrome)
 ok: [localhost] => (item=sublime-text)
-ok: [localhost] => (item=nordvpn)
 ok: [localhost] => (item=docker)
 TASK [homebrew : Install packages name={{ item }}, state=present] **********************************************************************************************************************************************************************
 ok: [localhost] => (item=curl)
