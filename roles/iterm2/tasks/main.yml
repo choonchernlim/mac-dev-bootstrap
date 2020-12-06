@@ -10,9 +10,12 @@
     dest: '{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles'
     mode: 0644
 
-# TODO use plutil -convert??
 - name: Copy com.googlecode.iterm2.plist to ~/Library/Preferences
   copy:
     src: com.googlecode.iterm2.plist
     dest: '{{ ansible_user_dir }}/Library/Preferences'
     mode: 0644
+
+- name: Convert com.googlecode.iterm2.plist to binary
+  command: plutil -convert binary1 {{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist
+  changed_when: no
