@@ -5,18 +5,10 @@
     dest: '{{ ohmyzsh_custom_dir }}/{{ item.type }}/{{ item.name }}'
     force: yes
   with_items:
-    - base_url: https://github.com/romkatv
-      name: powerlevel10k
-      type: themes
-    - base_url: https://github.com/denysdovhan
-      name: spaceship-prompt
-      type: themes
-    - base_url: https://github.com/zsh-users
-      name: zsh-syntax-highlighting
-      type: plugins
-    - base_url: https://github.com/zsh-users
-      name: zsh-autosuggestions
-      type: plugins
+    - { type: themes, base_url: https://github.com/romkatv, name: powerlevel10k }
+    - { type: themes, base_url: https://github.com/denysdovhan, name: spaceship-prompt }
+    - { type: plugins, base_url: https://github.com/zsh-users, name: zsh-syntax-highlighting }
+    - { type: plugins, base_url: https://github.com/zsh-users, name: zsh-autosuggestions }
 
 # See https://github.com/denysdovhan/spaceship-prompt#oh-my-zsh
 - name: Create symbolic link for Spaceship Prompt
@@ -25,7 +17,7 @@
     dest: '{{ ohmyzsh_custom_dir }}/themes/spaceship.zsh-theme'
     state: link
 
-- name: Copy PowerLevel10k config file
+- name: Copy .p10k.zsh to user dir
   copy:
     src: .p10k.zsh
     dest: '{{ ansible_user_dir }}/.p10k.zsh'
@@ -64,18 +56,8 @@
   blockinfile:
     path: '{{ ansible_user_dir }}/.zshrc'
     backup: yes
-    marker: "# {mark} - {{ onmyzsh_block_marker }}"
-    block: |
-      export PATH="/usr/local/sbin:$PATH"
-
-      alias update="cd {{ playbook_dir }} && git pull --ff-only && {{ playbook_dir }}/mac-dev-bootstrap.sh"
-      alias python="/usr/local/bin/python3"
-      alias pip="/usr/local/bin/pip3"
-
-      for conf_file in {{ ohmyzsh_conf_dir }}/*; do
-        echo "\nLoading ${conf_file} ...\n"
-        source "${conf_file}"
-      done
+    marker: '# {mark} - {{ onmyzsh_block_marker }}'
+    block: '{{ lookup("template", ".zshrc.j2") }}'
 
 - name: Create shell conf dir if not exist
   file:
@@ -83,8 +65,15 @@
     state: directory
     mode: '0755'
 
-- name: Add to shell config dir
+- name: Add ohmyzsh.sh to shell config dir
   copy:
     src: ohmyzsh.sh
     dest: '{{ ohmyzsh_conf_dir }}/ohmyzsh.sh'
     mode: '0644'
+
+- name: Add alias.sh to shell config dir
+  template:
+    src: alias.sh.j2
+    dest: '{{ ohmyzsh_conf_dir }}/alias.sh'
+    mode: '0644'
+

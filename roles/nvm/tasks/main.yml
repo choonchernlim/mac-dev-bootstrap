@@ -36,7 +36,7 @@
     state: absent
   with_items: "{{ (nvm_installed_version_dirs.files | sort(attribute='mtime') | map(attribute='path'))[:-1] }}"
 
-- name: Add to shell config dir
+- name: Add nvm.sh to shell config dir
   copy:
     src: nvm.sh
     dest: '{{ ohmyzsh_conf_dir }}/nvm.sh'

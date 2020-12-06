@@ -22,8 +22,7 @@
   when: not sdkman_installed.stat.exists
 
 - name: Run self update
-  shell: >-
-    . {{ sdkman_init_script }} && sdk selfupdate
+  shell: . {{ sdkman_init_script }} && sdk selfupdate
   retries: 5
   delay: 3
   register: sdkman_selfupdate
@@ -32,8 +31,7 @@
   when: sdkman_installed.stat.exists
 
 - name: Install packages
-  shell: >-
-    . {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}
+  shell: . {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}
   loop: '{{ sdkman_install_packages }}'
   retries: 5
   delay: 3
@@ -41,15 +39,8 @@
   until: sdkman_install_packages_output.rc == 0
   changed_when: not item.candidate + ' ' + item.version + ' is already installed.' in sdkman_install_packages_output.stdout
 
-- name: Add to shell config dir
+- name: Add sdkman.sh to shell config dir
   copy:
     src: sdkman.sh
     dest: '{{ ohmyzsh_conf_dir }}/sdkman.sh'
     mode: '0644'
-
-- name: 'Set "sdk use [CANDIDATE] [VERSION]" in shell script'
-  lineinfile:
-    dest: '{{ ohmyzsh_conf_dir }}/sdkman.sh'
-    line: 'sdk use {{ item.candidate }} {{ item.version }}'
-  with_items:
-    - '{{ sdkman_install_packages }}'

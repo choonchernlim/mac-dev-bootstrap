@@ -4,5 +4,3 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 export MAVEN_OPTS="-Xms2048m -Xmx2048m"
 export JAVA_OPTS="-Xms2048m -Xmx2048m"
 export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
-
-sdk version
