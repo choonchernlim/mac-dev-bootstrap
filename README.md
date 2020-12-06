@@ -22,6 +22,11 @@ A very opinionated script to install, configure and update the following develop
 - [Textmate](https://macromates.com/)
 - XCode Command Line Tools
 
+Tested on:
+
+- macOS Big Sur
+- macOS Catalina
+
 ## Usage
 
 **Note:** Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
