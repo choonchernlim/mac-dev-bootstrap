@@ -39,6 +39,7 @@
   delay: 3
   register: sdkman_install_packages_output
   until: sdkman_install_packages_output.rc == 0
+  changed_when: not item.candidate + ' ' + item.version + ' is already installed.' in sdkman_install_packages_output.stdout
 
 - name: Add to shell config dir
   copy:

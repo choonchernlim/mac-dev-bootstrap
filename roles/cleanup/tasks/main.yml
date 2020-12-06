@@ -1,6 +1,7 @@
 ---
 - name: Free up space by removing old packages installed by Homebrew
   command: brew cleanup
+  changed_when: no
 
 - name: Check health of Homebrew
   command: brew doctor
