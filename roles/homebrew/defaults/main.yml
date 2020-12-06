@@ -13,13 +13,14 @@ homebrew_packages:
   - htop
   - tldr
 homebrew_cask_packages:
+  - 1password
   - alfred
+  - docker
+  - firefox
   - font-hack-nerd-font
+  - google-chrome
+  - mamp
   - rectangle
   - spotify
-  - firefox
-  - 1password
-  - textmate
-  - google-chrome
   - sublime-text
-  - docker
+  - textmate
