@@ -81,10 +81,10 @@
   file:
     path: '{{ ohmyzsh_conf_dir }}'
     state: directory
-    mode: 0755
+    mode: '0755'
 
 - name: Add to shell config dir
   copy:
     src: ohmyzsh.sh
     dest: '{{ ohmyzsh_conf_dir }}/ohmyzsh.sh'
-    mode: 0644
+    mode: '0644'

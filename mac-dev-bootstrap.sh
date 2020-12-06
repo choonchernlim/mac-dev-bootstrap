@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
+readonly BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
 # Install Homebrew if missing
 [[ ! -x "$(command -v brew)" ]] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
@@ -10,7 +12,7 @@ set -e -o pipefail
 [[ ! -x "$(command -v python)" ]] && brew install python
 
 # Run the playbook
-ansible-playbook main.yml "$@"
+ANSIBLE_LOG_PATH="${BASE_DIR}/logs/ansible-$(date +%Y%m%d%H%M%S).log" ansible-playbook main.yml "$@"
 
 # Lint the playbook
 ansible-lint main.yml
