@@ -2,24 +2,24 @@
 
 A very opinionated script to install, configure and update the following development tools on a Mac:
 
+- [1Password](https://1password.com/)
+- [Alfred](https://www.alfredapp.com/)
+- [amix/vimrc](https://github.com/amix/vimrc)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+- [Google Chrome](https://www.google.com/chrome/)
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 - [Homebrew](https://brew.sh/)
+- [iTerm2](https://www.iterm2.com/)
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+- [NordVPN](https://nordvpn.com/)
+- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
 - [Oh MyZsh](https://ohmyz.sh/)
 - [SDKMAN!](https://sdkman.io/)
-- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
-- [amix/vimrc](https://github.com/amix/vimrc)
-- [iTerm2](https://www.iterm2.com/)
-- [Alfred](https://www.alfredapp.com/)
-- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 - [Rectangle](https://rectangleapp.com/)
 - [Spotify](https://www.spotify.com/us/)
-- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-- [1Password](https://1password.com/)
-- [Textmate](https://macromates.com/)
-- [Google Chrome](https://www.google.com/chrome/)
 - [Sublime Text](https://www.sublimetext.com/)
-- [NordVPN](https://nordvpn.com/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Textmate](https://macromates.com/)
 - XCode Command Line Tools
 
 ## Usage
