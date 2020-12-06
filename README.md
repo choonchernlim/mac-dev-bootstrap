@@ -24,8 +24,8 @@ A very opinionated script to install, configure and update the following develop
 
 ## Usage
 
-**IMPORTANT:** Please read [mac-dev-bootstrap.sh](mac-dev-bootstrap.sh) and understand what's going on first before
-proceeding.
+**Note:** Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
+proceeding. My workflow may not necessarily matches yours, but feel free to fork/modify it to tailor your needs.
 
 - Run `mac-dev-bootstrap.sh` to begin the installation.
 
@@ -33,7 +33,7 @@ proceeding.
   - `mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
   - `mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
 
-- To update the all the tools in the future, run `update` in the terminal.
+- To update all the tools in the future, run `update` in the terminal.
 
 ## Troubleshooting
 

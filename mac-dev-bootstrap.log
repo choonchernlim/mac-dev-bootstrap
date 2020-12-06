@@ -1,0 +1,134 @@
+PLAY [mac-dev-bootstrap] ***************************************************************************************************************************************************************************************************************
+TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] ************************************************************************************************************************************************************************
+ok: [localhost]
+TASK [xcode : Check if command line tools are installed _raw_params=xcode-select -print-path] ******************************************************************************************************************************************
+ok: [localhost]
+TASK [xcode : Install command line tools _raw_params=xcode-select --install] ***********************************************************************************************************************************************************
+skipping: [localhost]
+TASK [homebrew : Turn off analytics _raw_params=brew analytics off] ********************************************************************************************************************************************************************
+ok: [localhost]
+TASK [homebrew : Update Homebrew and upgrade all existing packages update_homebrew=True, upgrade_all=True] *****************************************************************************************************************************
+changed: [localhost]
+TASK [Tap homebrew/cask-fonts for installing Nerd Fonts name=homebrew/cask-fonts, state=present] ***************************************************************************************************************************************
+ok: [localhost]
+TASK [homebrew : Install cask packages _raw_params=brew install --cask {{ item }}] *****************************************************************************************************************************************************
+ok: [localhost] => (item=alfred)
+ok: [localhost] => (item=font-hack-nerd-font)
+ok: [localhost] => (item=rectangle)
+ok: [localhost] => (item=spotify)
+ok: [localhost] => (item=firefox)
+ok: [localhost] => (item=1password)
+ok: [localhost] => (item=textmate)
+ok: [localhost] => (item=google-chrome)
+ok: [localhost] => (item=sublime-text)
+ok: [localhost] => (item=nordvpn)
+ok: [localhost] => (item=docker)
+TASK [homebrew : Install packages name={{ item }}, state=present] **********************************************************************************************************************************************************************
+ok: [localhost] => (item=curl)
+ok: [localhost] => (item=jq)
+ok: [localhost] => (item=ansible)
+ok: [localhost] => (item=ansible-lint)
+ok: [localhost] => (item=wget)
+ok: [localhost] => (item=yarn)
+ok: [localhost] => (item=tree)
+ok: [localhost] => (item=composer)
+ok: [localhost] => (item=imagemagick)
+ok: [localhost] => (item=maven)
+ok: [localhost] => (item=htop)
+ok: [localhost] => (item=tldr)
+TASK [python : Install Python name=python, state=present] ******************************************************************************************************************************************************************************
+ok: [localhost]
+TASK [python : Install packages using PIP name={{ item }}, state=present] **************************************************************************************************************************************************************
+ok: [localhost] => (item=requests)
+TASK [ohmyzsh : Download/Update themes and plugins repo={{ item.base_url }}/{{ item.name }}.git, dest={{ ohmyzsh_custom_dir }}/{{ item.type }}/{{ item.name }}, force=True] ************************************************************
+ok: [localhost] => (item={'base_url': 'https://github.com/romkatv', 'name': 'powerlevel10k', 'type': 'themes'})
+ok: [localhost] => (item={'base_url': 'https://github.com/denysdovhan', 'name': 'spaceship-prompt', 'type': 'themes'})
+ok: [localhost] => (item={'base_url': 'https://github.com/zsh-users', 'name': 'zsh-syntax-highlighting', 'type': 'plugins'})
+ok: [localhost] => (item={'base_url': 'https://github.com/zsh-users', 'name': 'zsh-autosuggestions', 'type': 'plugins'})
+TASK [ohmyzsh : Create symbolic link for Spaceship Prompt src={{ ohmyzsh_custom_dir }}/themes/spaceship-prompt/spaceship.zsh-theme, dest={{ ohmyzsh_custom_dir }}/themes/spaceship.zsh-theme, state=link] ******************************
+ok: [localhost]
+TASK [ohmyzsh : Copy PowerLevel10k config file src=.p10k.zsh, dest={{ ansible_user_dir }}/.p10k.zsh, mode=0644] ************************************************************************************************************************
+ok: [localhost]
+TASK [ohmyzsh : Check whether this is an original .zshrc file name={{ ansible_user_dir }}/.zshrc, regexp={{ onmyzsh_block_marker }}, state=absent] *************************************************************************************
+ok: [localhost]
+TASK [ohmyzsh : Backup original ~/.zshrc file to ~/.zshrc.[TIMESTAMP] src={{ ansible_user_dir }}/.zshrc, dest={{ ansible_user_dir }}/.zshrc.{{ lookup("pipe", "date +%Y%m%d%H%M%S") }}, mode=0644] *************************************
+skipping: [localhost]
+TASK [ohmyzsh : Remove original .zshrc file path={{ ansible_user_dir }}/.zshrc, state=absent] ******************************************************************************************************************************************
+skipping: [localhost]
+TASK [ohmyzsh : Create empty .zshrc file path={{ ansible_user_dir }}/.zshrc, state=touch, mode=0644] ***********************************************************************************************************************************
+skipping: [localhost]
+TASK [ohmyzsh : Insert/Update configuration block in .zshrc file path={{ ansible_user_dir }}/.zshrc, backup=True, marker=# {mark} - {{ onmyzsh_block_marker }}, block=export PATH="/usr/local/sbin:$PATH"
+
+alias update="cd {{ playbook_dir }} && git pull --ff-only && {{ playbook_dir }}/mac-dev-bootstrap.sh"
+alias python="/usr/local/bin/python3"
+alias pip="/usr/local/bin/pip3"
+
+for conf_file in {{ ohmyzsh_conf_dir }}/*; do
+  echo "\nLoading ${conf_file} ...\n"
+  source "${conf_file}"
+done
+] ***
+ok: [localhost]
+TASK [ohmyzsh : Create shell conf dir if not exist path={{ ohmyzsh_conf_dir }}, state=directory, mode=0755] ****************************************************************************************************************************
+ok: [localhost]
+TASK [ohmyzsh : Add to shell config dir src=ohmyzsh.sh, dest={{ ohmyzsh_conf_dir }}/ohmyzsh.sh, mode=0644] *****************************************************************************************************************************
+ok: [localhost]
+TASK [sdkman : Is it installed? path={{ sdkman_init_script }}] *************************************************************************************************************************************************************************
+ok: [localhost]
+TASK [sdkman : Download installer url=https://get.sdkman.io, dest=/tmp, mode=0755] *****************************************************************************************************************************************************
+skipping: [localhost]
+TASK [sdkman : Run installer _raw_params=/tmp/index.html] ******************************************************************************************************************************************************************************
+skipping: [localhost]
+TASK [sdkman : Delete installer path=/tmp/index.html, state=absent] ********************************************************************************************************************************************************************
+skipping: [localhost]
+TASK [sdkman : Run self update _raw_params=. {{ sdkman_init_script }} && sdk selfupdate] ***********************************************************************************************************************************************
+ok: [localhost]
+TASK [sdkman : Install packages _raw_params=. {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}] *********************************************************************************************************
+ok: [localhost] => (item={'candidate': 'java', 'version': '15.0.1.j9-adpt'})
+TASK [sdkman : Add to shell config dir src=sdkman.sh, dest={{ ohmyzsh_conf_dir }}/sdkman.sh, mode=0644] ********************************************************************************************************************************
+changed: [localhost]
+TASK [sdkman : Set "sdk use [CANDIDATE] [VERSION]" in shell script dest={{ ohmyzsh_conf_dir }}/sdkman.sh, line=sdk use {{ item.candidate }} {{ item.version }}] ************************************************************************
+changed: [localhost] => (item={'candidate': 'java', 'version': '15.0.1.j9-adpt'})
+TASK [iterm2 : Install iTerm2 name=iTerm2, state=present] ******************************************************************************************************************************************************************************
+ok: [localhost]
+TASK [iterm2 : Copy Profiles.json to ~/Library/Application Support/iTerm2/DynamicProfiles src=Profiles.json.j2, dest={{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles/Profiles.json, mode=0644] ***************
+ok: [localhost]
+TASK [Copy com.googlecode.iterm2.plist to ~/Library/Preferences src=com.googlecode.iterm2.plist.j2, dest={{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist, mode=0644] ********************************************
+changed: [localhost]
+TASK [Convert com.googlecode.iterm2.plist to binary _raw_params=plutil -convert binary1 {{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist] ************************************************************************
+ok: [localhost]
+TASK [nvm : Install NVM name=nvm, state=present] ***************************************************************************************************************************************************************************************
+ok: [localhost]
+TASK [Create ~/.nvm dir if not exist path={{ nvm_dir }}, state=directory, mode=0755] ***************************************************************************************************************************************************
+ok: [localhost]
+TASK [nvm : Install LTS version of Node _raw_params=. $(brew --prefix)/opt/nvm/nvm.sh
+nvm install --lts
+] ******************************************************************************************************************************
+ok: [localhost]
+TASK [nvm : Find all installed versions paths={{ nvm_dir }}/versions/node, file_type=directory] ****************************************************************************************************************************************
+ok: [localhost]
+TASK [nvm : Keep most recent version and delete all older versions path={{ item }}, state=absent] **************************************************************************************************************************************
+TASK [nvm : Add to shell config dir src=nvm.sh, dest={{ ohmyzsh_conf_dir }}/nvm.sh, mode=0644] *****************************************************************************************************************************************
+ok: [localhost]
+TASK [vimrc : Download/Update VIMRC repo=https://github.com/amix/vimrc.git, dest={{ vimrc_runtime_dir }}, force=True] ******************************************************************************************************************
+ok: [localhost]
+TASK [vimrc : Install VIMRC creates={{ ansible_user_dir }}/.vimrc, _raw_params={{ vimrc_runtime_dir }}/install_awesome_vimrc.sh] *******************************************************************************************************
+ok: [localhost]
+TASK [vimrc : Update VIMRC executable=python3, _raw_params={{ vimrc_runtime_dir }}/update_plugins.py] **********************************************************************************************************************************
+changed: [localhost]
+TASK [Install gcloud _raw_params=brew install --cask google-cloud-sdk] *****************************************************************************************************************************************************************
+ok: [localhost]
+TASK [gcloud : Disable reporting usage _raw_params=$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud config set disable_usage_reporting false] *************************************************************
+ok: [localhost]
+TASK [gcloud : Update components _raw_params=$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud components update --quiet] **********************************************************************************
+ok: [localhost]
+TASK [gcloud : Add to shell config dir src=gcloud.sh, dest={{ ohmyzsh_conf_dir }}/gcloud.sh, mode=0644] ********************************************************************************************************************************
+ok: [localhost]
+TASK [cleanup : Free up space by removing old packages installed by Homebrew _raw_params=brew cleanup] *********************************************************************************************************************************
+ok: [localhost]
+TASK [cleanup : Check health of Homebrew _raw_params=brew doctor] **********************************************************************************************************************************************************************
+ok: [localhost]
+TASK [cleanup : Display things to fix in Homebrew var=cleanup_brew_doctor_output.stderr_lines] *****************************************************************************************************************************************
+skipping: [localhost]
+PLAY RECAP *****************************************************************************************************************************************************************************************************************************
+localhost                  : ok=39   changed=5    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0

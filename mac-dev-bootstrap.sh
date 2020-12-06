@@ -3,7 +3,7 @@ set -e -o pipefail
 
 readonly BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 readonly LOG_DIR="${BASE_DIR}/logs"
-readonly LOG_PATH="${LOG_DIR}/ansible-$(date +%Y%m%d%H%M%S).log"
+readonly LOG_PATH="${LOG_DIR}/mac-dev-bootstrap-$(date +%Y%m%d%H%M%S).log"
 
 # Install Homebrew if missing
 [[ ! -x "$(command -v brew)" ]] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
