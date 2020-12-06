@@ -10,6 +10,15 @@ A very opinionated script to install, configure and update the following develop
 - [amix/vimrc](https://github.com/amix/vimrc)
 - [iTerm2](https://www.iterm2.com/)
 - XCode Command Line Tools
+- [Alfred](https://www.alfredapp.com/)
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+- [Rectangle](https://rectangleapp.com/)
+- [Spotify](https://www.spotify.com/us/)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+- [1Password](https://1password.com/)
+- [Textmate](https://macromates.com/)
+- [Google Chrome](https://www.google.com/chrome/)
+- [Sublime Text](https://www.sublimetext.com/)
 
 ## Usage
 

@@ -14,17 +14,19 @@
     name: homebrew/cask-fonts
     state: present
 
-# homebrew_cask doesn't work with tapped repo... so, run the command directly
-- name: Install Nerd Fonts
-  command: brew install --cask font-hack-nerd-font
-  register: homebrew_install_nerd_fonts_output
-  changed_when: not 'is already installed' in homebrew_install_nerd_fonts_output.stderr
+#- name: Install cask packages
+#  homebrew_cask:
+#    name: '{{ item }}'
+#    state: present
+#  loop: '{{ homebrew_cask_packages }}'
 
+# TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now. See https://github.com/ansible-collections/community.general/issues/1037
 - name: Install cask packages
-  homebrew_cask:
-    name: '{{ item }}'
-    state: present
+  command: brew install --cask {{ item }}
+  register: homebrew_install_cask_package_output
+  changed_when: not 'is already installed' in homebrew_install_cask_package_output.stderr
   loop: '{{ homebrew_cask_packages }}'
+
 
 - name: Install packages
   homebrew:
