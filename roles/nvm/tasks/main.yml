@@ -8,7 +8,7 @@
   file:
     path: '{{ nvm_dir }}'
     state: directory
-    mode: 0755
+    mode: '0755'
 
 # Combining the commands using && throws this error:
 # Version '' (with LTS filter) not found - try `nvm ls-remote --lts` to browse available versions.
@@ -40,4 +40,4 @@
   copy:
     src: nvm.sh
     dest: '{{ ohmyzsh_conf_dir }}/nvm.sh'
-    mode: 0644
+    mode: '0644'

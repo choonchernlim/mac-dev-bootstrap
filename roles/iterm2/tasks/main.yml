@@ -8,13 +8,13 @@
   template:
     src: Profiles.json.j2
     dest: '{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles/Profiles.json'
-    mode: 0644
+    mode: '0644'
 
 - name: Copy com.googlecode.iterm2.plist to ~/Library/Preferences
   template:
     src: com.googlecode.iterm2.plist.j2
     dest: '{{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist'
-    mode: 0644
+    mode: '0644'
 
 - name: Convert com.googlecode.iterm2.plist to binary
   command: plutil -convert binary1 {{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist

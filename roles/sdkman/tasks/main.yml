@@ -10,7 +10,7 @@
       get_url:
         url: https://get.sdkman.io
         dest: /tmp
-        mode: 0755
+        mode: '0755'
 
     - name: Run installer
       command: /tmp/index.html
@@ -45,7 +45,7 @@
   copy:
     src: sdkman.sh
     dest: '{{ ohmyzsh_conf_dir }}/sdkman.sh'
-    mode: 0644
+    mode: '0644'
 
 - name: 'Set "sdk use [CANDIDATE] [VERSION]" in shell script'
   lineinfile:
