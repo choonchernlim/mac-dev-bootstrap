@@ -16,6 +16,7 @@ homebrew_cask_packages:
   - 1password
   - alfred
   - chronosync
+  - cleanmymac
   - docker
   - firefox
   - font-hack-nerd-font

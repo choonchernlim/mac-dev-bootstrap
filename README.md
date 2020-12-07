@@ -6,6 +6,7 @@ A very opinionated script to install, configure and update the following develop
 - [Alfred](https://www.alfredapp.com/)
 - [amix/vimrc](https://github.com/amix/vimrc/)
 - [ChronoSync](https://www.econtechnologies.com/)
+- [CleanMyMac](https://macpaw.com/cleanmymac/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 - [Google Backup and Sync](https://www.google.com/intl/en-GB_ALL/drive/)

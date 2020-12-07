@@ -8,18 +8,23 @@ skipping: [localhost]
 TASK [homebrew : Turn off analytics _raw_params=brew analytics off] ********************************************************************************************************************************************************************
 ok: [localhost]
 TASK [homebrew : Update Homebrew and upgrade all existing packages update_homebrew=True, upgrade_all=True] *****************************************************************************************************************************
-ok: [localhost]
+changed: [localhost]
 TASK [Tap homebrew/cask-fonts for installing Nerd Fonts name=homebrew/cask-fonts, state=present] ***************************************************************************************************************************************
 ok: [localhost]
 TASK [homebrew : Install cask packages _raw_params=brew install --cask {{ item }}] *****************************************************************************************************************************************************
 ok: [localhost] => (item=1password)
 ok: [localhost] => (item=alfred)
+ok: [localhost] => (item=chronosync)
+ok: [localhost] => (item=cleanmymac)
 ok: [localhost] => (item=docker)
 ok: [localhost] => (item=firefox)
 ok: [localhost] => (item=font-hack-nerd-font)
+ok: [localhost] => (item=google-backup-and-sync)
 ok: [localhost] => (item=google-chrome)
 ok: [localhost] => (item=mamp)
+ok: [localhost] => (item=postman)
 ok: [localhost] => (item=rectangle)
+ok: [localhost] => (item=skitch)
 ok: [localhost] => (item=spotify)
 ok: [localhost] => (item=sublime-text)
 ok: [localhost] => (item=textmate)
@@ -74,7 +79,7 @@ skipping: [localhost]
 TASK [sdkman : Delete installer path=/tmp/index.html, state=absent] ********************************************************************************************************************************************************************
 skipping: [localhost]
 TASK [sdkman : Run self update _raw_params=. {{ sdkman_init_script }} && sdk selfupdate] ***********************************************************************************************************************************************
-changed: [localhost]
+ok: [localhost]
 TASK [sdkman : Install packages _raw_params=. {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}] *********************************************************************************************************
 ok: [localhost] => (item={'candidate': 'java', 'version': '15.0.1.j9-adpt'})
 TASK [Add sdkman.sh to shell config dir src=sdkman.sh, dest={{ ohmyzsh_conf_dir }}/sdkman.sh, mode=0644] *******************************************************************************************************************************
@@ -118,7 +123,5 @@ TASK [cleanup : Free up space by removing old packages installed by Homebrew _ra
 ok: [localhost]
 TASK [cleanup : Check health of Homebrew _raw_params=brew doctor] **********************************************************************************************************************************************************************
 ok: [localhost]
-TASK [cleanup : Display things to fix in Homebrew var=cleanup_brew_doctor_output.stderr_lines] *****************************************************************************************************************************************
-skipping: [localhost]
 PLAY RECAP *****************************************************************************************************************************************************************************************************************************
-localhost                  : ok=39   changed=3    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0
+localhost                  : ok=39   changed=3    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0
