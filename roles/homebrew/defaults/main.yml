@@ -23,6 +23,7 @@ homebrew_cask_packages:
   - google-backup-and-sync
   - google-chrome
   - mamp
+  - nomachine
   - postman
   - rectangle
   - skitch

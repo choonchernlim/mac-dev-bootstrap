@@ -8,7 +8,7 @@ skipping: [localhost]
 TASK [homebrew : Turn off analytics _raw_params=brew analytics off] ********************************************************************************************************************************************************************
 ok: [localhost]
 TASK [homebrew : Update Homebrew and upgrade all existing packages update_homebrew=True, upgrade_all=True] *****************************************************************************************************************************
-changed: [localhost]
+ok: [localhost]
 TASK [Tap homebrew/cask-fonts for installing Nerd Fonts name=homebrew/cask-fonts, state=present] ***************************************************************************************************************************************
 ok: [localhost]
 TASK [homebrew : Install cask packages _raw_params=brew install --cask {{ item }}] *****************************************************************************************************************************************************
@@ -22,6 +22,7 @@ ok: [localhost] => (item=font-hack-nerd-font)
 ok: [localhost] => (item=google-backup-and-sync)
 ok: [localhost] => (item=google-chrome)
 ok: [localhost] => (item=mamp)
+ok: [localhost] => (item=nomachine)
 ok: [localhost] => (item=postman)
 ok: [localhost] => (item=rectangle)
 ok: [localhost] => (item=skitch)
@@ -45,6 +46,8 @@ TASK [python : Install Python name=python, state=present] **********************
 ok: [localhost]
 TASK [python : Install packages using PIP name={{ item }}, state=present] **************************************************************************************************************************************************************
 ok: [localhost] => (item=requests)
+TASK [ohmyzsh : Download/Update on-my-zsh repo=https://github.com/robbyrussell/oh-my-zsh, dest={{ ansible_user_dir }}/.oh-my-zsh, force=True] ******************************************************************************************
+ok: [localhost]
 TASK [ohmyzsh : Download/Update themes and plugins repo={{ item.base_url }}/{{ item.name }}.git, dest={{ ohmyzsh_custom_dir }}/{{ item.type }}/{{ item.name }}, force=True] ************************************************************
 ok: [localhost] => (item={'type': 'themes', 'base_url': 'https://github.com/romkatv', 'name': 'powerlevel10k'})
 ok: [localhost] => (item={'type': 'themes', 'base_url': 'https://github.com/denysdovhan', 'name': 'spaceship-prompt'})
@@ -54,13 +57,15 @@ TASK [ohmyzsh : Create symbolic link for Spaceship Prompt src={{ ohmyzsh_custom_
 ok: [localhost]
 TASK [ohmyzsh : Copy .p10k.zsh to user dir src=.p10k.zsh, dest={{ ansible_user_dir }}/.p10k.zsh, mode=0644] ****************************************************************************************************************************
 ok: [localhost]
-TASK [ohmyzsh : Check whether this is an original .zshrc file name={{ ansible_user_dir }}/.zshrc, regexp={{ onmyzsh_block_marker }}, state=absent] *************************************************************************************
+TASK [ohmyzsh : Create empty .zshrc file if not exist path={{ ansible_user_dir }}/.zshrc, state=touch, mode=0644] **********************************************************************************************************************
+changed: [localhost]
+TASK [ohmyzsh : Check if it is an original .zshrc file (no block marker) name={{ ansible_user_dir }}/.zshrc, regexp={{ onmyzsh_block_marker }}, state=absent] **************************************************************************
 ok: [localhost]
 TASK [ohmyzsh : Backup original ~/.zshrc file to ~/.zshrc.[TIMESTAMP] src={{ ansible_user_dir }}/.zshrc, dest={{ ansible_user_dir }}/.zshrc.{{ lookup("pipe", "date +%Y%m%d%H%M%S") }}, mode=0644] *************************************
 skipping: [localhost]
 TASK [ohmyzsh : Remove original .zshrc file path={{ ansible_user_dir }}/.zshrc, state=absent] ******************************************************************************************************************************************
 skipping: [localhost]
-TASK [ohmyzsh : Create empty .zshrc file path={{ ansible_user_dir }}/.zshrc, state=touch, mode=0644] ***********************************************************************************************************************************
+TASK [ohmyzsh : Create empty .zshrc file if not exist path={{ ansible_user_dir }}/.zshrc, state=touch, mode=0644] **********************************************************************************************************************
 skipping: [localhost]
 TASK [ohmyzsh : Insert/Update configuration block in .zshrc file path={{ ansible_user_dir }}/.zshrc, backup=True, marker=# {mark} - {{ onmyzsh_block_marker }}, block={{ lookup("template", ".zshrc.j2") }}] ***************************
 ok: [localhost]
@@ -69,6 +74,8 @@ ok: [localhost]
 TASK [Add ohmyzsh.sh to shell config dir src=ohmyzsh.sh, dest={{ ohmyzsh_conf_dir }}/ohmyzsh.sh, mode=0644] ****************************************************************************************************************************
 ok: [localhost]
 TASK [ohmyzsh : Add alias.sh to shell config dir src=alias.sh.j2, dest={{ ohmyzsh_conf_dir }}/alias.sh, mode=0644] *********************************************************************************************************************
+ok: [localhost]
+TASK [ohmyzsh : Set ZSH as default shell name={{ ansible_user_id }}, shell=/bin/zsh] ***************************************************************************************************************************************************
 ok: [localhost]
 TASK [sdkman : Is it installed? path={{ sdkman_init_script }}] *************************************************************************************************************************************************************************
 ok: [localhost]
@@ -96,9 +103,7 @@ TASK [nvm : Install NVM name=nvm, state=present] *******************************
 ok: [localhost]
 TASK [Create ~/.nvm dir if not exist path={{ nvm_dir }}, state=directory, mode=0755] ***************************************************************************************************************************************************
 ok: [localhost]
-TASK [nvm : Install LTS version of Node _raw_params=. $(brew --prefix)/opt/nvm/nvm.sh
-nvm install --lts
-] ******************************************************************************************************************************
+TASK [nvm : Install LTS version of Node _raw_params=. $(brew --prefix)/opt/nvm/nvm.sh && nvm install --lts] ****************************************************************************************************************************
 ok: [localhost]
 TASK [nvm : Find all installed versions paths={{ nvm_dir }}/versions/node, file_type=directory] ****************************************************************************************************************************************
 ok: [localhost]
@@ -122,6 +127,6 @@ ok: [localhost]
 TASK [cleanup : Free up space by removing old packages installed by Homebrew _raw_params=brew cleanup] *********************************************************************************************************************************
 ok: [localhost]
 TASK [cleanup : Check health of Homebrew _raw_params=brew doctor] **********************************************************************************************************************************************************************
-ok: [localhost]
+changed: [localhost]
 PLAY RECAP *****************************************************************************************************************************************************************************************************************************
-localhost                  : ok=39   changed=3    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0
+localhost                  : ok=42   changed=4    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0

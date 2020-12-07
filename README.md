@@ -16,6 +16,7 @@ A very opinionated script to install, configure and update the following develop
 - [iTerm2](https://www.iterm2.com/)
 - [MAMP](https://www.mamp.info/en/windows/)
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/)
+- [NoMachine](https://www.nomachine.com/)
 - [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm/)
 - [Oh MyZsh](https://ohmyz.sh/)
 - [Postman](https://www.postman.com/)
