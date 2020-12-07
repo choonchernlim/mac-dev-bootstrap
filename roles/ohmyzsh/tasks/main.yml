@@ -1,4 +1,10 @@
 ---
+- name: Download/Update on-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: '{{ ansible_user_dir }}/.oh-my-zsh'
+    force: yes
+
 - name: Download/Update themes and plugins
   git:
     repo: '{{ item.base_url }}/{{ item.name }}.git'
@@ -23,7 +29,13 @@
     dest: '{{ ansible_user_dir }}/.p10k.zsh'
     mode: '0644'
 
-- name: Check whether this is an original .zshrc file
+- name: Create empty .zshrc file if not exist
+  file:
+    path: '{{ ansible_user_dir }}/.zshrc'
+    state: touch
+    mode: '0644'
+
+- name: Check if it is an original .zshrc file (no block marker)
   lineinfile:
     name: '{{ ansible_user_dir }}/.zshrc'
     regexp: '{{ onmyzsh_block_marker }}'
@@ -32,7 +44,7 @@
   changed_when: no
   register: ohmyzsh_block_marker_lookup
 
-- name: First-time installation - Backup and create an empty .zshrc file
+- name: Backup and create an empty .zshrc file
   block:
     - name: Backup original ~/.zshrc file to ~/.zshrc.[TIMESTAMP]
       copy:
@@ -45,7 +57,7 @@
         path: '{{ ansible_user_dir }}/.zshrc'
         state: absent
 
-    - name: Create empty .zshrc file
+    - name: Create empty .zshrc file if not exist
       file:
         path: '{{ ansible_user_dir }}/.zshrc'
         state: touch
@@ -77,3 +89,7 @@
     dest: '{{ ohmyzsh_conf_dir }}/alias.sh'
     mode: '0644'
 
+- name: Set ZSH as default shell
+  user:
+    name: '{{ ansible_user_id }}'
+    shell: /bin/zsh
