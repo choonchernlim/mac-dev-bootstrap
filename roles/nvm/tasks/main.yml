@@ -11,7 +11,9 @@
     mode: '0755'
 
 - name: Install LTS version of Node
-  shell: . $(brew --prefix)/opt/nvm/nvm.sh && nvm install --lts
+  # using ';' instead of '&&' because the latter works in Catalina but failed in Big Sur with this error:
+  # Version '' (with LTS filter) not found - try `nvm ls-remote --lts` to browse available versions.
+  shell: . $(brew --prefix)/opt/nvm/nvm.sh;nvm install --lts
   environment:
     NVM_DIR: '{{ nvm_dir }}'
   register: nvm_install_output

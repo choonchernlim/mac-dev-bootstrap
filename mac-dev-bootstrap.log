@@ -8,7 +8,7 @@ skipping: [localhost]
 TASK [homebrew : Turn off analytics _raw_params=brew analytics off] ********************************************************************************************************************************************************************
 ok: [localhost]
 TASK [homebrew : Update Homebrew and upgrade all existing packages update_homebrew=True, upgrade_all=True] *****************************************************************************************************************************
-ok: [localhost]
+changed: [localhost]
 TASK [Tap homebrew/cask-fonts for installing Nerd Fonts name=homebrew/cask-fonts, state=present] ***************************************************************************************************************************************
 ok: [localhost]
 TASK [homebrew : Install cask packages _raw_params=brew install --cask {{ item }}] *****************************************************************************************************************************************************
@@ -103,7 +103,7 @@ TASK [nvm : Install NVM name=nvm, state=present] *******************************
 ok: [localhost]
 TASK [Create ~/.nvm dir if not exist path={{ nvm_dir }}, state=directory, mode=0755] ***************************************************************************************************************************************************
 ok: [localhost]
-TASK [nvm : Install LTS version of Node _raw_params=. $(brew --prefix)/opt/nvm/nvm.sh && nvm install --lts] ****************************************************************************************************************************
+TASK [nvm : Install LTS version of Node _raw_params=. $(brew --prefix)/opt/nvm/nvm.sh;nvm install --lts] *******************************************************************************************************************************
 ok: [localhost]
 TASK [nvm : Find all installed versions paths={{ nvm_dir }}/versions/node, file_type=directory] ****************************************************************************************************************************************
 ok: [localhost]
@@ -121,12 +121,12 @@ ok: [localhost]
 TASK [gcloud : Disable reporting usage _raw_params=$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud config set disable_usage_reporting false] *************************************************************
 ok: [localhost]
 TASK [gcloud : Update components _raw_params=$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud components update --quiet] **********************************************************************************
-ok: [localhost]
+changed: [localhost]
 TASK [Add gcloud.sh to shell config dir src=gcloud.sh, dest={{ ohmyzsh_conf_dir }}/gcloud.sh, mode=0644] *******************************************************************************************************************************
 ok: [localhost]
 TASK [cleanup : Free up space by removing old packages installed by Homebrew _raw_params=brew cleanup] *********************************************************************************************************************************
 ok: [localhost]
 TASK [cleanup : Check health of Homebrew _raw_params=brew doctor] **********************************************************************************************************************************************************************
-changed: [localhost]
+ok: [localhost]
 PLAY RECAP *****************************************************************************************************************************************************************************************************************************
-localhost                  : ok=42   changed=4    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0
+localhost                  : ok=42   changed=5    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0
