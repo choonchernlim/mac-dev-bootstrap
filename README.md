@@ -2,47 +2,64 @@
 
 A very opinionated script to install, configure and update the following development tools on a Mac:
 
+- [1Password](https://1password.com/)
+- [Alfred](https://www.alfredapp.com/)
+- [amix/vimrc](https://github.com/amix/vimrc/)
+- [ChronoSync](https://www.econtechnologies.com/)
+- [CleanMyMac](https://macpaw.com/cleanmymac/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+- [Google Backup and Sync](https://www.google.com/intl/en-GB_ALL/drive/)
+- [Google Chrome](https://www.google.com/chrome/)
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install/)
 - [Homebrew](https://brew.sh/)
-- [Oh MyZsh](https://ohmyz.sh/)
-- [SDKMAN!](https://sdkman.io/)
-- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm)
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
-- [amix/vimrc](https://github.com/amix/vimrc)
 - [iTerm2](https://www.iterm2.com/)
+- [MAMP](https://www.mamp.info/en/windows/)
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/)
+- [NoMachine](https://www.nomachine.com/)
+- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm/)
+- [Oh MyZsh](https://ohmyz.sh/)
+- [Postman](https://www.postman.com/)
+- [Rectangle](https://rectangleapp.com/)
+- [SDKMAN!](https://sdkman.io/)
+- [Skitch](https://evernote.com/products/skitch/)
+- [Spotify](https://www.spotify.com/us/)
+- [Sublime Text](https://www.sublimetext.com/)
+- [Textmate](https://macromates.com/)
+- XCode Command Line Tools
+- ... and many commonly used DevOps commands
+
+Tested on:
+
+- macOS Big Sur
+- macOS Catalina
 
 ## Usage
 
-**IMPORTANT:** Please read [mac-dev-bootstrap.sh](mac-dev-bootstrap.sh) and understand what's going on first before
-proceeding.
+**Note:** Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
+proceeding. My workflow may not necessarily matches yours, but feel free to fork/modify it to tailor your needs.
 
-- If iTerm was already installed without using Homebrew, remove it from `/Applications/iTerms.app` first.
 - Run `mac-dev-bootstrap.sh` to begin the installation.
 
-- Add the following on the top of `~/.zshrc`:
+- To install/configure just specific installation(s), run `mac-dev-bootstrap.sh --tags "[ROLE_TAG(S)]"`, ex:
+  - `mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
+  - `mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
 
-```shell script
-export MAC_DEV_BOOTSTRAP_HOME="[PATH]/mac-dev-bootstrap" # Fix [PATH]!
-export MAC_DEV_BOOTSTRAP_SCRIPT="${MAC_DEV_BOOTSTRAP_HOME}/mac-dev-bootstrap.sh"
-alias update="cd ${MAC_DEV_BOOTSTRAP_HOME} && git pull --ff-only; ${MAC_DEV_BOOTSTRAP_SCRIPT}"
-```
+- To update all the tools in the future, run `update` in the terminal.
 
-- To update the all the tools in the future, run `update` in the terminal.
+## Troubleshooting
+
+### Error: It seems there is already an App at '/Applications/[NAME].app'
+
+This is due to the fact the app was already installed before running the playbook. To fix this, simply delete the
+app and rerun the playbook. You will not lose your app's configuration.
 
 ## One-Time Setup
 
 ## iTerm2
 
-- `General -> Preferences`.
-    - Check "Load preferences from a custom folder or URL".
-    - Specify the path to `iterm2` dir in the Git repo: `[PATH]/mac-dev-bootstrap/iterm2`.
-    - Check "Save changes to folder when iTerm2 quits".
 - `Profiles`.
     - Click on `mac-dev-bootstrap`.
     - `Other Actions...`.
     - `Set as Default`.
     - Delete other existing profiles.
-
-## .zshrc
-
-- Copy `[PATH]/mac-dev-bootstrap/zshrc/.zshrc` and paste at the bottom of`~/.zshrc`. The pre-generated `.zshrc` file
-  can be safely replaced with this.

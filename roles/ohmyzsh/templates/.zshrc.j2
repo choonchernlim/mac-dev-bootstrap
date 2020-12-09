@@ -1,0 +1,6 @@
+export PATH="/usr/local/sbin:$PATH"
+
+for conf_file in {{ ohmyzsh_conf_dir }}/*; do
+  echo "Loading ${conf_file} ..."
+  source "${conf_file}"
+done

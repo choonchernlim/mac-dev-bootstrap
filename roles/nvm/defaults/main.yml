@@ -1,0 +1,2 @@
+---
+nvm_dir: '{{ ansible_user_dir }}/.nvm'

@@ -1,0 +1,32 @@
+---
+homebrew_packages:
+  - curl
+  - jq
+  - ansible
+  - ansible-lint
+  - wget
+  - yarn
+  - tree
+  - composer
+  - imagemagick
+  - maven
+  - htop
+  - tldr
+homebrew_cask_packages:
+  - 1password
+  - alfred
+  - chronosync
+  - cleanmymac
+  - docker
+  - firefox
+  - font-hack-nerd-font
+  - google-backup-and-sync
+  - google-chrome
+  - mamp
+  - nomachine
+  - postman
+  - rectangle
+  - skitch
+  - spotify
+  - sublime-text
+  - textmate

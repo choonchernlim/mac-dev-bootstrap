@@ -1,0 +1,95 @@
+---
+- name: Download/Update on-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: '{{ ansible_user_dir }}/.oh-my-zsh'
+    force: yes
+
+- name: Download/Update themes and plugins
+  git:
+    repo: '{{ item.base_url }}/{{ item.name }}.git'
+    dest: '{{ ohmyzsh_custom_dir }}/{{ item.type }}/{{ item.name }}'
+    force: yes
+  with_items:
+    - { type: themes, base_url: https://github.com/romkatv, name: powerlevel10k }
+    - { type: themes, base_url: https://github.com/denysdovhan, name: spaceship-prompt }
+    - { type: plugins, base_url: https://github.com/zsh-users, name: zsh-syntax-highlighting }
+    - { type: plugins, base_url: https://github.com/zsh-users, name: zsh-autosuggestions }
+
+# See https://github.com/denysdovhan/spaceship-prompt#oh-my-zsh
+- name: Create symbolic link for Spaceship Prompt
+  file:
+    src: '{{ ohmyzsh_custom_dir }}/themes/spaceship-prompt/spaceship.zsh-theme'
+    dest: '{{ ohmyzsh_custom_dir }}/themes/spaceship.zsh-theme'
+    state: link
+
+- name: Copy .p10k.zsh to user dir
+  copy:
+    src: .p10k.zsh
+    dest: '{{ ansible_user_dir }}/.p10k.zsh'
+    mode: '0644'
+
+- name: Create empty .zshrc file if not exist
+  file:
+    path: '{{ ansible_user_dir }}/.zshrc'
+    state: touch
+    mode: '0644'
+
+- name: Check if it is an original .zshrc file (no block marker)
+  lineinfile:
+    name: '{{ ansible_user_dir }}/.zshrc'
+    regexp: '{{ onmyzsh_block_marker }}'
+    state: absent
+  check_mode: yes
+  changed_when: no
+  register: ohmyzsh_block_marker_lookup
+
+- name: Backup and create an empty .zshrc file
+  block:
+    - name: Backup original ~/.zshrc file to ~/.zshrc.[TIMESTAMP]
+      copy:
+        src: '{{ ansible_user_dir }}/.zshrc'
+        dest: '{{ ansible_user_dir }}/.zshrc.{{ lookup("pipe", "date +%Y%m%d%H%M%S") }}'
+        mode: '0644'
+
+    - name: Remove original .zshrc file
+      file:
+        path: '{{ ansible_user_dir }}/.zshrc'
+        state: absent
+
+    - name: Create empty .zshrc file if not exist
+      file:
+        path: '{{ ansible_user_dir }}/.zshrc'
+        state: touch
+        mode: '0644'
+  when: ohmyzsh_block_marker_lookup.found == 0
+
+- name: Insert/Update configuration block in .zshrc file
+  blockinfile:
+    path: '{{ ansible_user_dir }}/.zshrc'
+    backup: yes
+    marker: '# {mark} - {{ onmyzsh_block_marker }}'
+    block: '{{ lookup("template", ".zshrc.j2") }}'
+
+- name: Create shell conf dir if not exist
+  file:
+    path: '{{ ohmyzsh_conf_dir }}'
+    state: directory
+    mode: '0755'
+
+- name: Add ohmyzsh.sh to shell config dir
+  copy:
+    src: ohmyzsh.sh
+    dest: '{{ ohmyzsh_conf_dir }}/ohmyzsh.sh'
+    mode: '0644'
+
+- name: Add alias.sh to shell config dir
+  template:
+    src: alias.sh.j2
+    dest: '{{ ohmyzsh_conf_dir }}/alias.sh'
+    mode: '0644'
+
+- name: Set ZSH as default shell
+  user:
+    name: '{{ ansible_user_id }}'
+    shell: /bin/zsh

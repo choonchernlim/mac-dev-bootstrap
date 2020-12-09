@@ -1,0 +1,16 @@
+---
+- name: Download/Update VIMRC
+  git:
+    repo: 'https://github.com/amix/vimrc.git'
+    dest: '{{ vimrc_runtime_dir }}'
+    force: yes
+
+- name: Install VIMRC
+  command: '{{ vimrc_runtime_dir }}/install_awesome_vimrc.sh'
+  args:
+    creates: '{{ ansible_user_dir }}/.vimrc'
+
+- name: Update VIMRC
+  script: '{{ vimrc_runtime_dir }}/update_plugins.py'
+  args:
+    executable: python3
