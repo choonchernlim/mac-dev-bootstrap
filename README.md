@@ -1,6 +1,6 @@
 # mac-dev-bootstrap
 
-A very opinionated script to install, configure and update the following development tools on a Mac:
+A very opinionated Ansible playbook to install, configure and update the following development tools on a Mac:
 
 - [1Password](https://1password.com/)
 - [Alfred](https://www.alfredapp.com/)
@@ -34,12 +34,17 @@ Tested on:
 - macOS Big Sur
 - macOS Catalina
 
-## Usage
+## Getting Started
 
-**Note:** Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
-proceeding. My workflow may not necessarily matches yours, but feel free to fork/modify it to tailor your needs.
+> IMPORTANT: Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
+> proceeding. Unless you are a clone of me, my workflow may not necessarily matches yours, but feel free to fork this repo and
+> customize it to fit your needs.
 
 - Run `./mac-dev-bootstrap.sh` to begin the installation.
+
+> NOTE: If you see this Homebrew error ( **Error: It seems there is already an App at '/Applications/[NAME].app'** ),
+> this is because you may have already installed the app before running the playbook. To fix this, simply delete the
+> app, then rerun the playbook. You will not lose your app's configuration.
 
 - To install/configure just specific installation(s), run `./mac-dev-bootstrap.sh --tags "[ROLE_TAGS]"`, ex:
   - `./mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
@@ -48,20 +53,3 @@ proceeding. My workflow may not necessarily matches yours, but feel free to fork
 - To display the arguments passed to each task, run `ANSIBLE_DISPLAY_ARGS_TO_STDOUT=true ./mac-dev-bootstrap.sh`.
 
 - To update all the tools in the future, run `update` in the terminal.
-
-## Troubleshooting
-
-### Error: It seems there is already an App at '/Applications/[NAME].app'
-
-This is due to the fact the app was already installed before running the playbook. To fix this, simply delete the
-app and rerun the playbook. You will not lose your app's configuration.
-
-## One-Time Setup
-
-## iTerm2
-
-- `Profiles`.
-    - Click on `mac-dev-bootstrap`.
-    - `Other Actions...`.
-    - `Set as Default`.
-    - Delete other existing profiles.
