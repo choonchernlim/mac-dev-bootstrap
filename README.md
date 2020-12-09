@@ -51,13 +51,3 @@ Tested on:
   - `mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
 
 - To update all the tools in the future, run `update` in the terminal.
-
-## One-Time Setup
-
-## iTerm2
-
-- `Profiles`.
-    - Click on `mac-dev-bootstrap`.
-    - `Other Actions...`.
-    - `Set as Default`.
-    - Delete other existing profiles.
