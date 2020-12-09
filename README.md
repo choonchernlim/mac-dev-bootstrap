@@ -39,11 +39,13 @@ Tested on:
 **Note:** Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
 proceeding. My workflow may not necessarily matches yours, but feel free to fork/modify it to tailor your needs.
 
-- Run `mac-dev-bootstrap.sh` to begin the installation.
+- Run `./mac-dev-bootstrap.sh` to begin the installation.
 
-- To install/configure just specific installation(s), run `mac-dev-bootstrap.sh --tags "[ROLE_TAG(S)]"`, ex:
-  - `mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
-  - `mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
+- To install/configure just specific installation(s), run `./mac-dev-bootstrap.sh --tags "[ROLE_TAGS]"`, ex:
+  - `./mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
+  - `./mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
+
+- To display the arguments passed to each task, run `ANSIBLE_DISPLAY_ARGS_TO_STDOUT=true ./mac-dev-bootstrap.sh`.
 
 - To update all the tools in the future, run `update` in the terminal.
 
