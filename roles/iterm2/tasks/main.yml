@@ -16,6 +16,10 @@
     dest: '{{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist'
     mode: '0644'
 
+
+# In case there's a need to inspect the current plist (to see if something got changed):-
+# cp ~/Library/Preferences/com.googlecode.iterm2.plist temp.plist
+# plutil -convert xml1 temp.plist
 - name: Convert com.googlecode.iterm2.plist to binary
   command: plutil -convert binary1 {{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist
   changed_when: no
