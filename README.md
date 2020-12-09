@@ -36,12 +36,13 @@ Tested on:
 
 ## Usage
 
-**Note:** Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
-proceeding. My workflow may not necessarily matches yours, but feel free to fork/modify it to tailor your needs.
+> IMPORTANT: Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
+> proceeding. Unless you are a clone of me, my workflow may not necessarily matches yours, but feel free to fork this repo and
+> customize it to fit your needs.
 
 - Run `mac-dev-bootstrap.sh` to begin the installation.
 
-> Note: If you see this Homebrew error ( **Error: It seems there is already an App at '/Applications/[NAME].app'** ),
+> NOTE: If you see this Homebrew error ( **Error: It seems there is already an App at '/Applications/[NAME].app'** ),
 > this is because you may have already installed the app before running the playbook. To fix this, simply delete the
 > app, then rerun the playbook. You will not lose your app's configuration.
 
