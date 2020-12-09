@@ -34,7 +34,7 @@ Tested on:
 - macOS Big Sur
 - macOS Catalina
 
-## Usage
+## Getting Started
 
 > IMPORTANT: Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
 > proceeding. Unless you are a clone of me, my workflow may not necessarily matches yours, but feel free to fork this repo and
