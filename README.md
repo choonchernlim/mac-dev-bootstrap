@@ -1,6 +1,6 @@
 # mac-dev-bootstrap
 
-A very opinionated script to install, configure and update the following development tools on a Mac:
+A very opinionated Ansible playbook to install, configure and update the following development tools on a Mac:
 
 - [1Password](https://1password.com/)
 - [Alfred](https://www.alfredapp.com/)
