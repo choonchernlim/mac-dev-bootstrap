@@ -40,14 +40,16 @@ Tested on:
 > proceeding. Unless you are a clone of me, my workflow may not necessarily matches yours, but feel free to fork this repo and
 > customize it to fit your needs.
 
-- Run `mac-dev-bootstrap.sh` to begin the installation.
+- Run `./mac-dev-bootstrap.sh` to begin the installation.
 
 > NOTE: If you see this Homebrew error ( **Error: It seems there is already an App at '/Applications/[NAME].app'** ),
 > this is because you may have already installed the app before running the playbook. To fix this, simply delete the
 > app, then rerun the playbook. You will not lose your app's configuration.
 
-- To install/configure just specific installation(s), run `mac-dev-bootstrap.sh --tags "[ROLE_TAG(S)]"`, ex:
-  - `mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
-  - `mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
+- To install/configure just specific installation(s), run `./mac-dev-bootstrap.sh --tags "[ROLE_TAGS]"`, ex:
+  - `./mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
+  - `./mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.
+
+- To display the arguments passed to each task, run `ANSIBLE_DISPLAY_ARGS_TO_STDOUT=true ./mac-dev-bootstrap.sh`.
 
 - To update all the tools in the future, run `update` in the terminal.
