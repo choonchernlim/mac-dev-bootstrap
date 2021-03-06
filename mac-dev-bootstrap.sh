@@ -23,4 +23,4 @@ sudo -v
 ANSIBLE_LOG_PATH="${LOG_PATH}" ansible-playbook main.yml "$@"
 
 # Lint the playbook
-ansible-lint main.yml
+ansible-lint
