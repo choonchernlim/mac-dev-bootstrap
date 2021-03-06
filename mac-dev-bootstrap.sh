@@ -16,6 +16,9 @@ readonly LOG_PATH="${LOG_DIR}/mac-dev-bootstrap-$(date +%Y%m%d%H%M%S).log"
 # Create log dir if not exist
 mkdir -p "${LOG_DIR}"
 
+# Prompting for sudo password upfront (for handling `brew install --cask xxx`)
+sudo -v
+
 # Run the playbook
 ANSIBLE_LOG_PATH="${LOG_PATH}" ansible-playbook main.yml "$@"
 
