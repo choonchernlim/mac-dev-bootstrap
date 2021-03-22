@@ -1,3 +1,4 @@
 ---
 python_packages:
   - requests # Needed by VIMRC
+  - crcmod # Needed by gsutil's rsync
