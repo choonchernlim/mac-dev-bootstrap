@@ -15,6 +15,12 @@
   register: gcloud_update_components_output
   changed_when: not 'All components are up to date' in gcloud_update_components_output.stderr
 
+- name: Install components
+  shell: $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud components install {{ item }}
+  register: gcloud_install_components_output
+  changed_when: not 'All components are up to date' in gcloud_install_components_output.stderr
+  loop: '{{ gcloud_components }}'
+
 - name: Add gcloud.sh to shell config dir
   copy:
     src: gcloud.sh
