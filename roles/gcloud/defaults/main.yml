@@ -1,0 +1,6 @@
+---
+gcloud_components:
+  - beta
+  - bq
+  - core
+  - gsutil
