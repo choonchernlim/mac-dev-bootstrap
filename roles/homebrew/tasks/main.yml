@@ -9,10 +9,16 @@
     update_homebrew: yes
     upgrade_all: yes
 
-- name: Tap homebrew/cask-fonts for installing Nerd Fonts
+- name: Tap homebrew
   homebrew_tap:
-    name: homebrew/cask-fonts
+    name: '{{ item }}'
     state: present
+  loop: '{{ homebrew_taps }}'
+
+- name: Upgrade all existing casks
+  command: brew cu --all --yes
+  register: homebrew_upgrade_cask_package_output
+  changed_when: '"Upgrading" in homebrew_upgrade_cask_package_output.stdout'
 
 #- name: Install cask packages
 #  homebrew_cask:
@@ -21,7 +27,7 @@
 #  loop: '{{ homebrew_cask_packages }}'
 
 # TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now. See https://github.com/ansible-collections/community.general/issues/1037
-- name: Install cask packages
+- name: Install casks
   command: brew install --cask {{ item }}
   register: homebrew_install_cask_package_output
   changed_when: not 'is already installed' in homebrew_install_cask_package_output.stderr
