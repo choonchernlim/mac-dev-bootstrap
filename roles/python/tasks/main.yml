@@ -5,7 +5,7 @@
     state: present
 
 - name: Install latest pip
-  command: python3 -m ensurepip --upgrade
+  shell: python3 -m ensurepip --upgrade
 
 - name: Install packages using PIP
   pip:
