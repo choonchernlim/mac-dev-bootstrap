@@ -5,7 +5,7 @@
     state: present
 
 - name: Install latest pip
-  shell: python3 -m ensurepip --upgrade
+  command: python3 -m ensurepip --upgrade # noqa no-changed-when
 
 - name: Install packages using PIP
   pip:
