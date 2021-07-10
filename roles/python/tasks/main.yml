@@ -4,8 +4,12 @@
     name: python
     state: present
 
+- name: Install latest pip
+  command: python3 -m ensurepip --upgrade
+
 - name: Install packages using PIP
   pip:
     name: '{{ item }}'
     state: present
+    extra_args: --user
   loop: '{{ python_packages }}'

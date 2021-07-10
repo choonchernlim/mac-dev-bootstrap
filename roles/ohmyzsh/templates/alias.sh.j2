@@ -1,8 +1,6 @@
 alias update="cd {{ playbook_dir }} && git pull --ff-only && {{ playbook_dir }}/mac-dev-bootstrap.sh"
 
 alias python="/usr/local/bin/python3"
-python -m ensurepip --upgrade
-
-alias pip="python -m pip"
-alias pip3="pip"
+alias pip="python3 -m pip"
+alias pip3="python3 -m pip"
 
