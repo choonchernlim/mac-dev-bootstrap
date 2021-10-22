@@ -16,6 +16,7 @@ homebrew_packages:
   - htop
   - tldr
   - azure-cli
+  - rsync
 homebrew_cask_packages:
   - 1password
   - alfred
