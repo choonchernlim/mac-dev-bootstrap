@@ -5,13 +5,13 @@
     state: present
 
 - name: Configure iTerm2 profile
-  template:
+  ansible.builtin.template:
     src: Profiles.json.j2
     dest: '{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles/Profiles.json'
     mode: '0644'
 
 - name: Configure iTerm2 settings
-  template:
+  ansible.builtin.template:
     src: com.googlecode.iterm2.plist.j2
     dest: '{{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist'
     mode: '0644'
@@ -20,5 +20,5 @@
 # cp ~/Library/Preferences/com.googlecode.iterm2.plist temp.plist
 # plutil -convert xml1 temp.plist
 - name: Convert plist file to binary
-  command: plutil -convert binary1 {{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist
-  changed_when: no
+  ansible.builtin.command: plutil -convert binary1 {{ ansible_user_dir }}/Library/Preferences/com.googlecode.iterm2.plist
+  changed_when: false

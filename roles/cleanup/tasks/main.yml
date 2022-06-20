@@ -1,10 +1,10 @@
 ---
 - name: Free up space by removing old packages installed by Homebrew
-  command: brew cleanup
-  changed_when: no
+  ansible.builtin.command: brew cleanup
+  changed_when: false
 
 - name: Perform Homebrew health check
-  command: brew doctor
+  ansible.builtin.command: brew doctor
   register: cleanup_brew_doctor_output
   changed_when:
     - not 'Your system is ready to brew' in cleanup_brew_doctor_output.stdout
@@ -15,7 +15,7 @@
     - not 'A newer Command Line Tools release is available.' in cleanup_brew_doctor_output.stderr
 
 - name: Display Homebrew health check recommendations
-  debug:
+  ansible.builtin.debug:
     var: cleanup_brew_doctor_output
   when:
     - not 'Your system is ready to brew' in cleanup_brew_doctor_output.stdout

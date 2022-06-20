@@ -915,7 +915,7 @@
   # - CONDA_PROMPT_MODIFIER        Configurable prompt modifier (see below).
   # - P9K_ANACONDA_PYTHON_VERSION  Current python version (python --version).
   #
-  # CONDA_PROMPT_MODIFIER can be configured with the following command:
+  # CONDA_PROMPT_MODIFIER can be configured with the following ansible.builtin.command:
   #
   #   conda config --set env_prompt '({default_env}) '
   #
@@ -1183,7 +1183,7 @@
 
   # Hide haskell version if it doesn't come from one of these sources.
   #
-  #   shell:  version is set by STACK_YAML
+  #   ansible.builtin.shell:  version is set by STACK_YAML
   #   local:  version is set by stack.yaml up the directory tree
   #   global: version is set by the implicit global project (~/.stack/global-project/stack.yaml)
   typeset -g POWERLEVEL9K_HASKELL_STACK_SOURCES=(shell local)
@@ -1559,7 +1559,7 @@
   #   P9K_WIFI_NOISE        | noise in dBm, from -120 to 0
   #   P9K_WIFI_BARS         | signal strength in bars, from 0 to 4 (derived from P9K_WIFI_RSSI and P9K_WIFI_NOISE)
   #
-  # All parameters except P9K_WIFI_BARS are extracted from the output of the following command:
+  # All parameters except P9K_WIFI_BARS are extracted from the output of the following ansible.builtin.command:
   #
   #   /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 

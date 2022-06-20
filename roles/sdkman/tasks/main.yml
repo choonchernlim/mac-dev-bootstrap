@@ -1,28 +1,29 @@
 ---
 - name: Is it installed?
-  stat:
+  ansible.builtin.stat:
     path: '{{ sdkman_init_script }}'
   register: sdkman_installed
 
 - name: Not installed
   block:
     - name: Download installer
-      get_url:
+      ansible.builtin.get_url:
         url: https://get.sdkman.io
         dest: /tmp
         mode: '0755'
 
     - name: Run installer
-      command: /tmp/index.html
+      ansible.builtin.command: /tmp/index.html
+      changed_when: false
 
     - name: Delete installer
-      file:
+      ansible.builtin.file:
         path: /tmp/index.html
         state: absent
   when: not sdkman_installed.stat.exists
 
 - name: Run self update
-  shell: . {{ sdkman_init_script }} && sdk selfupdate
+  ansible.builtin.shell: . {{ sdkman_init_script }} && sdk selfupdate
   retries: '{{ playbook_retries }}'
   delay: '{{ playbook_delay }}'
   register: sdkman_selfupdate
@@ -31,7 +32,7 @@
   when: sdkman_installed.stat.exists
 
 - name: Install packages
-  shell: . {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}
+  ansible.builtin.shell: . {{ sdkman_init_script }} && sdk install {{ item.candidate }} {{ item.version }}
   loop: '{{ sdkman_install_packages }}'
   retries: '{{ playbook_retries }}'
   delay: '{{ playbook_delay }}'
@@ -40,7 +41,7 @@
   changed_when: not item.candidate + ' ' + item.version + ' is already installed.' in sdkman_install_packages_output.stdout
 
 - name: Add sdkman.sh to shell config dir
-  copy:
+  ansible.builtin.copy:
     src: sdkman.sh
     dest: '{{ ohmyzsh_conf_dir }}/sdkman.sh'
     mode: '0644'

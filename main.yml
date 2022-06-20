@@ -5,23 +5,23 @@
     - playbook_retries: 10
     - playbook_delay: 3
   roles:
-    #--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # Tools to install/configure
-    #--------------------------------------------------------------------------
-    - { role: xcode, tags: xcode }
-    - { role: homebrew, tags: homebrew }
-    - { role: python, tags: python }
-    - { role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud] }
-    - { role: sdkman, tags: sdkman }
-    - { role: iterm2, tags: iterm2 }
-    - { role: nvm, tags: nvm }
-    - { role: vimrc, tags: vimrc }
-    - { role: gcloud, tags: gcloud }
-    #--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
+    - {role: xcode, tags: xcode}
+    - {role: homebrew, tags: homebrew}
+    - {role: python, tags: python}
+    - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud]}
+    - {role: sdkman, tags: sdkman}
+    - {role: iterm2, tags: iterm2}
+    - {role: nvm, tags: nvm}
+    - {role: vimrc, tags: vimrc}
+    - {role: gcloud, tags: gcloud}
+    # --------------------------------------------------------------------------
     # Post installation
-    #--------------------------------------------------------------------------
-    - { role: cleanup, tags: cleanup }
-    #--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
+    - {role: cleanup, tags: cleanup}
+    # --------------------------------------------------------------------------
     # For debugging purpose
-    #--------------------------------------------------------------------------
-    - { role: debug, tags: [never, debug] }
+    # --------------------------------------------------------------------------
+    - {role: debug, tags: [never, debug]}

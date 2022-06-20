@@ -1,13 +1,13 @@
 ---
 - name: Turn off analytics
-  command: brew analytics off
+  ansible.builtin.command: brew analytics off
   register: homebrew_analytics_off_output
   changed_when: homebrew_analytics_off_output.rc != 0
 
 - name: Update Homebrew and upgrade all existing packages
   homebrew:
-    update_homebrew: yes
-    upgrade_all: yes
+    update_homebrew: true
+    upgrade_all: true
 
 - name: Tap homebrew
   homebrew_tap:
@@ -16,20 +16,21 @@
   loop: '{{ homebrew_taps }}'
 
 # Don't upgrade casks because it resets app settings
-#- name: Upgrade all existing casks
-#  command: brew cu --all --yes
-#  register: homebrew_upgrade_cask_package_output
-#  changed_when: '"Upgrading" in homebrew_upgrade_cask_package_output.stdout'
+# - name: Upgrade all existing casks
+#   ansible.builtin.command: brew cu --all --yes
+#   register: homebrew_upgrade_cask_package_output
+#   changed_when: '"Upgrading" in homebrew_upgrade_cask_package_output.stdout'
 
-#- name: Install cask packages
-#  homebrew_cask:
-#    name: '{{ item }}'
-#    state: present
-#  loop: '{{ homebrew_cask_packages }}'
+# - name: Install cask packages
+#   homebrew_cask:
+#     name: '{{ item }}'
+#     state: present
+#   loop: '{{ homebrew_cask_packages }}'
 
-# TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now. See https://github.com/ansible-collections/community.general/issues/1037
+# TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now.
+# TODO See https://github.com/ansible-collections/community.general/issues/1037
 - name: Install casks
-  command: brew install --cask {{ item }}
+  ansible.builtin.command: brew install --cask {{ item }}
   register: homebrew_install_cask_package_output
   changed_when: not 'is already installed' in homebrew_install_cask_package_output.stderr
   loop: '{{ homebrew_cask_packages }}'
