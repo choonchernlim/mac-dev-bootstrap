@@ -92,4 +92,4 @@
 - name: Set ZSH as default shell
   ansible.builtin.user:
     name: '{{ ansible_user_id }}'
-    ansible.builtin.shell: /bin/zsh
+    shell: /bin/zsh
