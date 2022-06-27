@@ -69,7 +69,7 @@
     path: '{{ ansible_user_dir }}/.zshrc'
     backup: true
     marker: '# {mark} - {{ onmyzsh_block_marker }}'
-    ansible.builtin.block: '{{ lookup("template", ".zshrc.j2") }}'
+    block: '{{ lookup("template", ".zshrc.j2") }}'
 
 - name: Create shell conf dir if not exist
   ansible.builtin.file:
