@@ -45,6 +45,7 @@
   register: ohmyzsh_block_marker_lookup
 
 - name: Backup and create an empty .zshrc file
+  when: ohmyzsh_block_marker_lookup.found == 0
   block:
     - name: Backup original ~/.zshrc file to ~/.zshrc.[TIMESTAMP]
       ansible.builtin.copy:
@@ -62,7 +63,6 @@
         path: '{{ ansible_user_dir }}/.zshrc'
         state: touch
         mode: '0644'
-  when: ohmyzsh_block_marker_lookup.found == 0
 
 - name: Insert/Update configuration block in .zshrc file
   ansible.builtin.blockinfile:

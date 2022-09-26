@@ -5,6 +5,7 @@
   register: sdkman_installed
 
 - name: Not installed
+  when: not sdkman_installed.stat.exists
   block:
     - name: Download installer
       ansible.builtin.get_url:
@@ -20,7 +21,6 @@
       ansible.builtin.file:
         path: /tmp/index.html
         state: absent
-  when: not sdkman_installed.stat.exists
 
 - name: Run self update
   ansible.builtin.shell: . {{ sdkman_init_script }} && sdk selfupdate

@@ -7,4 +7,4 @@
 
 - name: Install command line tools
   ansible.builtin.command: xcode-select --install
-  when: xcode_is_installed_output.stdout|length == 0
+  when: xcode_is_installed_output.stdout | length == 0
