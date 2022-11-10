@@ -5,12 +5,12 @@
   changed_when: homebrew_analytics_off_output.rc != 0
 
 - name: Update Homebrew and upgrade all existing packages
-  homebrew:
+  community.general.packaging.os.homebrew:
     update_homebrew: true
     upgrade_all: true
 
 - name: Tap homebrew
-  homebrew_tap:
+  community.general.packaging.os.homebrew_tap:
     name: '{{ item }}'
     state: present
   loop: '{{ homebrew_taps }}'
@@ -37,7 +37,7 @@
 
 
 - name: Install packages
-  homebrew:
+  community.general.packaging.os.homebrew:
     name: '{{ item }}'
     state: present
   loop: '{{ homebrew_packages }}'

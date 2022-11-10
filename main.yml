@@ -2,8 +2,8 @@
 - name: mac-dev-bootstrap
   hosts: all
   vars:
-    - playbook_retries: 10
-    - playbook_delay: 3
+    playbook_retries: 10
+    playbook_delay: 3
   roles:
     # --------------------------------------------------------------------------
     # Tools to install/configure
