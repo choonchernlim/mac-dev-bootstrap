@@ -1,6 +1,6 @@
 ---
 - name: Install Python
-  community.general.packaging.os.homebrew:
+  community.general.homebrew:
     name: python
     state: present
 

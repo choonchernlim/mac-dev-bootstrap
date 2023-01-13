@@ -1,6 +1,6 @@
 ---
 - name: Install iTerm2
-  community.general.packaging.os.homebrew_cask:
+  community.general.homebrew_cask:
     name: iTerm2
     state: present
 

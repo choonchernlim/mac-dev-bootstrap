@@ -1,6 +1,6 @@
 ---
 - name: Install NVM
-  community.general.packaging.os.homebrew:
+  community.general.homebrew:
     name: nvm
     state: present
 
