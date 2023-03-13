@@ -2,7 +2,8 @@
 homebrew_taps:
   - homebrew/cask-fonts
   - buo/cask-upgrade
-homebrew_packages:
+
+homebrew_packages_present:
   - curl
   - jq
   - ansible
@@ -14,14 +15,19 @@ homebrew_packages:
   - imagemagick
   - maven
   - htop
-  - tldr
   - azure-cli
   - rsync
-homebrew_cask_packages:
+  - shellcheck
+  - yamllint
+  - tfenv
+
+homebrew_packages_absent:
+  - tldr
+
+homebrew_cask_packages_present:
   - 1password
   - alfred
   - brave-browser
-  - chronosync
   - cleanmymac
   - docker
   - firefox
@@ -36,3 +42,6 @@ homebrew_cask_packages:
   - spotify
   - sublime-text
   - textmate
+
+homebrew_cask_packages_absent:
+  - chronosync

@@ -25,7 +25,7 @@
 #   homebrew_cask:
 #     name: '{{ item }}'
 #     state: present
-#   loop: '{{ homebrew_cask_packages }}'
+#   loop: '{{ homebrew_cask_packages_present }}'
 
 # TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now.
 # TODO See https://github.com/ansible-collections/community.general/issues/1037
@@ -33,11 +33,25 @@
   ansible.builtin.command: brew install --cask {{ item }}
   register: homebrew_install_cask_package_output
   changed_when: not 'is already installed' in homebrew_install_cask_package_output.stderr
-  loop: '{{ homebrew_cask_packages }}'
+  loop: '{{ homebrew_cask_packages_present }}'
 
+# TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now.
+# TODO See https://github.com/ansible-collections/community.general/issues/1037
+- name: Uninstall casks
+  ansible.builtin.command: brew uninstall --cask {{ item }}
+  register: homebrew_install_cask_package_output
+  changed_when: not 'is not installed' in homebrew_install_cask_package_output.stderr
+  ignore_errors: true
+  loop: '{{ homebrew_cask_packages_absent }}'
 
 - name: Install packages
   community.general.homebrew:
     name: '{{ item }}'
     state: present
-  loop: '{{ homebrew_packages }}'
+  loop: '{{ homebrew_packages_present }}'
+
+- name: Uninstall packages
+  community.general.homebrew:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ homebrew_packages_absent }}'
