@@ -1,5 +1,5 @@
 ---
-- name: mac-dev-bootstrap
+- name: Mac Dev Bootstrap
   hosts: all
   vars:
     playbook_retries: 10
