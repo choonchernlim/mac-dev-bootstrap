@@ -13,6 +13,9 @@ readonly LOG_PATH="${LOG_DIR}/mac-dev-bootstrap-$(date +%Y%m%d%H%M%S).log"
 [[ ! -x "$(command -v ansible-lint)" ]] && brew install ansible-lint
 [[ ! -x "$(command -v python)" ]] && brew install python
 
+# Homebrew installed Python in /usr/local for macOS Intel and /opt/homebrew for Apple Silicon
+readonly PYTHON_PATH=$(which python3)
+
 # Create log dir if not exist
 mkdir -p "${LOG_DIR}"
 
@@ -20,7 +23,7 @@ mkdir -p "${LOG_DIR}"
 sudo -v
 
 # Run the playbook
-ANSIBLE_LOG_PATH="${LOG_PATH}" ansible-playbook main.yml "$@"
+ANSIBLE_LOG_PATH="${LOG_PATH}" ANSIBLE_PYTHON_INTERPRETER="${PYTHON_PATH}" ansible-playbook main.yml "$@"
 
 # Lint the playbook
 ansible-lint

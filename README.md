@@ -9,7 +9,6 @@ A very opinionated Ansible playbook to install, configure and update the followi
 - [CleanMyMac](https://macpaw.com/cleanmymac/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-- [Google Backup and Sync](https://www.google.com/intl/en-GB_ALL/drive/)
 - [Google Chrome](https://www.google.com/chrome/)
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install/)
 - [Homebrew](https://brew.sh/)
@@ -21,7 +20,6 @@ A very opinionated Ansible playbook to install, configure and update the followi
 - [Oh MyZsh](https://ohmyz.sh/)
 - [Postman](https://www.postman.com/)
 - [Rectangle](https://rectangleapp.com/)
-- [SDKMAN!](https://sdkman.io/)
 - [Skitch](https://evernote.com/products/skitch/)
 - [Spotify](https://www.spotify.com/us/)
 - [Sublime Text](https://www.sublimetext.com/)
@@ -33,6 +31,7 @@ Tested on:
 
 - macOS Big Sur
 - macOS Catalina
+- macOS Ventura
 
 ## Getting Started
 

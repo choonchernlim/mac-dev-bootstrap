@@ -4,6 +4,7 @@ homebrew_taps:
   - buo/cask-upgrade
 
 homebrew_packages_present:
+  - bash
   - curl
   - jq
   - ansible
