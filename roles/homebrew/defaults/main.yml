@@ -32,12 +32,12 @@ homebrew_cask_packages_present:
   - docker
   - firefox
   - font-hack-nerd-font
-  - google-backup-and-sync
   - google-chrome
   - mamp
   - nomachine
   - postman
   - rectangle
+  - scroll-reverser
   - skitch
   - spotify
   - sublime-text
