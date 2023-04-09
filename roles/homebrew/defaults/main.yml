@@ -38,7 +38,6 @@ homebrew_cask_packages_present:
   - nomachine
   - postman
   - rectangle
-  - scroll-reverser
   - skitch
   - spotify
   - sublime-text
@@ -46,3 +45,4 @@ homebrew_cask_packages_present:
 
 homebrew_cask_packages_absent:
   - chronosync
+  - scroll-reverser
