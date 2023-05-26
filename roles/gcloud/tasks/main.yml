@@ -2,8 +2,8 @@
 # homebrew_cask doesn't work... so, run the command directly
 - name: Install gcloud
   ansible.builtin.command: brew install --cask google-cloud-sdk
-  register: homebrew_install_gcloud_output
-  changed_when: not 'is already installed' in homebrew_install_gcloud_output.stderr
+  register: gcloud_homebrew_install_gcloud_output
+  changed_when: not 'is already installed' in gcloud_homebrew_install_gcloud_output.stderr
 
 - name: Disable reporting usage
   ansible.builtin.shell: $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud config set disable_usage_reporting false
