@@ -26,7 +26,6 @@ homebrew_packages_absent:
   - tldr
 
 homebrew_cask_packages_present:
-  - 1password
   - alfred
   - brave-browser
   - cleanmymac
