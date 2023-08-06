@@ -35,7 +35,6 @@ homebrew_cask_packages_present:
   - font-hack-nerd-font
   - google-chrome
   - mamp
-  - nomachine
   - postman
   - rectangle
   - skitch
@@ -46,3 +45,4 @@ homebrew_cask_packages_present:
 homebrew_cask_packages_absent:
   - chronosync
   - scroll-reverser
+  - nomachine
