@@ -34,6 +34,7 @@
   ansible.builtin.command: brew install --cask {{ item }}
   register: homebrew_install_cask_package_output
   changed_when: not 'is already installed' in homebrew_install_cask_package_output.stderr
+  ignore_errors: true
   loop: '{{ homebrew_cask_packages_present }}'
 
 # TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now.
