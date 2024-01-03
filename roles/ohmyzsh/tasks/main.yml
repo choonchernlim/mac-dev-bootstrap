@@ -38,7 +38,7 @@
 - name: Check if it is an original .zshrc file (no block marker)
   ansible.builtin.lineinfile:
     name: '{{ ansible_user_dir }}/.zshrc'
-    regexp: '{{ onmyzsh_block_marker }}'
+    regexp: '{{ ohmyzsh_block_marker }}'
     state: absent
   check_mode: true
   changed_when: false
@@ -68,7 +68,7 @@
   ansible.builtin.blockinfile:
     path: '{{ ansible_user_dir }}/.zshrc'
     backup: true
-    marker: '# {mark} - {{ onmyzsh_block_marker }}'
+    marker: '# {mark} - {{ ohmyzsh_block_marker }}'
     block: '{{ lookup("template", ".zshrc.j2") }}'
 
 - name: Create shell conf dir if not exist
