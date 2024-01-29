@@ -25,10 +25,8 @@
   community.general.homebrew_cask:
     upgrade_all: true
     greedy: true
+  ignore_errors: true
   register: upgrade_homebrew_cask_output
-  failed_when:
-    - not 'It seems the App source' in upgrade_homebrew_cask_output
-    - not 'It seems there is already an App at' in upgrade_homebrew_cask_output
 
 - name: Install cask packages
   community.general.homebrew_cask:
