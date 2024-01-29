@@ -3,6 +3,10 @@
   ansible.builtin.command: brew cleanup
   changed_when: false
 
+- name: Free up space by removing unused homebrew dependencies
+  ansible.builtin.command: brew autoremove
+  changed_when: false
+
 - name: Perform Homebrew health check
   ansible.builtin.command: brew doctor
   register: cleanup_brew_doctor_output
