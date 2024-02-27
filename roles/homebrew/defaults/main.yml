@@ -27,21 +27,32 @@ homebrew_packages_absent:
 
 homebrew_cask_packages_present:
   - alfred
+  - anaconda
   - brave-browser
   - cleanmymac
+  - cyberduck
   - docker
   - firefox
   - font-hack-nerd-font
+  - garmin-basecamp
+  - garmin-express
+  - google-cloud-sdk
   - google-chrome
-  - mamp
+  - google-drive
+  - grammarly-desktop
+  - logi-options-plus
   - postman
+  - raindropio
+  - readdle-spark
   - rectangle
   - skitch
   - spotify
   - sublime-text
-  - textmate
 
 homebrew_cask_packages_absent:
   - chronosync
-  - scroll-reverser
+  - google-backup-and-sync
+  - mamp
   - nomachine
+  - scroll-reverser
+  - textmate
