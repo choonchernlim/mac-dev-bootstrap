@@ -4,10 +4,9 @@
   register: homebrew_analytics_off_output
   changed_when: homebrew_analytics_off_output.rc != 0
 
-- name: Update Homebrew and upgrade all existing packages
+- name: Update Homebrew
   community.general.homebrew:
     update_homebrew: true
-    upgrade_all: true
 
 - name: Tap homebrew
   community.general.homebrew_tap:
@@ -21,51 +20,22 @@
     state: uninstalled
   loop: '{{ homebrew_cask_packages_absent }}'
 
-- name: Upgrade all casks with greedy option
+- name: Install/Upgrade cask packages
   community.general.homebrew_cask:
-    upgrade_all: true
+    name: '{{ item }}'
+    state: upgraded
     greedy: true
-  ignore_errors: true
-  register: upgrade_homebrew_cask_output
-
-- name: Install cask packages
-  community.general.homebrew_cask:
-    name: '{{ item }}'
-    state: present
   loop: '{{ homebrew_cask_packages_present }}'
-
-# Don't upgrade casks because it resets app settings
-# - name: Upgrade all existing casks
-#   ansible.builtin.command: brew cu --all --yes
-#   register: homebrew_upgrade_cask_package_output
-#   changed_when: '"Upgrading" in homebrew_upgrade_cask_package_output.stdout'
-
-# TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now.
-# TODO See https://github.com/ansible-collections/community.general/issues/1037
-# - name: Install casks
-#  ansible.builtin.command: brew install --cask {{ item }}
-#  register: homebrew_install_cask_package_output
-#  changed_when: not 'is already installed' in homebrew_install_cask_package_output.stderr
-#  ignore_errors: true
-#  loop: '{{ homebrew_cask_packages_present }}'
-
-# TODO A bug that prevents cask packages with hyphen in the name. Run brew command for now.
-# TODO See https://github.com/ansible-collections/community.general/issues/1037
-# - name: Uninstall casks
-#  ansible.builtin.command: brew uninstall --cask {{ item }}
-#  register: homebrew_install_cask_package_output
-#  changed_when: not 'is not installed' in homebrew_install_cask_package_output.stderr
-#  ignore_errors: true
-#  loop: '{{ homebrew_cask_packages_absent }}'
-
-- name: Install packages
-  community.general.homebrew:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ homebrew_packages_present }}'
+  ignore_errors: true  # noqa ignore-errors
 
 - name: Uninstall packages
   community.general.homebrew:
     name: '{{ item }}'
     state: absent
   loop: '{{ homebrew_packages_absent }}'
+
+- name: Install/Upgrade packages
+  community.general.homebrew:
+    name: '{{ item }}'
+    state: upgraded
+  loop: '{{ homebrew_packages_present }}'
