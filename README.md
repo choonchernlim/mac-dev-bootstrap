@@ -13,9 +13,7 @@ A very opinionated Ansible playbook to install, configure and update the followi
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install/)
 - [Homebrew](https://brew.sh/)
 - [iTerm2](https://www.iterm2.com/)
-- [MAMP](https://www.mamp.info/en/windows/)
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/)
-- [NoMachine](https://www.nomachine.com/)
 - [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm/)
 - [Oh MyZsh](https://ohmyz.sh/)
 - [Postman](https://www.postman.com/)
@@ -29,15 +27,12 @@ A very opinionated Ansible playbook to install, configure and update the followi
 
 Tested on:
 
+- macOS Sonoma
 - macOS Big Sur
 - macOS Catalina
 - macOS Ventura
 
 ## Getting Started
-
-> IMPORTANT: Consider reviewing [mac-dev-bootstrap.log](mac-dev-bootstrap.log) to understand what's going on first before
-> proceeding. Unless you are a clone of me, my workflow may not necessarily matches yours, but feel free to fork this repo and
-> customize it to fit your needs.
 
 - Run `./mac-dev-bootstrap.sh` to begin the installation.
 
