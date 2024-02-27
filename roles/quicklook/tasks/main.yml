@@ -1,0 +1,26 @@
+---
+# https://github.com/sindresorhus/quick-look-plugins
+
+- name: Uninstall packages
+  community.general.homebrew:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ quicklook_absent }}'
+
+- name: Install/Upgrade packages
+  community.general.homebrew:
+    name: '{{ item }}'
+    state: upgraded
+  loop: '{{ quicklook_present }}'
+
+- name: Remove quarantine attribute
+  ansible.builtin.command: xattr -d -r com.apple.quarantine ~/Library/QuickLook
+  changed_when: false
+
+- name: Force reloading generators list
+  ansible.builtin.command: qlmanage -r
+  changed_when: false
+
+- name: Reset thumbnail disk cache
+  ansible.builtin.command: qlmanage -r cache
+  changed_when: false
