@@ -1,9 +1,4 @@
 ---
-- name: Install Python
-  community.general.homebrew:
-    name: python
-    state: present
-
 - name: Install latest pip
   ansible.builtin.command: python3 -m ensurepip --upgrade  # noqa no-changed-when
 

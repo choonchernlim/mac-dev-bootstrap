@@ -1,9 +1,4 @@
 ---
-- name: Install NVM
-  community.general.homebrew:
-    name: nvm
-    state: present
-
 - name: Create ~/.nvm dir if not exist
   ansible.builtin.file:
     path: '{{ nvm_dir }}'

@@ -4,25 +4,38 @@ homebrew_taps:
   - buo/cask-upgrade
 
 homebrew_packages_present:
-  - bash
-  - curl
-  - jq
   - ansible
   - ansible-lint
-  - wget
-  - yarn
-  - tree
-  - composer
-  - imagemagick
-  - maven
-  - htop
   - azure-cli
+  - bash
+  - coreutils
+  - curl
+  - exiftool
+  - go
+  - gpsbabel
+  - htop
+  - imagemagick
+  - jq
+  - tree
+  - maven
+  - nvm
+  - python
   - rsync
   - shellcheck
   - yamllint
   - tfenv
+  - tflint
+  - wget
+  - yarn
 
 homebrew_packages_absent:
+  - allure
+  - checkov
+  - composer
+  - dialog
+  - gobject-introspection
+  - graphviz
+  - nghttp2
   - tldr
 
 homebrew_cask_packages_present:
@@ -40,6 +53,7 @@ homebrew_cask_packages_present:
   - google-chrome
   - google-drive
   - grammarly-desktop
+  - iTerm2
   - logi-options-plus
   - postman
   - raindropio

@@ -1,9 +1,4 @@
 ---
-- name: Install iTerm2
-  community.general.homebrew_cask:
-    name: iTerm2
-    state: present
-
 - name: Configure iTerm2 profile
   ansible.builtin.template:
     src: Profiles.json.j2
