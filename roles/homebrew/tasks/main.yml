@@ -17,7 +17,8 @@
 - name: Uninstall cask packages
   community.general.homebrew_cask:
     name: '{{ item }}'
-    state: uninstalled
+    state: absent
+    install_options: force
   loop: '{{ homebrew_cask_packages_absent }}'
 
 - name: Install/Upgrade cask packages
@@ -25,6 +26,7 @@
     name: '{{ item }}'
     state: upgraded
     greedy: true
+    install_options: force
   loop: '{{ homebrew_cask_packages_present }}'
   ignore_errors: true  # noqa ignore-errors
 
@@ -32,10 +34,12 @@
   community.general.homebrew:
     name: '{{ item }}'
     state: absent
+    install_options: force
   loop: '{{ homebrew_packages_absent }}'
 
 - name: Install/Upgrade packages
   community.general.homebrew:
     name: '{{ item }}'
     state: upgraded
+    install_options: force
   loop: '{{ homebrew_packages_present }}'

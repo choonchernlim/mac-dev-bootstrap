@@ -5,12 +5,14 @@
   community.general.homebrew:
     name: '{{ item }}'
     state: absent
+    install_options: force
   loop: '{{ quicklook_absent }}'
 
 - name: Install/Upgrade packages
   community.general.homebrew:
     name: '{{ item }}'
     state: upgraded
+    install_options: force
   loop: '{{ quicklook_present }}'
 
 - name: Remove quarantine attribute
