@@ -8,10 +8,20 @@ readonly LOG_PATH="${LOG_DIR}/mac-dev-bootstrap-$(date +%Y%m%d%H%M%S).log"
 # Install Homebrew if missing
 [[ ! -x "$(command -v brew)" ]] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-# Install Ansible and its dependencies
-[[ ! -x "$(command -v ansible)" ]] && brew install ansible
-[[ ! -x "$(command -v ansible-lint)" ]] && brew install ansible-lint
-[[ ! -x "$(command -v python)" ]] && brew install python
+# update formulae and Homebrew itself
+brew update
+
+# Ansible and its core dependencies
+readonly ansible_formulae="ansible ansible-lint python"
+
+# loop through the list and install the missing formulae, if exist, upgrade it if it is outdated
+for formula in ${ansible_formulae}; do
+  if [[ ! -x "$(command -v "${formula}")" ]]; then
+    brew install "${formula}"
+  else
+    brew outdated "${formula}" || brew upgrade "${formula}"
+  fi
+done
 
 # Homebrew installed Python in /usr/local for macOS Intel and /opt/homebrew for Apple Silicon
 readonly PYTHON_PATH=$(which python3)

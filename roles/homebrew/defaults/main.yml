@@ -4,8 +4,6 @@ homebrew_taps:
   - buo/cask-upgrade
 
 homebrew_packages_present:
-  - ansible
-  - ansible-lint
   - azure-cli
   - bash
   - coreutils
@@ -19,7 +17,6 @@ homebrew_packages_present:
   - tree
   - maven
   - nvm
-  - python
   - rsync
   - shellcheck
   - yamllint
