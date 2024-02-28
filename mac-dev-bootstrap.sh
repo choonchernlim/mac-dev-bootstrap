@@ -12,7 +12,7 @@ readonly LOG_PATH="${LOG_DIR}/mac-dev-bootstrap-$(date +%Y%m%d%H%M%S).log"
 brew update
 
 # Ansible and its core dependencies
-readonly ansible_formulae="ansible ansible-lint python"
+readonly ansible_formulae="ansible ansible-lint homebrew/core/pytho"
 
 # loop through the list and install the missing formulae, if exist, upgrade it if it is outdated
 for formula in ${ansible_formulae}; do
