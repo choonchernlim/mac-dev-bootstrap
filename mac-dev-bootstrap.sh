@@ -4,22 +4,24 @@ set -e -o pipefail
 readonly BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 readonly LOG_DIR="${BASE_DIR}/logs"
 readonly LOG_PATH="${LOG_DIR}/mac-dev-bootstrap-$(date +%Y%m%d%H%M%S).log"
+readonly PACKAGES="ansible ansible-lint homebrew/core/python"
 
-# Install Homebrew if missing
-[[ ! -x "$(command -v brew)" ]] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# Install Homebrew if missing, otherwise update all package definitions and Homebrew itself
+if [[ ! -x "$(command -v brew)" ]]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+else
+  brew update --quiet
+fi
 
-# update formulae and Homebrew itself
-brew update
-
-# Ansible and its core dependencies
-readonly ansible_formulae="ansible ansible-lint homebrew/core/pytho"
-
-# loop through the list and install the missing formulae, if exist, upgrade it if it is outdated
-for formula in ${ansible_formulae}; do
-  if [[ ! -x "$(command -v "${formula}")" ]]; then
-    brew install "${formula}"
-  else
-    brew outdated "${formula}" || brew upgrade "${formula}"
+# Loop through the list and install the missing core packages, if exist, upgrade it if it is outdated
+for package in ${PACKAGES}; do
+  echo "${package}: Checking..."
+  if ! brew list "${package}" &>/dev/null; then
+    echo "${package}: Package missing. Installing it..."
+    brew install "${package}"
+  elif ! brew outdated "${package}" &>/dev/null; then
+    echo "${package}: Package outdated. Upgrading it..."
+    brew upgrade "${package}" --force
   fi
 done
 
