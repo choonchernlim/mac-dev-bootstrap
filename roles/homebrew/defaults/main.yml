@@ -26,8 +26,8 @@ homebrew_packages_present:
   - yarn
 
 homebrew_packages_absent:
+  - ansible-lint  # remove first before removing ansible
   - ansible
-  - ansible-lint
   - allure
   - checkov
   - composer
