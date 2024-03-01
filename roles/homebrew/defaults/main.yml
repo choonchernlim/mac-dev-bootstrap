@@ -26,6 +26,8 @@ homebrew_packages_present:
   - yarn
 
 homebrew_packages_absent:
+  - ansible
+  - ansible-lint
   - allure
   - checkov
   - composer
@@ -37,7 +39,6 @@ homebrew_packages_absent:
 
 homebrew_cask_packages_present:
   - alfred
-  - anaconda
   - brave-browser
   - cleanmymac
   - cyberduck
@@ -61,6 +62,7 @@ homebrew_cask_packages_present:
   - sublime-text
 
 homebrew_cask_packages_absent:
+  - anaconda
   - chronosync
   - google-backup-and-sync
   - mamp

@@ -6,5 +6,4 @@
   ansible.builtin.pip:
     name: '{{ item }}'
     state: present
-    extra_args: --user
   loop: '{{ python_packages }}'
