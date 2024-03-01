@@ -55,6 +55,7 @@ homebrew_cask_packages_present:
   - i1profiler
   - iTerm2
   - logi-options-plus
+  - nordvpn
   - postman
   - raindropio
   - readdle-spark
