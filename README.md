@@ -36,10 +36,6 @@ Tested on:
 
 - Run `./mac-dev-bootstrap.sh` to begin the installation.
 
-> NOTE: If you see this Homebrew error ( **Error: It seems there is already an App at '/Applications/[NAME].app'** ),
-> this is because you may have already installed the app before running the playbook. To fix this, simply delete the
-> app, then rerun the playbook. You will not lose your app's configuration.
-
 - To install/configure just specific installation(s), run `./mac-dev-bootstrap.sh --tags "[ROLE_TAGS]"`, ex:
   - `./mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
   - `./mac-dev-bootstrap.sh --tags "nvm,gcloud"`: Install NVM and Google Cloud SDK.

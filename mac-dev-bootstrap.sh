@@ -31,11 +31,16 @@ if [[ ! -d "${PYTHON_VENV_DIR}" ]]; then
   python3 -m venv "${PYTHON_VENV_DIR}"
 fi
 
+# If existing virtual environment is activated, deactivate it
+if [[ -n "${VIRTUAL_ENV}" ]]; then
+  deactivate
+fi
+
 # Activate virtual environment
 source "${PYTHON_VENV_DIR}/bin/activate"
 
 # Pip install or upgrade ansible and ansible-lint
-python3 -m pip install --upgrade ansible ansible-lint
+python3 -m pip install --quiet --upgrade ansible ansible-lint
 
 # Homebrew installed Python in /usr/local for macOS Intel and /opt/homebrew for Apple Silicon
 readonly PYTHON_PATH=$(which python3)
