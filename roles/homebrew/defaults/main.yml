@@ -45,6 +45,7 @@ homebrew_cask_packages_present:
   - docker
   - firefox
   - font-hack-nerd-font
+  - font-meslo-lg-nerd-font
   - garmin-basecamp
   - garmin-express
   - google-cloud-sdk
