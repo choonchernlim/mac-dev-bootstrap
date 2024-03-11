@@ -12,7 +12,7 @@
   community.general.homebrew:
     name: '{{ item }}'
     state: upgraded
-    install_options: force
+    install_options: force,no-quarantine
   loop: '{{ quicklook_present }}'
 
 - name: Remove quarantine attribute

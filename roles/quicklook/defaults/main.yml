@@ -1,6 +1,6 @@
 ---
 quicklook_present:
-  - qlcolorcode
+  - syntax-highlight
   - qlstephen
   - qlmarkdown
   - quicklook-json
@@ -10,4 +10,5 @@ quicklook_present:
   - quicklookase
   - qlvideo
 
-quicklook_absent: []
+quicklook_absent:
+  - qlcolorcode

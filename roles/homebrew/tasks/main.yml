@@ -26,7 +26,7 @@
     name: '{{ item }}'
     state: upgraded
     greedy: true
-    install_options: force
+    install_options: force,no-quarantine
   loop: '{{ homebrew_cask_packages_present }}'
   ignore_errors: true  # noqa ignore-errors
 
@@ -41,5 +41,5 @@
   community.general.homebrew:
     name: '{{ item }}'
     state: upgraded
-    install_options: force
+    install_options: force,no-quarantine
   loop: '{{ homebrew_packages_present }}'
