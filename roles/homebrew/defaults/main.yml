@@ -11,6 +11,7 @@ homebrew_packages_present:
   - exiftool
   - go
   - gpsbabel
+  - graphviz
   - htop
   - imagemagick
   - jq
@@ -33,7 +34,6 @@ homebrew_packages_absent:
   - composer
   - dialog
   - gobject-introspection
-  - graphviz
   - nghttp2
   - tldr
 
