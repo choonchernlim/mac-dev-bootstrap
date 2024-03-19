@@ -10,14 +10,13 @@ homebrew_packages_present:
   - coreutils
   - curl
   - exiftool
-  - gitui
   - go
   - gpsbabel
   - graphviz
   - htop
   - imagemagick
   - jq
-  - tree
+  - lazygit
   - maven
   - nvm
   - rsync
@@ -25,6 +24,7 @@ homebrew_packages_present:
   - yamllint
   - tfenv
   - tflint
+  - tree
   - wget
   - yarn
 
