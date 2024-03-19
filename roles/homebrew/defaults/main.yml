@@ -6,6 +6,7 @@ homebrew_taps:
 homebrew_packages_present:
   - azure-cli
   - bash
+  - black
   - coreutils
   - curl
   - exiftool
@@ -27,7 +28,7 @@ homebrew_packages_present:
   - yarn
 
 homebrew_packages_absent:
-  - ansible-lint  # remove first before removing ansible
+  - ansible-lint # remove first before removing ansible
   - ansible
   - allure
   - checkov
@@ -65,6 +66,7 @@ homebrew_cask_packages_present:
   - spotify
   - sublime-text
   - visual-studio-code
+  - zed
 
 homebrew_cask_packages_absent:
   - anaconda
