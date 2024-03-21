@@ -10,6 +10,7 @@ homebrew_packages_present:
   - coreutils
   - curl
   - exiftool
+  - ffmpeg
   - go
   - gpsbabel
   - graphviz
@@ -19,19 +20,20 @@ homebrew_packages_present:
   - lazygit
   - maven
   - nvm
+  - pipx
   - rsync
   - shellcheck
-  - yamllint
   - tfenv
   - tflint
   - tree
   - wget
+  - yamllint
   - yarn
 
 homebrew_packages_absent:
+  - allure
   - ansible-lint # remove first before removing ansible
   - ansible
-  - allure
   - checkov
   - composer
   - dialog
@@ -50,13 +52,13 @@ homebrew_cask_packages_present:
   - font-meslo-lg-nerd-font
   - garmin-basecamp
   - garmin-express
-  - google-cloud-sdk
   - google-chrome
+  - google-cloud-sdk
   - google-drive
   - grammarly-desktop
-  - intellij-idea
   - i1profiler
   - iTerm2
+  - intellij-idea
   - logi-options-plus
   - nordvpn
   - postman
