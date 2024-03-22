@@ -32,7 +32,7 @@ homebrew_packages_present:
 
 homebrew_packages_absent:
   - allure
-  - ansible-lint # remove first before removing ansible
+  - ansible-lint  # remove first before removing ansible
   - ansible
   - checkov
   - composer
