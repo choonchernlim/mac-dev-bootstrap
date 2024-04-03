@@ -1,3 +1,6 @@
+#--------------------------------------------------
+# MAC-DEV-BOOTSTRAP MANAGED BLOCK - DO NOT EDIT!
+#--------------------------------------------------
 ZSH="${HOME}/.oh-my-zsh"
 ZSH_CUSTOM="${ZSH}/custom"
 ZSH_THEME="spaceship"

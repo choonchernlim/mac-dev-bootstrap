@@ -1,3 +1,7 @@
+#--------------------------------------------------
+# MAC-DEV-BOOTSTRAP MANAGED BLOCK - DO NOT EDIT!
+#--------------------------------------------------
+
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
