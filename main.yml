@@ -13,8 +13,7 @@
     - {role: python, tags: python}
     - {role: quicklook, tags: quicklook}
     - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud]}
-    # Disable
-    # - {role: sdkman, tags: sdkman}
+    - {role: sdkman, tags: sdkman}
     - {role: iterm2, tags: iterm2}
     - {role: nvm, tags: nvm}
     - {role: vimrc, tags: vimrc}
