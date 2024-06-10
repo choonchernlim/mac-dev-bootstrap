@@ -1,6 +1,5 @@
 ---
 homebrew_taps:
-  - homebrew/cask-fonts
   - buo/cask-upgrade
 
 homebrew_packages_present:
