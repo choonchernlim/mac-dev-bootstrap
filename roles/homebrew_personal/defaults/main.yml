@@ -1,0 +1,12 @@
+---
+homebrew_personal_taps: []
+
+homebrew_personal_packages_present: []
+
+homebrew_personal_packages_absent: []
+
+homebrew_personal_cask_packages_present:
+  - grammarly-desktop
+  - nordvpn
+
+homebrew_personal_cask_packages_absent: []

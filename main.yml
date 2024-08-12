@@ -8,20 +8,22 @@
     # --------------------------------------------------------------------------
     # Tools to install/configure
     # --------------------------------------------------------------------------
-    - {role: xcode, tags: xcode}
-    - {role: homebrew, tags: homebrew}
-    - {role: python, tags: python}
-    - {role: quicklook, tags: quicklook}
-    - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud]}
-    - {role: sdkman, tags: sdkman}
-    - {role: iterm2, tags: iterm2}
-    - {role: nvm, tags: nvm}
-    - {role: vimrc, tags: vimrc}
-    - {role: gcloud, tags: gcloud}
+    - {role: xcode, tags: [xcode, personal, work]}
+    - {role: homebrew, tags: [homebrew, personal, work]}
+    - {role: homebrew_personal, tags: [personal]}
+    - {role: homebrew_work, tags: [work]}
+    - {role: python, tags: [python, personal, work]}
+    - {role: quicklook, tags: [quicklook, personal, work]}
+    - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud, personal, work]}
+    - {role: sdkman, tags: [sdkman, personal, work]}
+    - {role: iterm2, tags: [iterm2, personal, work]}
+    - {role: nvm, tags: [nvm, personal, work]}
+    - {role: vimrc, tags: [vimrc, personal, work]}
+    - {role: gcloud, tags: [gcloud, personal, work]}
     # --------------------------------------------------------------------------
     # Post installation
     # --------------------------------------------------------------------------
-    - {role: cleanup, tags: cleanup}
+    - {role: cleanup, tags: [cleanup, personal, work]}
     # --------------------------------------------------------------------------
     # For debugging purpose
     # --------------------------------------------------------------------------

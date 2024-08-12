@@ -1,0 +1,12 @@
+---
+homebrew_work_taps: []
+
+homebrew_work_packages_present: []
+
+homebrew_work_packages_absent: []
+
+homebrew_work_cask_packages_present: []
+
+homebrew_work_cask_packages_absent:
+  - grammarly-desktop
+  - nordvpn

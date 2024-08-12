@@ -45,7 +45,6 @@ homebrew_cask_packages_present:
   - brave-browser
   - cleanmymac
   - cyberduck
-  - docker
   - firefox
   - font-hack-nerd-font
   - font-meslo-lg-nerd-font
@@ -54,17 +53,15 @@ homebrew_cask_packages_present:
   - google-chrome
   - google-cloud-sdk
   - google-drive
-  - grammarly-desktop
   - i1profiler
   - iTerm2
   - intellij-idea
   - logi-options-plus
-  - nordvpn
   - postman
   - raindropio
+  - rancher
   - readdle-spark
   - rectangle
-  - skitch
   - spotify
   - sublime-text
   - visual-studio-code
@@ -73,8 +70,10 @@ homebrew_cask_packages_present:
 homebrew_cask_packages_absent:
   - anaconda
   - chronosync
+  - docker
   - google-backup-and-sync
   - mamp
   - nomachine
   - scroll-reverser
+  - skitch
   - textmate

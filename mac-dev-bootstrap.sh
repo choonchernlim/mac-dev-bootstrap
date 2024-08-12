@@ -39,6 +39,8 @@ fi
 # Activate virtual environment
 source "${PYTHON_VENV_DIR}/bin/activate"
 
+python3 -m pip install --upgrade pip
+
 # Pip install or upgrade ansible and ansible-lint
 python3 -m pip install --quiet --upgrade ansible ansible-lint
 
