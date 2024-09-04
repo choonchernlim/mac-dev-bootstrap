@@ -25,3 +25,4 @@ Session.vim
 
 logs/
 .venv/
+vault.yml

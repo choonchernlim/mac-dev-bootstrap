@@ -50,14 +50,17 @@ readonly PYTHON_PATH=$(which python3)
 # Create log dir if not exist
 mkdir -p "${LOG_DIR}"
 
-# Prompting for sudo password upfront (for handling `brew install --cask xxx`)
-sudo -v
 
-# Keep sudo alive until the script is done
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+if [[ ! -f "${BASE_DIR}/vault.yml" ]]; then
+  echo "Creating vault.yml for the first time..."
+  echo "Once you are prompted for a new vault password, please enter the following into the file:"
+  echo "ansible_become_pass: [SUDO_PASSWORD]"
+  pause
+  ansible-vault create vault.yml
+fi
 
 # Run the playbook
-ANSIBLE_LOG_PATH="${LOG_PATH}" ANSIBLE_PYTHON_INTERPRETER="${PYTHON_PATH}" ansible-playbook main.yml "$@"
+ANSIBLE_LOG_PATH="${LOG_PATH}" ANSIBLE_PYTHON_INTERPRETER="${PYTHON_PATH}" ansible-playbook main.yml --ask-vault-pass "$@"
 
 # Lint the playbook
 ansible-lint

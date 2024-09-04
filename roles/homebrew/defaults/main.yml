@@ -43,6 +43,7 @@ homebrew_packages_absent:
 homebrew_cask_packages_present:
   - alfred
   - brave-browser
+  - chatgpt
   - cleanmymac
   - cyberduck
   - firefox
@@ -56,7 +57,7 @@ homebrew_cask_packages_present:
   - i1profiler
   - iTerm2
   - intellij-idea
-  - logi-options+
+  - logi-options-plus
   - postman
   - raindropio
   - rancher

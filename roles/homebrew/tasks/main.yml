@@ -1,4 +1,8 @@
 ---
+- name: Include vault file to resolve ansible_become_pass
+  ansible.builtin.include_vars:
+    file: vault.yml
+
 - name: Turn off analytics
   ansible.builtin.command: brew analytics off
   register: homebrew_analytics_off_output
@@ -19,6 +23,7 @@
     name: '{{ item }}'
     state: absent
     install_options: force
+    sudo_password: "{{ ansible_become_pass }}"
   loop: '{{ homebrew_cask_packages_absent }}'
 
 - name: Install/Upgrade cask packages
@@ -27,6 +32,7 @@
     state: upgraded
     greedy: true
     install_options: force,no-quarantine
+    sudo_password: "{{ ansible_become_pass }}"
   loop: '{{ homebrew_cask_packages_present }}'
   ignore_errors: true  # noqa ignore-errors
 
