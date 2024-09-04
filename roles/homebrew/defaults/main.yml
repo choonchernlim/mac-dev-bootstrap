@@ -56,7 +56,7 @@ homebrew_cask_packages_present:
   - i1profiler
   - iTerm2
   - intellij-idea
-  - logi-options-plus
+  - logi-options+
   - postman
   - raindropio
   - rancher
