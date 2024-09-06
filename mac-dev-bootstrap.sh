@@ -55,7 +55,7 @@ if [[ ! -f "${BASE_DIR}/vault.yml" ]]; then
   echo "Creating vault.yml for the first time..."
   echo "Once you are prompted for a new vault password, please enter the following into the file:"
   echo "ansible_become_pass: [SUDO_PASSWORD]"
-  pause
+  echo Press enter to continue; read dummy;
   ansible-vault create vault.yml
 fi
 
