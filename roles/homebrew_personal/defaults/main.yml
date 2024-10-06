@@ -1,7 +1,8 @@
 ---
 homebrew_personal_taps: []
 
-homebrew_personal_packages_present: []
+homebrew_personal_packages_present:
+  - yt-dlp
 
 homebrew_personal_packages_absent: []
 
