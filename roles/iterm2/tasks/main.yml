@@ -1,4 +1,10 @@
 ---
+- name: Create ~/Library/Application Support/iTerm2/DynamicProfiles dir if not exist
+  ansible.builtin.file:
+    path: '{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles'
+    state: directory
+    mode: '0755'
+
 - name: Configure iTerm2 profile
   ansible.builtin.template:
     src: Profiles.json.j2

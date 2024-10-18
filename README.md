@@ -32,9 +32,17 @@ Tested on:
 - macOS Catalina
 - macOS Ventura
 
+
 ## Getting Started
 
 - Run `./mac-dev-bootstrap.sh` to begin the installation.
+  - Note: When getting `Bash must not run in POSIX mode. Please unset POSIXLY_CORRECT and try again.` error,
+    install Homebrew and upgrade Bash to the latest version:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install bash
+```
 
 - To install/configure just specific installation(s), run `./mac-dev-bootstrap.sh --tags "[ROLE_TAGS]"`, ex:
   - `./mac-dev-bootstrap.sh --tags "nvm"`: Install just NVM.
