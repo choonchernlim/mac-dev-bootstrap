@@ -2,4 +2,4 @@
 sdkman_init_script: '{{ ansible_user_dir }}/.sdkman/bin/sdkman-init.sh'
 sdkman_install_packages:
   - candidate: java
-    version: 23.ea.18-open
+    version: 23-tem

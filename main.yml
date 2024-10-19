@@ -8,6 +8,7 @@
     # --------------------------------------------------------------------------
     # Tools to install/configure
     # --------------------------------------------------------------------------
+    - {role: mac, tags: [mac, personal, work]}
     - {role: xcode, tags: [xcode, personal, work]}
     - {role: homebrew, tags: [homebrew, personal, work]}
     - {role: homebrew_personal, tags: [personal]}
