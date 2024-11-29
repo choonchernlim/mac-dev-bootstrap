@@ -45,7 +45,6 @@ homebrew_cask_packages_present:
   - alfred
   - brave-browser
   - chatgpt
-  - cleanmymac
   - cyberduck
   - firefox
   - font-hack-nerd-font
@@ -72,6 +71,7 @@ homebrew_cask_packages_present:
 homebrew_cask_packages_absent:
   - anaconda
   - chronosync
+  - cleanmymac
   - docker
   - google-backup-and-sync
   - mamp
