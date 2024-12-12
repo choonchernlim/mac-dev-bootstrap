@@ -4,7 +4,6 @@ quicklook_present:
   - qlstephen
   - qlmarkdown
   - quicklook-json
-  - qlimagesize
   - suspicious-package
   - apparency
   - quicklookase
@@ -12,3 +11,4 @@ quicklook_present:
 
 quicklook_absent:
   - qlcolorcode
+  - qlimagesize
