@@ -44,6 +44,7 @@ homebrew_cask_packages_present:
   - 1password
   - alfred
   - brave-browser
+  - calibrite-profiler
   - chatgpt
   - cyberduck
   - firefox
@@ -54,7 +55,6 @@ homebrew_cask_packages_present:
   - google-chrome
   - google-cloud-sdk
   - google-drive
-  - i1profiler
   - iTerm2
   - intellij-idea
   - logi-options-plus
@@ -74,6 +74,7 @@ homebrew_cask_packages_absent:
   - cleanmymac
   - docker
   - google-backup-and-sync
+  - i1profiler
   - mamp
   - nomachine
   - scroll-reverser
