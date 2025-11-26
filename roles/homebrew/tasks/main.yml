@@ -36,18 +36,20 @@
   loop: '{{ homebrew_cask_packages_present }}'
   ignore_errors: true  # noqa ignore-errors
 
-- name: Get installed cask info
-  ansible.builtin.command: brew info --cask --json=v2 {{ item }}
-  register: cask_info
-  changed_when: false
-  loop: '{{ homebrew_cask_packages_present }}'
+- name: Remove quarantine attributes from cask apps
+  block:
+    - name: Get cask info
+      ansible.builtin.command: brew info --cask --json=v2 {{ item }}
+      register: cask_info
+      changed_when: false
 
-- name: Remove quarantine attributes from all installed .app bundles
-  ansible.builtin.shell: |
-    for app in $(echo '{{ cask_info.stdout }}' | jq -r '.[0].artifacts[] | select(type=="object") | .app[]?'); do
-      xattr -rd com.apple.quarantine "/Applications/$app"
-    done
-  when: cask_info.stdout is search('.app')
+    - name: Remove quarantine attributes
+      ansible.builtin.shell: |
+        for app in $(echo '{{ cask_info.stdout }}' \
+          | jq -r '.[0].artifacts[] | select(type=="object") | .app[]?'); do
+          xattr -rd com.apple.quarantine "/Applications/$app"
+        done
+      when: cask_info.stdout is search('.app')
   loop: '{{ homebrew_cask_packages_present }}'
   ignore_errors: true
 
