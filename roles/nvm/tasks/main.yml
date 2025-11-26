@@ -27,6 +27,15 @@
     state: absent
   with_items: "{{ (nvm_installed_version_dirs.files | sort(attribute='mtime') | map(attribute='path'))[:-1] }}"
 
+- name: Clear NVM cache
+  ansible.builtin.shell: |
+    . $(brew --prefix)/opt/nvm/nvm.sh
+    nvm cache clear
+  environment:
+    NVM_DIR: "{{ nvm_dir }}"
+  args:
+    executable: /bin/bash
+
 - name: Add nvm.sh to shell config dir
   ansible.builtin.copy:
     src: nvm.sh

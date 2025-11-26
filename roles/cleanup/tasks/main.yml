@@ -1,6 +1,6 @@
 ---
 - name: Free up space by removing old packages installed by Homebrew
-  ansible.builtin.command: brew cleanup
+  ansible.builtin.command: brew cleanup --prune=all
   changed_when: false
 
 - name: Free up space by removing unused homebrew dependencies
