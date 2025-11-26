@@ -55,6 +55,7 @@ homebrew_common_cask_packages_present:
   - google-chrome
   - google-cloud-sdk
   - google-drive
+  - grandperspective
   - iTerm2
   - intellij-idea
   - logi-options-plus
