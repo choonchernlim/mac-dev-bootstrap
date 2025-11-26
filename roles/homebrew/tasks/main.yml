@@ -44,7 +44,12 @@
 
 - name: Filter only installed casks
   ansible.builtin.set_fact:
-    installed_casks: "{{ cask_info.results | selectattr('rc', 'equalto', 0) | selectattr('stdout', 'search', '.app') | list }}"
+    installed_casks: "{{ cask_info.results | select('installed_cask_filter') | list }}"
+  vars:
+    installed_cask_filter: |
+      {{ item.rc == 0 and
+         (item.stdout | from_json).casks[0].installed is defined and
+         item.stdout is search('.app') }}
 
 - name: Remove quarantine attributes from all installed .app bundles
   ansible.builtin.shell: |
