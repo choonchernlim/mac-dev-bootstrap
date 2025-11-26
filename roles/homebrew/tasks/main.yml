@@ -44,12 +44,14 @@
 
 - name: Remove quarantine attributes from all installed .app bundles
   ansible.builtin.shell: |
-    for app in $(echo '{{ cask_info.stdout }}' \
+    for app in $(echo '{{ item.stdout }}' \
       | jq -r '.[0].artifacts[] | select(type=="object") | .app[]?'); do
       xattr -rd com.apple.quarantine "/Applications/$app"
     done
-  when: cask_info.stdout is search('.app')
-  loop: '{{ homebrew_cask_packages_present }}'
+  when: item.stdout is search('.app')
+  loop: '{{ cask_info.results }}'
+  loop_control:
+    label: '{{ item.item }}'
   ignore_errors: true
 
 - name: Uninstall packages
