@@ -39,16 +39,19 @@
 - name: Get installed cask info
   ansible.builtin.command: brew info --cask --json=v2 {{ item }}
   register: cask_info
-  changed_when: false
+  failed_when: false
   loop: '{{ homebrew_cask_packages_present }}'
 
 - name: Remove quarantine attributes from all installed .app bundles
   ansible.builtin.shell: |
     for app in $(echo '{{ item.stdout }}' \
-      | jq -r '.[0].artifacts[] | select(type=="object") | .app[]?'); do
+      | jq -r '.casks[0].artifacts[] | select(type=="object") | .app[]?'); do
       xattr -rd com.apple.quarantine "/Applications/$app"
     done
-  when: item.stdout is search('.app')
+  when:
+    - item.rc == 0
+    - item.stdout is search('.app')
+    - item.stdout | from_json | json_query('casks[0].installed') != null
   loop: '{{ cask_info.results }}'
   loop_control:
     label: '{{ item.item }}'
