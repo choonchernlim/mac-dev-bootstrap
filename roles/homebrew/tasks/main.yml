@@ -42,17 +42,17 @@
   failed_when: false
   loop: '{{ homebrew_cask_packages_present }}'
 
+- name: Filter only installed casks
+  ansible.builtin.set_fact:
+    installed_casks: "{{ cask_info.results | selectattr('rc', 'equalto', 0) | selectattr('stdout', 'search', '.app') | list }}"
+
 - name: Remove quarantine attributes from all installed .app bundles
   ansible.builtin.shell: |
     for app in $(echo '{{ item.stdout }}' \
       | jq -r '.casks[0].artifacts[] | select(type=="object") | .app[]?'); do
       xattr -rd com.apple.quarantine "/Applications/$app"
     done
-  when:
-    - item.rc == 0
-    - item.stdout is search('.app')
-    - item.stdout | from_json | json_query('casks[0].installed') != null
-  loop: '{{ cask_info.results }}'
+  loop: '{{ installed_casks }}'
   loop_control:
     label: '{{ item.item }}'
   ignore_errors: true
