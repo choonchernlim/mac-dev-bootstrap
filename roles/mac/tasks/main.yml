@@ -2,4 +2,4 @@
 - name: Install Rosetta to allow Apple Silicon Mac to run apps built for Intel Mac
   ansible.builtin.command: softwareupdate --install-rosetta --agree-to-license
   changed_when: false
-  when: ansible_facts['ansible_architecture'] == 'arm64'
+  when: ansible_facts['architecture'] == 'arm64'
