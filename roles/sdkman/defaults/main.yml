@@ -1,5 +1,5 @@
 ---
-sdkman_init_script: '{{ ansible_user_dir }}/.sdkman/bin/sdkman-init.sh'
+sdkman_init_script: '{{ ansible_facts["user_dir"] }}/.sdkman/bin/sdkman-init.sh'
 sdkman_install_packages:
   - candidate: java
     version: 23-tem

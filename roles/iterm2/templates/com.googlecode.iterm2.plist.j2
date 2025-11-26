@@ -525,7 +525,7 @@
 			<key>Draw Powerline Glyphs</key>
 			<true/>
 			<key>Dynamic Profile Filename</key>
-			<string>{{ ansible_user_dir }}/Library/Application Support/iTerm2/DynamicProfiles/Profiles.json</string>
+			<string>{{ ansible_facts['user_dir'] }}/Library/Application Support/iTerm2/DynamicProfiles/Profiles.json</string>
 			<key>Flashing Bell</key>
 			<false/>
 			<key>Foreground Color</key>
@@ -1189,7 +1189,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>{{ ansible_user_dir }}</string>
+			<string>{{ ansible_facts['user_dir'] }}</string>
 		</dict>
 	</array>
 	<key>NoSyncAllAppVersions</key>

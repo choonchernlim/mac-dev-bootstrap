@@ -9,6 +9,4 @@ quicklook_present:
   - quicklookase
   - qlvideo
 
-quicklook_absent:
-  - qlcolorcode
-  - qlimagesize
+quicklook_absent: []
