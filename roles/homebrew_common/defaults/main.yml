@@ -52,8 +52,8 @@ homebrew_common_cask_packages_present:
   - font-meslo-lg-nerd-font
   - garmin-basecamp
   - garmin-express
+  - gcloud-cli
   - google-chrome
-  - google-cloud-sdk
   - google-drive
   - grandperspective
   - iTerm2
