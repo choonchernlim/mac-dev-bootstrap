@@ -38,8 +38,8 @@
 
 - name: Get installed cask info
   ansible.builtin.command: brew info --cask --json=v2 {{ item }}
-  register: cask_info
-  changed_when: false
+  register: homebrew_cask_info
+  changed_when: homebrew_cask_info.rc != 0
   failed_when: false
   loop: '{{ homebrew_cask_packages_present }}'
 
@@ -54,10 +54,10 @@
     - item.rc == 0
     - item.stdout is search('"installed"')
     - item.stdout is search('.app')
-  loop: '{{ cask_info.results }}'
+  loop: '{{ homebrew_cask_info.results }}'
   loop_control:
     label: '{{ item.item }}'
-  ignore_errors: true
+  ignore_errors: true  # noqa ignore-errors
 
 - name: Uninstall packages
   community.general.homebrew:
