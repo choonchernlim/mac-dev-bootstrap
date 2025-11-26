@@ -1,0 +1,10 @@
+---
+- name: Run homebrew with common packages
+  ansible.builtin.include_role:
+    name: homebrew
+  vars:
+    homebrew_taps: "{{ homebrew_common_taps }}"
+    homebrew_packages_present: "{{ homebrew_common_packages_present }}"
+    homebrew_packages_absent: "{{ homebrew_common_packages_absent }}"
+    homebrew_cask_packages_present: "{{ homebrew_common_cask_packages_present }}"
+    homebrew_cask_packages_absent: "{{ homebrew_common_cask_packages_absent }}"

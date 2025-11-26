@@ -10,7 +10,7 @@
     # --------------------------------------------------------------------------
     - {role: mac, tags: [mac, personal, work]}
     - {role: xcode, tags: [xcode, personal, work]}
-    - {role: homebrew, tags: [homebrew, personal, work]}
+    - {role: homebrew_common, tags: [homebrew, personal, work]}
     - {role: homebrew_personal, tags: [personal]}
     - {role: homebrew_work, tags: [work]}
     - {role: python, tags: [python, personal, work]}
