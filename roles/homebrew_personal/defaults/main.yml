@@ -7,6 +7,8 @@ homebrew_personal_packages_present:
 homebrew_personal_packages_absent: []
 
 homebrew_personal_cask_packages_present:
+  - garmin-basecamp
+  - garmin-express
   - grammarly-desktop
   - nordvpn
 

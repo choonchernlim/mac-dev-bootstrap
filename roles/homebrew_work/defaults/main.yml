@@ -1,12 +1,17 @@
 ---
 homebrew_work_taps: []
 
-homebrew_work_packages_present: []
+homebrew_work_packages_present:
+  - node
+  - watchman
 
 homebrew_work_packages_absent: []
 
-homebrew_work_cask_packages_present: []
+homebrew_work_cask_packages_present:
+  - android-studio
 
 homebrew_work_cask_packages_absent:
+  - garmin-basecamp
+  - garmin-express
   - grammarly-desktop
   - nordvpn

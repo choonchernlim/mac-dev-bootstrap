@@ -10,6 +10,7 @@ homebrew_common_packages_present:
   - curl
   - exiftool
   - ffmpeg
+  - gemini-cli
   - go
   - gpsbabel
   - graphviz
@@ -19,6 +20,7 @@ homebrew_common_packages_present:
   - lazygit
   - maven
   - nvm
+  - ollama
   - pipx
   - rsync
   - shellcheck
@@ -50,8 +52,6 @@ homebrew_common_cask_packages_present:
   - firefox
   - font-hack-nerd-font
   - font-meslo-lg-nerd-font
-  - garmin-basecamp
-  - garmin-express
   - gcloud-cli
   - google-chrome
   - google-drive
@@ -60,14 +60,12 @@ homebrew_common_cask_packages_present:
   - intellij-idea
   - logi-options-plus
   - postman
-  - raindropio
   - rancher
   - readdle-spark
   - rectangle
   - spotify
   - sublime-text
   - visual-studio-code
-  - zed
 
 homebrew_common_cask_packages_absent:
   - anaconda
@@ -78,6 +76,8 @@ homebrew_common_cask_packages_absent:
   - i1profiler
   - mamp
   - nomachine
+  - raindropio
   - scroll-reverser
   - skitch
   - textmate
+  - zed
