@@ -27,6 +27,7 @@ homebrew_common_packages_present:
   - tfenv
   - tflint
   - tree
+  - uv
   - wget
   - yamllint
   - yarn

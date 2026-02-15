@@ -40,6 +40,10 @@
   until: sdkman_install_packages_output.rc == 0
   changed_when: not item.candidate + ' ' + item.version + ' is already installed.' in sdkman_install_packages_output.stdout
 
+- name: Flush temp and archives
+  ansible.builtin.shell: . {{ sdkman_init_script }} && sdk flush temp && sdk flush archives
+  changed_when: false
+
 - name: Add sdkman.sh to shell config dir
   ansible.builtin.copy:
     src: sdkman.sh
