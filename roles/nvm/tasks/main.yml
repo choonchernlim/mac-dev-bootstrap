@@ -13,7 +13,7 @@
   delay: '{{ playbook_delay }}'
   register: nvm_install_output
   until: not "Version '' (with LTS filter) not found" in nvm_install_output.stderr
-  changed_when: not 'is already installed' in nvm_install_output.stderr
+  changed_when: "not 'is already installed' in nvm_install_output.stderr"
 
 - name: Find all installed versions
   ansible.builtin.find:
@@ -35,6 +35,7 @@
     NVM_DIR: "{{ nvm_dir }}"
   args:
     executable: /bin/bash
+  changed_when: 'false'
 
 - name: Add nvm.sh to shell config dir
   ansible.builtin.copy:
