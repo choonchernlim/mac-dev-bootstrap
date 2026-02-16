@@ -21,6 +21,7 @@
     - {role: nvm, tags: [nvm, personal, work]}
     - {role: vimrc, tags: [vimrc, personal, work]}
     - {role: gcloud, tags: [gcloud, personal, work]}
+    - {role: ai_instructions, tags: [ai_instructions, personal, work]}
     # --------------------------------------------------------------------------
     # Post installation
     # --------------------------------------------------------------------------
