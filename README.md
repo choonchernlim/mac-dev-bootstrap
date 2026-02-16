@@ -1,41 +1,10 @@
 # mac-dev-bootstrap
 
-A very opinionated Ansible playbook to install, configure and update the following development tools on a Mac:
-
-- [1Password](https://1password.com/)
-- [Alfred](https://www.alfredapp.com/)
-- [amix/vimrc](https://github.com/amix/vimrc/)
-- [ChronoSync](https://www.econtechnologies.com/)
-- [CleanMyMac](https://macpaw.com/cleanmymac/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-- [Google Chrome](https://www.google.com/chrome/)
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install/)
-- [Homebrew](https://brew.sh/)
-- [iTerm2](https://www.iterm2.com/)
-- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/)
-- [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm/)
-- [Oh MyZsh](https://ohmyz.sh/)
-- [Postman](https://www.postman.com/)
-- [Rectangle](https://rectangleapp.com/)
-- [Skitch](https://evernote.com/products/skitch/)
-- [Spotify](https://www.spotify.com/us/)
-- [Sublime Text](https://www.sublimetext.com/)
-- [Textmate](https://macromates.com/)
-- XCode Command Line Tools
-- ... and many commonly used DevOps commands
-
-Tested on:
-
-- macOS Sonoma
-- macOS Big Sur
-- macOS Catalina
-- macOS Ventura
-
+A very opinionated Ansible playbook to install, configure and update software and development tools on a Mac.
 
 ## Getting Started
 
-- Run `./mac-dev-bootstrap.sh` to begin the installation.
+- To begin first-time installation, run `./mac-dev-bootstrap.sh --tags [MACHINE_TYPE]` where `[MACHINE_TYPE]` is `work` for work machines or `personal` for personal machines.
   - Note: When getting `Bash must not run in POSIX mode. Please unset POSIXLY_CORRECT and try again.` error,
     install Homebrew and upgrade Bash to the latest version:
 
@@ -50,4 +19,4 @@ brew install bash
 
 - To display the arguments passed to each task, run `ANSIBLE_DISPLAY_ARGS_TO_STDOUT=true ./mac-dev-bootstrap.sh`.
 
-- To update all the tools in the future, run `update` in the terminal.
+- To update all the tools in the future, run `update --tags [MACHINE_TYPE]` where `[MACHINE_TYPE]` is `work` for work machines or `personal` for personal machines.
