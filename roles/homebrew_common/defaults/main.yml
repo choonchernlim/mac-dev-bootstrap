@@ -17,8 +17,10 @@ homebrew_common_packages_present:
   - htop
   - imagemagick
   - jq
+  - kubectl
   - lazygit
   - maven
+  - minikube
   - nvm
   - ollama
   - pipx
