@@ -73,5 +73,5 @@
   community.general.homebrew:
     name: '{{ item }}'
     state: upgraded
-    install_options: force,no-quarantine
+    install_options: force
   loop: '{{ homebrew_packages_present }}'

@@ -18,6 +18,7 @@ Before coding:
 2. Identify edge cases and failure modes.
 3. State assumptions if uncertain.
 4. Implement.
+5. If a .pre-commit-config.yaml file exists in the project root, you must autonomously run the shell command `pre-commit run --all-files` after completing any code modifications.
 
 ## Architecture
 

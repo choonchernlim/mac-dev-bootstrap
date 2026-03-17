@@ -33,6 +33,7 @@ homebrew_common_packages_present:
   - wget
   - yamllint
   - yarn
+  - zed
 
 homebrew_common_packages_absent:
   - allure
@@ -83,4 +84,3 @@ homebrew_common_cask_packages_absent:
   - scroll-reverser
   - skitch
   - textmate
-  - zed
