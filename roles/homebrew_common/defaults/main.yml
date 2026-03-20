@@ -8,6 +8,7 @@ homebrew_common_packages_present:
   - black
   - coreutils
   - curl
+  - direnv
   - exiftool
   - ffmpeg
   - gemini-cli
@@ -37,7 +38,7 @@ homebrew_common_packages_present:
 
 homebrew_common_packages_absent:
   - allure
-  - ansible-lint  # remove first before removing ansible
+  - ansible-lint # remove first before removing ansible
   - ansible
   - checkov
   - composer
@@ -52,6 +53,7 @@ homebrew_common_cask_packages_present:
   - brave-browser
   - calibrite-profiler
   - chatgpt
+  - claude-code
   - cyberduck
   - firefox
   - font-hack-nerd-font

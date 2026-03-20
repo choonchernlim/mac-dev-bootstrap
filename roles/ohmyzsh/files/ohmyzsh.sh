@@ -11,6 +11,7 @@ if [[ -z "${TERM_PROGRAM}" || "${TERM_PROGRAM}" == "iTerm.app" ]]; then
 fi
 
 plugins=(
+  direnv
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
