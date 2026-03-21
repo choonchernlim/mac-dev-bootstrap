@@ -1,11 +1,13 @@
 ---
 homebrew_common_taps:
   - buo/cask-upgrade
+  - oven-sh/bun
 
 homebrew_common_packages_present:
   - azure-cli
   - bash
   - black
+  - bun
   - coreutils
   - curl
   - direnv
