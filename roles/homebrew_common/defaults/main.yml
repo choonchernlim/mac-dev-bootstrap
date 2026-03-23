@@ -8,6 +8,7 @@ homebrew_common_packages_present:
   - bash
   - black
   - bun
+  - copilot-cli
   - coreutils
   - curl
   - direnv

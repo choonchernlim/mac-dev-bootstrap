@@ -1,3 +1,8 @@
 ---
-ai_instructions_gemini_dir: '{{ ansible_facts["user_dir"] }}/.gemini'
-ai_instructions_claude_dir: '{{ ansible_facts["user_dir"] }}/.claude'
+ai_instructions_targets:
+  - dir: '{{ ansible_facts["user_dir"] }}/.gemini'
+    filename: GEMINI.md
+  - dir: '{{ ansible_facts["user_dir"] }}/.claude'
+    filename: CLAUDE.md
+  - dir: '{{ ansible_facts["user_dir"] }}/.copilot'
+    filename: copilot-instructions.md
