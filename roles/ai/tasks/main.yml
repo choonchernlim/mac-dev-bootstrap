@@ -8,7 +8,7 @@
 
 - name: Copy INSTRUCTIONS.md to AI tool config
   ansible.builtin.copy:
-    src: INSTRUCTIONS.md
+    src: agents/INSTRUCTIONS.md
     dest: "{{ item.dir }}/{{ item.filename }}"
     mode: '0644'
   loop: "{{ ai_targets }}"
@@ -22,7 +22,7 @@
 
 - name: Copy skills to AI tool config
   ansible.builtin.copy:
-    src: skills/
+    src: agents/skills/
     dest: "{{ item.dir }}/skills/"
     mode: '0644'
     directory_mode: '0755'
