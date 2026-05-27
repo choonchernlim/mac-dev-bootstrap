@@ -28,6 +28,12 @@
     directory_mode: '0755'
   loop: "{{ ai_targets }}"
 
+- name: Add ai.sh to ohmyzsh config dir
+  ansible.builtin.copy:
+    src: ai.sh
+    dest: '{{ ohmyzsh_conf_dir }}/ai.sh'
+    mode: '0644'
+
 # ── Claude plugins ──────────────────────────────────────────────────────────
 
 - name: Check claude CLI present
