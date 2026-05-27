@@ -4,6 +4,7 @@ homebrew_common_taps:
   - oven-sh/bun
 
 homebrew_common_packages_present:
+  - antigravity-cli
   - azure-cli
   - bash
   - black
@@ -14,7 +15,6 @@ homebrew_common_packages_present:
   - direnv
   - exiftool
   - ffmpeg
-  - gemini-cli
   - go
   - gpsbabel
   - graphviz
@@ -47,6 +47,7 @@ homebrew_common_packages_absent:
   - checkov
   - composer
   - dialog
+  - gemini-cli
   - gobject-introspection
   - nghttp2
   - tldr

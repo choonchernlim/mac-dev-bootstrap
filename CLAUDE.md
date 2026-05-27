@@ -60,7 +60,7 @@ roles/
   python/             # Python setup
   quicklook/          # QuickLook plugins
   vimrc/              # Vim config
-  ai_instructions/    # Copies INSTRUCTIONS.md to ~/.claude/CLAUDE.md, ~/.gemini/GEMINI.md, ~/.copilot/copilot-instructions.md
+  ai/                 # Copies INSTRUCTIONS.md to ~/.claude/CLAUDE.md, ~/.gemini/antigravity-cli/ANTIGRAVITY.md, ~/.copilot/copilot-instructions.md
   cleanup/            # Post-install cleanup
   debug/              # Never runs by default (tag: never)
 ```

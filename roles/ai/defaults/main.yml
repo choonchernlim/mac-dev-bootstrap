@@ -1,7 +1,7 @@
 ---
-ai_instructions_targets:
-  - dir: '{{ ansible_facts["user_dir"] }}/.gemini'
-    filename: GEMINI.md
+ai_targets:
+  - dir: '{{ ansible_facts["user_dir"] }}/.gemini/antigravity-cli'
+    filename: ANTIGRAVITY.md
   - dir: '{{ ansible_facts["user_dir"] }}/.claude'
     filename: CLAUDE.md
   - dir: '{{ ansible_facts["user_dir"] }}/.copilot'
@@ -9,10 +9,10 @@ ai_instructions_targets:
   - dir: '{{ ansible_facts["user_dir"] }}/.codex'
     filename: AGENTS.md
 
-ai_instructions_plugins_claude_marketplace:
+ai_plugins_claude_marketplace:
   name: claude-plugins-official
   source: anthropics/claude-plugins-official
-ai_instructions_plugins_claude:
+ai_plugins_claude:
   - superpowers
   - context7
   - frontend-design
@@ -21,15 +21,15 @@ ai_instructions_plugins_claude:
   - playwright
   - skill-creator
 
-ai_instructions_plugins_gemini:
+ai_plugins_antigravity:
   - https://github.com/obra/superpowers
   - https://github.com/upstash/context7
 
-ai_instructions_plugins_copilot_marketplaces:
+ai_plugins_copilot_marketplaces:
   - name: superpowers-marketplace
     source: obra/superpowers-marketplace
-ai_instructions_plugins_copilot:
+ai_plugins_copilot:
   - {name: superpowers, marketplace: superpowers-marketplace}
 
-ai_instructions_plugins_codex_marketplaces: []
-ai_instructions_plugins_codex: []
+ai_plugins_codex_marketplaces: []
+ai_plugins_codex: []
