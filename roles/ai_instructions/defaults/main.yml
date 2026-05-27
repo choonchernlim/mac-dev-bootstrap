@@ -6,3 +6,30 @@ ai_instructions_targets:
     filename: CLAUDE.md
   - dir: '{{ ansible_facts["user_dir"] }}/.copilot'
     filename: copilot-instructions.md
+  - dir: '{{ ansible_facts["user_dir"] }}/.codex'
+    filename: AGENTS.md
+
+ai_instructions_plugins_claude_marketplace:
+  name: claude-plugins-official
+  source: anthropics/claude-plugins-official
+ai_instructions_plugins_claude:
+  - superpowers
+  - context7
+  - frontend-design
+  - code-simplifier
+  - typescript-lsp
+  - playwright
+  - skill-creator
+
+ai_instructions_plugins_gemini:
+  - https://github.com/obra/superpowers
+  - https://github.com/upstash/context7
+
+ai_instructions_plugins_copilot_marketplaces:
+  - name: superpowers-marketplace
+    source: obra/superpowers-marketplace
+ai_instructions_plugins_copilot:
+  - {name: superpowers, marketplace: superpowers-marketplace}
+
+ai_instructions_plugins_codex_marketplaces: []
+ai_instructions_plugins_codex: []

@@ -1,14 +1,116 @@
 ---
-- name: "Ensure {{ item.dir }} directory exists"
+- name: Ensure AI tool config directory exists
   ansible.builtin.file:
     path: "{{ item.dir }}"
     state: directory
     mode: '0755'
   loop: "{{ ai_instructions_targets }}"
 
-- name: "Copy INSTRUCTIONS.md to {{ item.dir }}/{{ item.filename }}"
+- name: Copy INSTRUCTIONS.md to AI tool config
   ansible.builtin.copy:
     src: INSTRUCTIONS.md
     dest: "{{ item.dir }}/{{ item.filename }}"
     mode: '0644'
   loop: "{{ ai_instructions_targets }}"
+
+- name: Ensure AI tool skills directory exists
+  ansible.builtin.file:
+    path: "{{ item.dir }}/skills"
+    state: directory
+    mode: '0755'
+  loop: "{{ ai_instructions_targets }}"
+
+- name: Copy skills to AI tool config
+  ansible.builtin.copy:
+    src: skills/
+    dest: "{{ item.dir }}/skills/"
+    mode: '0644'
+    directory_mode: '0755'
+  loop: "{{ ai_instructions_targets }}"
+
+# ── Claude plugins ──────────────────────────────────────────────────────────
+
+- name: Check claude CLI present
+  ansible.builtin.command: which claude
+  register: ai_instructions_claude_cli
+  changed_when: false
+  failed_when: false
+
+- name: List Claude marketplaces
+  ansible.builtin.command: claude plugin marketplace list
+  register: ai_instructions_claude_marketplaces
+  changed_when: false
+  when: ai_instructions_claude_cli.rc == 0
+
+- name: Add Claude plugin marketplace
+  ansible.builtin.command: claude plugin marketplace add {{ ai_instructions_plugins_claude_marketplace.source }}
+  changed_when: true
+  when:
+    - ai_instructions_claude_cli.rc == 0
+    - ai_instructions_plugins_claude_marketplace.name not in ai_instructions_claude_marketplaces.stdout
+
+- name: Install Claude plugins
+  ansible.builtin.command: claude plugin install {{ item }}@{{ ai_instructions_plugins_claude_marketplace.name }}
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.claude/plugins/cache/{{ ai_instructions_plugins_claude_marketplace.name }}/{{ item }}"
+  loop: "{{ ai_instructions_plugins_claude }}"
+  when: ai_instructions_claude_cli.rc == 0
+
+# ── Gemini extensions ────────────────────────────────────────────────────────
+
+- name: Check gemini CLI present
+  ansible.builtin.command: which gemini
+  register: ai_instructions_gemini_cli
+  changed_when: false
+  failed_when: false
+
+- name: Install Gemini extensions
+  ansible.builtin.command: gemini extensions install {{ item }} --consent --skip-settings
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.gemini/extensions/{{ item | basename }}"
+  loop: "{{ ai_instructions_plugins_gemini }}"
+  when: ai_instructions_gemini_cli.rc == 0
+
+# ── Copilot plugins ──────────────────────────────────────────────────────────
+
+- name: Check copilot CLI present
+  ansible.builtin.command: which copilot
+  register: ai_instructions_copilot_cli
+  changed_when: false
+  failed_when: false
+
+- name: List Copilot marketplaces
+  ansible.builtin.command: copilot plugin marketplace list
+  register: ai_instructions_copilot_marketplaces
+  changed_when: false
+  when: ai_instructions_copilot_cli.rc == 0
+
+- name: Add Copilot plugin marketplaces
+  ansible.builtin.command: copilot plugin marketplace add {{ item.source }}
+  changed_when: true
+  loop: "{{ ai_instructions_plugins_copilot_marketplaces }}"
+  when:
+    - ai_instructions_copilot_cli.rc == 0
+    - item.name not in ai_instructions_copilot_marketplaces.stdout
+
+- name: Install Copilot plugins
+  ansible.builtin.command: copilot plugin install {{ item.name }}@{{ item.marketplace }}
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.copilot/installed-plugins/{{ item.marketplace }}/{{ item.name }}"
+  loop: "{{ ai_instructions_plugins_copilot }}"
+  when: ai_instructions_copilot_cli.rc == 0
+
+# ── Codex plugins ────────────────────────────────────────────────────────────
+
+- name: Check codex CLI present
+  ansible.builtin.command: which codex
+  register: ai_instructions_codex_cli
+  changed_when: false
+  failed_when: false
+
+- name: Install Codex plugins
+  ansible.builtin.command: codex plugin install {{ item.name }}@{{ item.marketplace }}
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.codex/plugins/{{ item.name }}"
+  loop: "{{ ai_instructions_plugins_codex }}"
+  when: ai_instructions_codex_cli.rc == 0
