@@ -1,11 +1,16 @@
 ---
+ai_skills_canonical_dir: '{{ ansible_facts["user_dir"] }}/.local/share/ai-skills'
+
 ai_targets:
   - dir: '{{ ansible_facts["user_dir"] }}/.gemini/antigravity-cli'
     filename: ANTIGRAVITY.md
+    settings_src: antigravity.json
   - dir: '{{ ansible_facts["user_dir"] }}/.claude'
     filename: CLAUDE.md
+    settings_src: claude.json
   - dir: '{{ ansible_facts["user_dir"] }}/.copilot'
     filename: copilot-instructions.md
+    settings_src: copilot.json
   - dir: '{{ ansible_facts["user_dir"] }}/.codex'
     filename: AGENTS.md
 
@@ -14,16 +19,16 @@ ai_plugins_claude_marketplace:
   source: anthropics/claude-plugins-official
 ai_plugins_claude:
   - superpowers
-  - context7
   - frontend-design
   - code-simplifier
   - typescript-lsp
-  - playwright
   - skill-creator
+ai_plugins_claude_remove:
+  - context7@claude-plugins-official
+  - playwright@claude-plugins-official
 
 ai_plugins_antigravity:
   - https://github.com/obra/superpowers
-  - https://github.com/upstash/context7
 
 ai_plugins_copilot_marketplaces:
   - name: superpowers-marketplace
@@ -31,5 +36,9 @@ ai_plugins_copilot_marketplaces:
 ai_plugins_copilot:
   - {name: superpowers, marketplace: superpowers-marketplace}
 
-ai_plugins_codex_marketplaces: []
-ai_plugins_codex: []
+# TODO: verify marketplace source string after codex CLI is installed
+ai_plugins_codex_marketplaces:
+  - name: superpowers-marketplace
+    source: obra/superpowers
+ai_plugins_codex:
+  - {name: superpowers, marketplace: superpowers-marketplace}

@@ -1,4 +1,8 @@
 ---
+- name: Include vault file to resolve secrets
+  ansible.builtin.include_vars:
+    file: vault.yml
+
 - name: Ensure AI tool config directory exists
   ansible.builtin.file:
     path: "{{ item.dir }}"
@@ -13,26 +17,133 @@
     mode: '0644'
   loop: "{{ ai_targets }}"
 
-- name: Ensure AI tool skills directory exists
+# ── Settings.json ─────────────────────────────────────────────────────────────
+
+- name: Stat existing settings.json
+  ansible.builtin.stat:
+    path: "{{ item.dir }}/settings.json"
+  register: ai_settings_stat
+  loop: "{{ ai_targets | selectattr('settings_src', 'defined') | list }}"
+
+- name: Backup existing settings.json with date suffix
+  ansible.builtin.copy:
+    src: "{{ item.item.dir }}/settings.json"
+    dest: "{{ item.item.dir }}/settings.json.{{ ansible_facts['date_time']['date'] | replace('-', '') }}"
+    remote_src: true
+    force: false
+    mode: '0644'
+  loop: "{{ ai_settings_stat.results }}"
+  loop_control:
+    label: "{{ item.item.dir }}"
+  when:
+    - item.stat.exists
+    - item.stat.isreg
+
+- name: Copy settings.json to AI tool config
+  ansible.builtin.copy:
+    src: "agents/settings/{{ item.settings_src }}"
+    dest: "{{ item.dir }}/settings.json"
+    mode: '0644'
+  loop: "{{ ai_targets | selectattr('settings_src', 'defined') | list }}"
+
+# ── Skills (single canonical copy + per-agent symlinks) ───────────────────────
+
+- name: Ensure canonical skills directory exists
   ansible.builtin.file:
-    path: "{{ item.dir }}/skills"
+    path: "{{ ai_skills_canonical_dir }}"
     state: directory
     mode: '0755'
-  loop: "{{ ai_targets }}"
 
-- name: Copy skills to AI tool config
+- name: Sync skills to canonical directory
   ansible.builtin.copy:
     src: agents/skills/
-    dest: "{{ item.dir }}/skills/"
+    dest: "{{ ai_skills_canonical_dir }}/"
     mode: '0644'
     directory_mode: '0755'
+
+- name: Stat each agent's existing skills path
+  ansible.builtin.stat:
+    path: "{{ item.dir }}/skills"
+  register: ai_skills_stat
+  loop: "{{ ai_targets }}"
+
+- name: Remove real skills directories (replaced by symlinks below)
+  ansible.builtin.file:
+    path: "{{ item.item.dir }}/skills"
+    state: absent
+  loop: "{{ ai_skills_stat.results }}"
+  loop_control:
+    label: "{{ item.item.dir }}"
+  when:
+    - item.stat.exists
+    - item.stat.isdir
+    - not item.stat.islnk
+
+- name: Symlink agent skills directories to canonical location
+  ansible.builtin.file:
+    src: "{{ ai_skills_canonical_dir }}"
+    dest: "{{ item.dir }}/skills"
+    state: link
   loop: "{{ ai_targets }}"
 
 - name: Add ai.sh to ohmyzsh config dir
-  ansible.builtin.copy:
-    src: ai.sh
+  ansible.builtin.template:
+    src: ai.sh.j2
     dest: '{{ ohmyzsh_conf_dir }}/ai.sh'
     mode: '0644'
+  no_log: true
+
+# ── MCP prerequisites ─────────────────────────────────────────────────────────
+
+- name: Check npx available (required for playwright MCP server)
+  ansible.builtin.command: which npx
+  register: ai_npx_check
+  changed_when: false
+  failed_when: false
+
+- name: Warn if npx not found
+  ansible.builtin.debug:
+    msg: >-
+      npx not found on PATH. Playwright MCP server requires Node.js.
+      Install node via homebrew_work or nvm before running AI tools.
+  when: ai_npx_check.rc != 0
+
+# ── Antigravity playwright plugin ─────────────────────────────────────────────
+
+- name: Ensure Antigravity playwright plugin directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['user_dir'] }}/.gemini/antigravity-cli/plugins/playwright"
+    state: directory
+    mode: '0755'
+
+- name: Copy Antigravity playwright plugin files
+  ansible.builtin.copy:
+    src: "agents/antigravity_plugins/playwright/{{ item }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.gemini/antigravity-cli/plugins/playwright/{{ item }}"
+    mode: '0644'
+  loop:
+    - plugin.json
+    - mcp_config.json
+
+# ── Copilot MCP config ─────────────────────────────────────────────────────────
+
+- name: Render Copilot MCP config
+  ansible.builtin.template:
+    src: mcp/copilot.json.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.copilot/mcp-config.json"
+    mode: '0600'
+  no_log: true
+  when: context7_api_key is defined
+
+# ── Codex MCP config ───────────────────────────────────────────────────────────
+
+- name: Render Codex config.toml
+  ansible.builtin.template:
+    src: mcp/codex.toml.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.codex/config.toml"
+    mode: '0600'
+  no_log: true
+  when: context7_api_key is defined
 
 # ── Claude plugins ──────────────────────────────────────────────────────────
 
@@ -62,6 +173,48 @@
   loop: "{{ ai_plugins_claude }}"
   when: ai_claude_cli.rc == 0
 
+- name: List installed Claude plugins (for uninstall guard)
+  ansible.builtin.command: claude plugin list
+  register: ai_claude_plugin_list
+  changed_when: false
+  when: ai_claude_cli.rc == 0
+
+- name: Uninstall Claude plugins replaced by direct MCP
+  ansible.builtin.command: claude plugin uninstall {{ item }} --scope user -y
+  loop: "{{ ai_plugins_claude_remove }}"
+  when:
+    - ai_claude_cli.rc == 0
+    - ai_claude_plugin_list is defined
+    - item in ai_claude_plugin_list.stdout
+  changed_when: true
+
+- name: List Claude MCP servers (post-uninstall)
+  ansible.builtin.command: claude mcp list
+  register: ai_claude_mcp_list
+  changed_when: false
+  when: ai_claude_cli.rc == 0
+  no_log: true
+
+- name: Add context7 MCP to Claude (user scope, HTTP)
+  ansible.builtin.command: >-
+    claude mcp add --scope user --transport http context7
+    https://mcp.context7.com/mcp
+    --header "CONTEXT7_API_KEY: {{ context7_api_key }}"
+  when:
+    - ai_claude_cli.rc == 0
+    - ai_claude_mcp_list is defined
+    - "'context7' not in ai_claude_mcp_list.stdout"
+  changed_when: true
+  no_log: true
+
+- name: Add playwright MCP to Claude (user scope, stdio)
+  ansible.builtin.command: claude mcp add --scope user playwright -- npx @playwright/mcp@latest
+  when:
+    - ai_claude_cli.rc == 0
+    - ai_claude_mcp_list is defined
+    - "'playwright' not in ai_claude_mcp_list.stdout"
+  changed_when: true
+
 # ── Antigravity extensions ───────────────────────────────────────────────────
 
 - name: Check antigravity-cli present
@@ -73,7 +226,7 @@
 - name: Install Antigravity extensions
   ansible.builtin.command: agy extensions install {{ item }} --consent --skip-settings
   args:
-    creates: "{{ ansible_facts['user_dir'] }}/.gemini/antigravity-cli/extensions/{{ item | basename }}"
+    creates: "{{ ansible_facts['user_dir'] }}/.gemini/antigravity-cli/plugins/{{ item | basename }}"
   loop: "{{ ai_plugins_antigravity }}"
   when: ai_antigravity_cli.rc == 0
 
@@ -113,6 +266,21 @@
   register: ai_codex_cli
   changed_when: false
   failed_when: false
+
+- name: List Codex marketplaces
+  ansible.builtin.command: codex plugin marketplace list
+  register: ai_codex_marketplaces
+  changed_when: false
+  when: ai_codex_cli.rc == 0
+
+- name: Add Codex plugin marketplaces
+  ansible.builtin.command: codex plugin marketplace add {{ item.source }}
+  changed_when: true
+  loop: "{{ ai_plugins_codex_marketplaces }}"
+  when:
+    - ai_codex_cli.rc == 0
+    - ai_codex_marketplaces is defined
+    - item.name not in ai_codex_marketplaces.stdout
 
 - name: Install Codex plugins
   ansible.builtin.command: codex plugin install {{ item.name }}@{{ item.marketplace }}

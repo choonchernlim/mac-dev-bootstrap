@@ -1,0 +1,12 @@
+{
+  "experimental": true,
+  "model": "claude-opus-4.6",
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    }
+  }
+}

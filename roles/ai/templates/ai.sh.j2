@@ -5,3 +5,6 @@
 export ANTHROPIC_MODEL=opusplan
 export ANTHROPIC_DEFAULT_OPUS_MODEL=claude-opus-4-7
 export ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6
+{% if context7_api_key is defined %}
+export CONTEXT7_API_KEY="{{ context7_api_key }}"
+{% endif %}

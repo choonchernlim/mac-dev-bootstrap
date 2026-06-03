@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm *)",
+      "Bash(pip3 *)",
+      "Bash(pytest *)",
+      "Bash(python3 *)",
+      "Bash(uv *)",
+      "Bash(lsof *)",
+      "Bash(source *)",
+      "Bash(* --help)",
+      "mcp__playwright__*",
+      "mcp__context7__*",
+      "mcp__ide__getDiagnostics"
+    ],
+    "deny": [
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(curl *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "model": "opusplan",
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "advisorModel": "opus"
+}
