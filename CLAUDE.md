@@ -60,7 +60,7 @@ roles/
   python/             # Python setup
   quicklook/          # QuickLook plugins
   vimrc/              # Vim config
-  ai/                 # Copies INSTRUCTIONS.md to ~/.claude/CLAUDE.md, ~/.gemini/antigravity-cli/ANTIGRAVITY.md, ~/.copilot/copilot-instructions.md
+  ai/                 # Deploys INSTRUCTIONS.md + skills/ to all AI tool config dirs; installs plugins for Claude/Copilot/Antigravity/Codex CLIs
   cleanup/            # Post-install cleanup
   debug/              # Never runs by default (tag: never)
 ```
@@ -71,9 +71,11 @@ roles/
 
 **The `homebrew` role** is a generic reusable role that accepts `homebrew_taps`, `homebrew_packages_present`, `homebrew_packages_absent`, `homebrew_cask_packages_present`, `homebrew_cask_packages_absent` vars. The `homebrew_common/personal/work` roles call it via `include_role` with their own defaults.
 
-**The `ohmyzsh` role** manages `.zshrc` via a `blockinfile` marker (`MAC-DEV-BOOTSTRAP MANAGED BLOCK - DO NOT EDIT!`). On first run it backs up the existing `.zshrc`. Config fragments go in `~/.zshrc_conf/`.
+**The `ohmyzsh` role** manages `.zshrc` via a `blockinfile` marker (`MAC-DEV-BOOTSTRAP MANAGED BLOCK - DO NOT EDIT!`). On first run it backs up the existing `.zshrc`. Config fragments go in `~/.zshrc_conf/`. The `ohmyzsh` role carries `sdkman`, `nvm`, and `gcloud` in its tag list, so running `--tags sdkman` (or `nvm`/`gcloud`) also runs `ohmyzsh` — this is intentional because those tools need the shell environment set up first.
 
-**The `ai_instructions` role** deploys a single `INSTRUCTIONS.md` source file to all AI tool config locations. To update AI instructions, edit `roles/ai_instructions/files/INSTRUCTIONS.md`.
+The `update` alias (installed by `ohmyzsh` into `~/.zshrc_conf/alias.sh`) runs `git pull --ff-only` on the repo before invoking `mac-dev-bootstrap.sh`, keeping the local copy up-to-date before applying.
+
+**The `ai` role** deploys `roles/ai/files/agents/INSTRUCTIONS.md` to all AI tool config locations (`~/.claude/CLAUDE.md`, `~/.gemini/antigravity-cli/ANTIGRAVITY.md`, `~/.copilot/copilot-instructions.md`, `~/.codex/AGENTS.md`) and syncs `roles/ai/files/agents/skills/` to each. It also installs plugins for Claude, Copilot, Antigravity, and Codex CLIs if those CLIs are present. Edit `roles/ai/files/agents/INSTRUCTIONS.md` to update AI instructions; add skill files under `roles/ai/files/agents/skills/`.
 
 **vault.yml** is git-ignored and ansible-vault encrypted. It holds `ansible_become_pass` only.
 

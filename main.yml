@@ -18,6 +18,7 @@
     - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud, personal, work]}
     - {role: sdkman, tags: [sdkman, personal, work]}
     - {role: iterm2, tags: [iterm2, personal, work]}
+    - {role: ghostty, tags: [ghostty, personal, work]}
     - {role: nvm, tags: [nvm, personal, work]}
     - {role: vimrc, tags: [vimrc, personal, work]}
     - {role: gcloud, tags: [gcloud, personal, work]}

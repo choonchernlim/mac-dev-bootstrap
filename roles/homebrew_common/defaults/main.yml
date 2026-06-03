@@ -1,7 +1,7 @@
 ---
 homebrew_common_taps:
-  - buo/cask-upgrade
   - oven-sh/bun
+  - redis-stack/redis-stack
 
 homebrew_common_packages_present:
   - antigravity-cli
@@ -31,6 +31,7 @@ homebrew_common_packages_present:
   - pipx
   - rsync
   - shellcheck
+  - starship
   - tfenv
   - tflint
   - tree
@@ -39,6 +40,8 @@ homebrew_common_packages_present:
   - yamllint
   - yarn
   - zed
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
 
 homebrew_common_packages_absent:
   - allure
@@ -64,6 +67,7 @@ homebrew_common_cask_packages_present:
   - font-hack-nerd-font
   - font-meslo-lg-nerd-font
   - gcloud-cli
+  - ghostty
   - google-chrome
   - google-drive
   - grandperspective
