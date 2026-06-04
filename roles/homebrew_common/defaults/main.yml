@@ -2,6 +2,7 @@
 homebrew_common_taps:
   - oven-sh/bun
   - redis-stack/redis-stack
+  - terraform-linters/tap
 
 homebrew_common_packages_present:
   - antigravity-cli
