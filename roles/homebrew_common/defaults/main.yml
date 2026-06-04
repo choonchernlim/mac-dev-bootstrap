@@ -61,6 +61,7 @@ homebrew_common_cask_packages_present:
   - brave-browser
   - calibrite-profiler
   - chatgpt
+  - claude
   - claude-code
   - cyberduck
   - firefox
@@ -70,6 +71,7 @@ homebrew_common_cask_packages_present:
   - ghostty
   - google-chrome
   - google-drive
+  - google-gemini
   - grandperspective
   - iTerm2
   - intellij-idea
