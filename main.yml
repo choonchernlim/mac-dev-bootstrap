@@ -15,13 +15,13 @@
     # - {role: homebrew_work, tags: [work]}  # disabled: managed by Nix (dotfiles repo)
     - {role: python, tags: [python, personal, work]}
     - {role: quicklook, tags: [quicklook, personal, work]}
-    - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud, personal, work]}
-    - {role: sdkman, tags: [sdkman, personal, work]}
+    # - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud, personal, work]}  # disabled: zsh/prompt now managed by Nix (dotfiles repo)
+    # - {role: sdkman, tags: [sdkman, personal, work]}  # disabled: java/sdkman dropped; version management via mise (dotfiles repo)
     - {role: iterm2, tags: [iterm2, personal, work]}
     - {role: ghostty, tags: [ghostty, personal, work]}
-    - {role: nvm, tags: [nvm, personal, work]}
+    # - {role: nvm, tags: [nvm, personal, work]}  # disabled: node now managed by mise (dotfiles repo)
     - {role: vimrc, tags: [vimrc, personal, work]}
-    - {role: gcloud, tags: [gcloud, personal, work]}
+    # - {role: gcloud, tags: [gcloud, personal, work]}  # disabled: gcloud config/components/completions managed by Nix (dotfiles repo)
     # - {role: ai, tags: [ai, personal, work]}  # disabled: AI configs now managed by Nix (dotfiles repo)
     # --------------------------------------------------------------------------
     # Post installation
