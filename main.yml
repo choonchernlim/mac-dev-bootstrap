@@ -8,25 +8,25 @@
     # --------------------------------------------------------------------------
     # Tools to install/configure
     # --------------------------------------------------------------------------
-    - {role: mac, tags: [mac, personal, work]}
-    - {role: xcode, tags: [xcode, personal, work]}
+    # - {role: mac, tags: [mac, personal, work]}  # retired: Rosetta install managed by Nix (dotfiles repo)
+    # - {role: xcode, tags: [xcode, personal, work]}  # retired: CLT check moved to dotfiles bootstrap.sh
     # - {role: homebrew_common, tags: [homebrew, personal, work]}  # disabled: managed by Nix (dotfiles repo)
     # - {role: homebrew_personal, tags: [personal]}  # disabled: managed by Nix (dotfiles repo)
     # - {role: homebrew_work, tags: [work]}  # disabled: managed by Nix (dotfiles repo)
-    - {role: python, tags: [python, personal, work]}
-    - {role: quicklook, tags: [quicklook, personal, work]}
+    # - {role: python, tags: [python, personal, work]}  # retired: packages dropped (requests served vimrc, crcmod served deprecated gsutil rsync)
+    # - {role: quicklook, tags: [quicklook, personal, work]}  # retired: maintained plugins managed by Nix (dotfiles repo); dead ones dropped
     # - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud, personal, work]}  # disabled: zsh/prompt now managed by Nix (dotfiles repo)
     # - {role: sdkman, tags: [sdkman, personal, work]}  # disabled: java/sdkman dropped; version management via mise (dotfiles repo)
-    - {role: iterm2, tags: [iterm2, personal, work]}
-    - {role: ghostty, tags: [ghostty, personal, work]}
+    # - {role: iterm2, tags: [iterm2, personal, work]}  # retired: iTerm2 dropped entirely (WezTerm + ghostty)
+    # - {role: ghostty, tags: [ghostty, personal, work]}  # retired: config managed by Nix (dotfiles repo)
     # - {role: nvm, tags: [nvm, personal, work]}  # disabled: node now managed by mise (dotfiles repo)
-    - {role: vimrc, tags: [vimrc, personal, work]}
+    # - {role: vimrc, tags: [vimrc, personal, work]}  # retired: amix/vimrc dropped (Neovim, managed by Nix, is the editor)
     # - {role: gcloud, tags: [gcloud, personal, work]}  # disabled: gcloud config/components/completions managed by Nix (dotfiles repo)
     # - {role: ai, tags: [ai, personal, work]}  # disabled: AI configs now managed by Nix (dotfiles repo)
     # --------------------------------------------------------------------------
     # Post installation
     # --------------------------------------------------------------------------
-    - {role: cleanup, tags: [cleanup, personal, work]}
+    # - {role: cleanup, tags: [cleanup, personal, work]}  # retired: brew cleanup/autoremove managed by Nix (dotfiles repo)
     # --------------------------------------------------------------------------
     # For debugging purpose
     # --------------------------------------------------------------------------
