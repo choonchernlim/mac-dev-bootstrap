@@ -10,9 +10,9 @@
     # --------------------------------------------------------------------------
     - {role: mac, tags: [mac, personal, work]}
     - {role: xcode, tags: [xcode, personal, work]}
-    - {role: homebrew_common, tags: [homebrew, personal, work]}
-    - {role: homebrew_personal, tags: [personal]}
-    - {role: homebrew_work, tags: [work]}
+    # - {role: homebrew_common, tags: [homebrew, personal, work]}  # disabled: managed by Nix (dotfiles repo)
+    # - {role: homebrew_personal, tags: [personal]}  # disabled: managed by Nix (dotfiles repo)
+    # - {role: homebrew_work, tags: [work]}  # disabled: managed by Nix (dotfiles repo)
     - {role: python, tags: [python, personal, work]}
     - {role: quicklook, tags: [quicklook, personal, work]}
     - {role: ohmyzsh, tags: [ohmyzsh, sdkman, nvm, gcloud, personal, work]}
@@ -22,7 +22,7 @@
     - {role: nvm, tags: [nvm, personal, work]}
     - {role: vimrc, tags: [vimrc, personal, work]}
     - {role: gcloud, tags: [gcloud, personal, work]}
-    - {role: ai, tags: [ai, personal, work]}
+    # - {role: ai, tags: [ai, personal, work]}  # disabled: AI configs now managed by Nix (dotfiles repo)
     # --------------------------------------------------------------------------
     # Post installation
     # --------------------------------------------------------------------------
